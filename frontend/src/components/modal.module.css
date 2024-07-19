@@ -1,0 +1,25 @@
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(90, 88, 88, 0.500);
+    z-index: 10;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* padding: 300px; */
+    width: 600px;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}

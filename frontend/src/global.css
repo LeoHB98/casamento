@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  min-width: 320px;
+  min-height: 100vh;
+
+  width: 100%;
+  height: 100%;
+  background-color: var(--violet-100);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+
+:root {
+  --violet-100: #e4ceff;
+  --violet-200: #c4aafd;
+  --violet-300: #bea0fe;
+  --violet-400: #aa83ff;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background-color: var(--violet-200);
+}
+
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--violet-200);
+}
+
+button:hover {
+  background-color: var(--violet-400);
+}

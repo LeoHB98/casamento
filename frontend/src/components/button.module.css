@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: var(--violet-200); */
+    width: 100%;
+}
+
+.container button {
+    width: 700px;
+    height: 100px;
+    font-size: 20px;
+    background-color: var(--violet-300);
+
+}
