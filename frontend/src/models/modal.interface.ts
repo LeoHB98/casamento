@@ -1,5 +1,10 @@
 export interface Result {
     id?: number;
     nome_familia?: string;
-    nome_membros?: string[];
+    membros?: Membros[];
+}
+
+interface Membros {
+    id: number;
+    nome: string;
 }

@@ -155,6 +155,10 @@ export default function App() {
         : <></>
       }
 
+      <p>
+        {membersSelected}
+      </p>
+
     </div>
   )
 }
