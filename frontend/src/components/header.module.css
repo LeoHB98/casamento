@@ -2,10 +2,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Lavishly Yours", cursive;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+
+    font-family: "Lavishly Yours";
     font-weight: 400;
     font-style: normal;
-    font-size: 50px;
-    height: 8rem;
-    background-color: var(--violet-400);
+    font-size: 200px;
+
+
+    /* background-color: black; */
+    color: aliceblue;
+
+
+    transform: translate(0%, -120%);
+
+    /* position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    /* background-color: var(--violet-400); */
 }

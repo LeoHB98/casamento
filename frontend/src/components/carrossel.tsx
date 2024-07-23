@@ -31,8 +31,6 @@ export function Carrossel(img: ImageCarouselProps) {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 0, opacity: 0 }}
                 transition={{ duration: 3 }}
-
-
             >
 
                 {img.images.map((image, index) => (

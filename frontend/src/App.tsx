@@ -1,111 +1,123 @@
 
+import { useCallback, useEffect, useState } from 'react'
 import { Header } from './components/header'
-import { useEffect, useState } from 'react'
-import { Post } from './api/api';
-import { Result } from './models/modal.interface'
+import { Api } from './api/api';
+import { ResponseGetMembers } from './models/modal.interface'
 import { Confirmacao } from './components/confirmacao'
+import { Membros } from './components/membro';
+import { PlanoDeFundo } from './components/backgroud';
+import { Images } from './assets/imgs';
+import { BackgroudImage } from './assets/backgroud'
+import { Carrossel } from './components/carrossel'
 
 import Modal from './components/modal'
 import ButtonConfirm from './components/button'
 
 
-import { Carrossel } from './components/carrossel'
-import Img1 from './assets/img1.jpg'
-const images = [
-  Img1,
-]
-
-import { Membros } from './components/membro';
 // import EmojiPicker from 'emoji-picker-react';
-// import Party from './assets/1f389 (1).png'
+// import styles from './App.module.css'
+// import Party from './assets/1f389.png'
 
 export default function App() {
 
-  const [family, setFamily] = useState<Partial<Result>>({});
+  const [family, setFamily] = useState<Partial<ResponseGetMembers>>({});
 
-  const [openModal, setOpenModal] = useState(false)
+  const [openOk, setOpenOk] = useState(false)
 
   const [code, setCode] = useState('')
   const [sendCode, setSendCode] = useState(false)
 
-  const [openFamily, setOpenFamily] = useState(false)
-  const [membersSelected, setMembersSelected] = useState([''])
+  const [openFamilyMembers, setOpenFamilyMembers] = useState(false)
+  const [membersSelected, setMembersSelected] = useState<string[]>([])
 
   const [isError, setIsError] = useState(false)
 
-  function MessageAfterSendCode() {
-    setOpenModal(false)
-    setOpenFamily(true)
+  const [isLoading, setIsLoading] = useState(false)
+
+  function handleToFamilyMembers() {
+    setOpenOk(false)
+    setOpenFamilyMembers(true)
   }
 
-  function MessageError() {
+  function handleMessageError() {
     setIsError(false)
-
   }
+
+  const fetchFamilyData = useCallback(async () => {
+
+    try {
+      setIsLoading(true);
+      const data = await Api.getAFamily(code);
+      setFamily(data);
+
+    } catch (err) {
+      console.log(err);
+      setIsError(true);
+
+    } finally {
+
+      setIsLoading(false);
+      setCode('')
+      setSendCode(false)
+      setOpenOk(false)
+    }
+  }, [code]);
+
+  const confirmMembers = useCallback(async () => {
+    try {
+      setIsLoading(true)
+      if (membersSelected.length > 0) {
+        const data = await Api.confirmationMembers(membersSelected);
+        console.log(data);
+      }
+    } catch (err) {
+      console.log(err);
+      setIsError(true);
+    } finally {
+      setMembersSelected([]);
+      setIsLoading(false)
+    }
+  }, [membersSelected])
+
 
   useEffect(() => {
 
     if (sendCode && (code.length > 0)) {
-
-
-      Post.getAFamily(code).then((data) => {
-        setFamily(data)
-
-      }).catch((err) => {
-        console.log(err)
-        setIsError(true)
-      });
-
-      setCode('')
-      setSendCode(false)
-      setOpenModal(false)
-
-      if (membersSelected.length > 0) {
-        Post
-      }
-
-      // return () => { }
+      fetchFamilyData()
     }
 
+  }, [sendCode, code, fetchFamilyData]);
 
-  },
-    [
-      sendCode,
-      code,
-      openFamily,
-      membersSelected
-    ]);
 
+  useEffect(() => {
+    if (membersSelected.length > 0) {
+      confirmMembers();
+    }
+  }, [membersSelected, confirmMembers]);
 
   return (
-    <div >
-
-      <Header />
-      {/* <div
-        className={styles.logo}
-      >
-        <img
-          src={Party}
-        />
-        <p>
-          Parabens voce foi convidado!!!
-        </p>
-      </div> */}
+    <div>
 
 
-      <Carrossel
-        images={images}
+      <PlanoDeFundo
+        images={BackgroudImage}
       />
 
+      <Header />
+
       <ButtonConfirm
-        setState={setOpenModal}
+        setState={setOpenOk}
+      />
+
+      <Carrossel
+        images={Images}
       />
 
       <Modal
-        currentState={openModal}
+        currentState={openOk}
       >
         <Confirmacao
-          setState={setOpenModal}
+          setState={setOpenOk}
           setCode={setCode}
           setSendCode={setSendCode}
           currentCode={code}
@@ -121,7 +133,7 @@ export default function App() {
               <div>
                 Algo aconteceu de errado
                 😕
-                <button onClick={MessageError}>
+                <button onClick={handleMessageError}>
                   OK
                 </button>
               </div>
@@ -132,32 +144,59 @@ export default function App() {
       {!sendCode && family.id !== undefined ?
         <Modal
           currentState={!sendCode}>
-          <div>
-            Confirmacao aceita!
-            <button onClick={MessageAfterSendCode}>
-              OK
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            flexDirection: 'column',
+          }}>
+            <h3 style={{
+              marginBottom: '20px'
+            }}>
+              Código confirmado! ✅
+            </h3>
+            <button onClick={handleToFamilyMembers}>
+              Clique para continuar
             </button>
           </div>
         </Modal>
         : <></>
       }
 
-      {openFamily ?
+      {openFamilyMembers ?
         <Modal
-          currentState={openFamily}>
+          currentState={openFamilyMembers}>
           <Membros
             family={family}
             setFamily={setFamily}
-            setOpenFamily={setOpenFamily}
+            setOpenFamily={setOpenFamilyMembers}
             setMembersSelected={setMembersSelected}
           />
         </Modal>
         : <></>
       }
 
-      <p>
-        {membersSelected}
-      </p>
+      {isLoading ?
+        <Modal
+          currentState={true}
+        >
+          <p>Aguarde...</p>
+        </Modal>
+        : <></>}
+
+
+      {/* <div
+        className={styles.logo}
+      >
+        <img
+          src={Party}
+        />
+        <p>
+          Parabens voce foi convidado!!!
+        </p>
+      </div> */}
 
     </div>
   )

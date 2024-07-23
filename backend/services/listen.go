@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
 )
 
 var authorization string
@@ -14,11 +15,22 @@ var authorization string
 func (s *Service) Listener(port int, auth string) {
 	router := chi.NewRouter()
 
+	// Configurar CORS
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300,
+	}))
+
 	router.Route("/", func(r chi.Router) {
 		// r.Use(Middleware)
 		r.Get("/familia/{id}", s.GetFamilyLastName)
-	})
+		r.Post("/membros", s.UpdateConfirmationMember)
 
+	})
 	log.Printf("Listening at port: %v", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), router))
 }

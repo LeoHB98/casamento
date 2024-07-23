@@ -1,22 +1,46 @@
 .container {
-    padding: 10px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.membersContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .memberContainer {
     display: flex;
     color: black;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    margin: 10px 5px;
+    height: 50px;
+    border-radius: 8px;
+
 }
 
-.check {
+.toCheck {
+    border: 1px solid var(--violet-200);
     background-color: white;
 }
 
-.checked {
-    background-color: var(--violet-200);
+.checkedButton {
+    border: 3px solid var(--violet-200);
+    background-color: var(--violet-100);
+}
+
+.send {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+    width: 100%;
 }

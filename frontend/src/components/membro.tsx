@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { Result } from '../models/modal.interface'
+import { ResponseGetMembers } from '../models/modal.interface'
 import styles from './membro.module.css'
 
 
-import { CheckCircle, Circle } from 'phosphor-react'
+// import { CheckCircle, Circle } from 'phosphor-react'
 
 interface MembrosProps {
-    family: Result
-    setFamily: (value: Result) => void
+    family: ResponseGetMembers
+    setFamily: (value: ResponseGetMembers) => void
     setOpenFamily: (value: boolean) => void
     setMembersSelected: (value: string[]) => void
 }
@@ -20,7 +20,7 @@ interface MembroProps {
 
 export function Membros(props: MembrosProps) {
 
-    const [members, setMembers] = useState([''])
+    const [members, setMembers] = useState<string[]>([])
 
     function handleMessageMembers() {
         props.setOpenFamily(false)
@@ -31,27 +31,35 @@ export function Membros(props: MembrosProps) {
 
     return (
         <div className={styles.container}>
-            {
-                props.family.membros?.map(
-                    (member) => (
-                        <Membro
-                            key={member.id}
-                            membro={member.nome}
-                            membros={members}
-                            setMembersSelected={setMembers}
-                        />
-                    ))
-            }
-
             <p>
-                {members}
+                <h3>
+                    Selecione os membros da família:
+                </h3>
             </p>
 
-            <button
-                onClick={handleMessageMembers}
-            >
-                Enviar
-            </button>
+            <div className={styles.membersContainer}>
+                {
+                    props.family.membros?.map(
+                        (member) => (
+                            <Membro
+                                key={member.id}
+                                membro={member.nome}
+                                membros={members}
+                                setMembersSelected={setMembers}
+                            />
+                        ))
+                }
+
+            </div>
+
+            <div className={styles.send}>
+                <button
+                    onClick={handleMessageMembers}
+                >
+                    Enviar
+                </button>
+            </div>
+
         </div>
     )
 
@@ -62,14 +70,14 @@ function Membro(props: MembroProps) {
 
     const [memberSelected, setMemberSelected] = useState(false)
 
-    function SetClick() {
+    function SetMember() {
 
         setMemberSelected(!memberSelected)
 
         let updateMemberSelected: string[] = [...props.membros]
 
 
-        if (memberSelected) {
+        if (!memberSelected) {
             updateMemberSelected = [...updateMemberSelected, props.membro];
 
         } else {
@@ -86,27 +94,24 @@ function Membro(props: MembroProps) {
         <div className={styles.memberContainer}>
 
             <button
-                className={`${!memberSelected ? styles.checked : styles.check}`}
-                onClick={SetClick}
+                className={`${memberSelected ? styles.checkedButton : styles.toCheck}`}
+                onClick={SetMember}
 
             >
-                {!memberSelected ?
+                {/* {!memberSelected ?
                     <Circle
                         size={20}
                     />
                     :
                     <CheckCircle
                         size={20}
-                    />}
+                    />} */}
+
+                <p>
+                    {props.membro}
+                </p>
 
             </button>
-
-            <p
-                className={`${memberSelected ? styles.checked : styles.check}`}
-            >
-                {props.membro}
-            </p>
-
         </div>
     )
 

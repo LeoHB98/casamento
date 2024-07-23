@@ -5,7 +5,14 @@ export function Header() {
         <div
             className={styles.container}
         >
-            Leonardo & Bruna
+            <p>
+                Leonardo & Bruna
+            </p>
+
+            <p style={{ fontSize: '100px' }}>
+                Voce esta convidado!!!
+            </p>
+
         </div>
     )
 }

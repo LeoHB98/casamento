@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "host": "127.0.0.1",
+            "cwd": "${workspaceFolder}/backend/cmd/",
+            "program": "${workspaceRoot}/backend/cmd/",
+            "env": {},
+            "args": [],
+            "showLog": false
+        }
+    ]
+}

@@ -37,7 +37,9 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 	 fm.id,
 	 fm.nome_membro 
 	from familia_membros fm
-	where fm.familia_id = $1`
+	where fm.familia_id = $1
+	order by fm.id asc
+	`
 
 	err := s.DBs[0].Get(&data, sqlOp, code)
 	if err != nil {

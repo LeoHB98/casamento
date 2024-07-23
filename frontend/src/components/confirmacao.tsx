@@ -48,9 +48,9 @@ export function Confirmacao(props: ConfirmacaoProps) {
             <div
                 className={styles.content}
             >
-                <text>
+                <p>
                     Codigo disponibilizado pelo(a) noivo(a)
-                </text>
+                </p>
 
                 <form
                     onSubmit={handleSetSendCode}
