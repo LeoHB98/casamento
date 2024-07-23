@@ -53,5 +53,6 @@ button {
 }
 
 button:hover {
+  transition: 0.25s;
   background-color: var(--violet-400);
 }

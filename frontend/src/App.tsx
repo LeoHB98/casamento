@@ -12,6 +12,8 @@ import { Carrossel } from './components/carrossel'
 
 import Modal from './components/modal'
 import ButtonConfirm from './components/button'
+import { Error } from './components/erro';
+import MembrosEnviados from './components/envio_membros';
 
 
 // import EmojiPicker from 'emoji-picker-react';
@@ -20,64 +22,68 @@ import ButtonConfirm from './components/button'
 
 export default function App() {
 
-  const [family, setFamily] = useState<Partial<ResponseGetMembers>>({});
 
-  const [openOk, setOpenOk] = useState(false)
+  //Modais
+  const [confirmarPresenca, setConfirmarPresenca] = useState(false)
+  const [pMembrosFamilia, setPMembrosFamilia] = useState(false)
+  const [modalError, setModalError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [presencaMembrosConfirmada, setPresencaMembrosConfirmada] = useState(false)
+
+  const [family, setFamily] = useState<Partial<ResponseGetMembers>>({});
 
   const [code, setCode] = useState('')
   const [sendCode, setSendCode] = useState(false)
 
-  const [openFamilyMembers, setOpenFamilyMembers] = useState(false)
   const [membersSelected, setMembersSelected] = useState<string[]>([])
 
-  const [isError, setIsError] = useState(false)
 
-  const [isLoading, setIsLoading] = useState(false)
 
   function handleToFamilyMembers() {
-    setOpenOk(false)
-    setOpenFamilyMembers(true)
+    setConfirmarPresenca(false)
+    setPMembrosFamilia(true)
   }
 
-  function handleMessageError() {
-    setIsError(false)
-  }
 
   const fetchFamilyData = useCallback(async () => {
 
     try {
-      setIsLoading(true);
+      setLoading(true);
       const data = await Api.getAFamily(code);
       setFamily(data);
 
     } catch (err) {
       console.log(err);
-      setIsError(true);
+      setModalError(true);
 
     } finally {
 
-      setIsLoading(false);
+      setLoading(false);
       setCode('')
       setSendCode(false)
-      setOpenOk(false)
+      setConfirmarPresenca(false)
     }
   }, [code]);
 
   const confirmMembers = useCallback(async () => {
+
     try {
-      setIsLoading(true)
+      setLoading(true)
       if (membersSelected.length > 0) {
         const data = await Api.confirmationMembers(membersSelected);
         console.log(data);
       }
+
     } catch (err) {
       console.log(err);
-      setIsError(true);
+      setModalError(true);
+
     } finally {
-      setMembersSelected([]);
-      setIsLoading(false)
+      setLoading(false)
+      setPresencaMembrosConfirmada(true)
     }
   }, [membersSelected])
+
 
 
   useEffect(() => {
@@ -106,7 +112,7 @@ export default function App() {
       <Header />
 
       <ButtonConfirm
-        setState={setOpenOk}
+        setState={setConfirmarPresenca}
       />
 
       <Carrossel
@@ -114,10 +120,10 @@ export default function App() {
       />
 
       <Modal
-        currentState={openOk}
+        currentState={confirmarPresenca}
       >
         <Confirmacao
-          setState={setOpenOk}
+          setState={setConfirmarPresenca}
           setCode={setCode}
           setSendCode={setSendCode}
           currentCode={code}
@@ -125,18 +131,17 @@ export default function App() {
       </Modal>
 
       {
-        isError ?
+        modalError ?
           <>
             <Modal
               currentState
             >
-              <div>
-                Algo aconteceu de errado
-                😕
-                <button onClick={handleMessageError}>
-                  OK
-                </button>
-              </div>
+              <Error
+                setError={setModalError}
+                setConfirmarPresenca={setConfirmarPresenca}
+                setPMembrosFamilia={setPMembrosFamilia}
+                setPresencaMembrosConfirmada={setPresencaMembrosConfirmada}
+              />
             </Modal>
           </> : <></>
       }
@@ -165,38 +170,39 @@ export default function App() {
         : <></>
       }
 
-      {openFamilyMembers ?
+      {pMembrosFamilia ?
         <Modal
-          currentState={openFamilyMembers}>
+          currentState={pMembrosFamilia}>
           <Membros
             family={family}
             setFamily={setFamily}
-            setOpenFamily={setOpenFamilyMembers}
+            setOpenFamily={setPMembrosFamilia}
             setMembersSelected={setMembersSelected}
           />
         </Modal>
         : <></>
       }
 
-      {isLoading ?
+      {loading ?
         <Modal
-          currentState={true}
+          currentState={loading}
         >
           <p>Aguarde...</p>
         </Modal>
         : <></>}
 
+      {presencaMembrosConfirmada && !modalError ?
+        <Modal
+          currentState={presencaMembrosConfirmada}
+        >
+          <MembrosEnviados
+            setMembrosEnviados={setPresencaMembrosConfirmada}
+            setMembersSelected={setMembersSelected}
+          />
+        </Modal>
+        : <></>
+      }
 
-      {/* <div
-        className={styles.logo}
-      >
-        <img
-          src={Party}
-        />
-        <p>
-          Parabens voce foi convidado!!!
-        </p>
-      </div> */}
 
     </div>
   )
