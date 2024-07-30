@@ -30,6 +30,12 @@ func (s *Service) Listener(port int, auth string) {
 		r.Get("/familia/{id}", s.GetFamilyLastName)
 		r.Post("/membros", s.UpdateConfirmationMember)
 
+		r.Get("/casamento", s.Server)
+
+		// Serve arquivos estáticos do diretório "dist"
+		fs := http.FileServer(http.Dir("../../frontend/dist"))
+		router.Handle("/casamento/*", http.StripPrefix("/casamento", fs))
+
 	})
 	log.Printf("Listening at port: %v", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), router))
