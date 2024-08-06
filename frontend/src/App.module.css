@@ -9,15 +9,33 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
+  a:nth-of-type(2) container {
     animation: logo-spin infinite 20s linear;
   }
 }
 
-.logo {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 30px;
+  padding: 1rem;
+}
+
+@media (max-width: 1080px) {
+
+  .container {
+    display: block;
+    margin: 1rem 1rem;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  .container {
+    padding: 0;
+    display: block;
+  }
+
 }

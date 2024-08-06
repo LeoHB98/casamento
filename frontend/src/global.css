@@ -6,7 +6,6 @@
 
 
 body {
-  margin: 0;
   display: flex;
   flex-direction: column;
 
@@ -25,7 +24,7 @@ body {
   --violet-200: #c4aafd;
   --violet-300: #bea0fe;
   --violet-400: #aa83ff;
-  --backgroud: #0f0f0fa5;
+  --backgroud-opacity: #00000063;
 
 }
 
@@ -41,7 +40,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
   background-color: var(--violet-200);

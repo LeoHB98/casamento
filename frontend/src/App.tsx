@@ -1,23 +1,21 @@
 
 import { useCallback, useEffect, useState } from 'react'
-import { Header } from './components/header'
 import { Api } from './api/api';
 import { ResponseGetMembers } from './models/modal.interface'
 import { Confirmacao } from './components/confirmacao'
 import { Membros } from './components/membro';
-import { PlanoDeFundo } from './components/backgroud';
+import { PlanoDeFundo } from './components/background';
 import { Images } from './assets/imgs';
 import { BackgroudImage } from './assets/backgroud'
 import { Carrossel } from './components/carrossel'
 
 import Modal from './components/modal'
-import ButtonConfirm from './components/button'
 import { Error } from './components/erro';
 import MembrosEnviados from './components/envio_membros';
 
 
 // import EmojiPicker from 'emoji-picker-react';
-// import styles from './App.module.css'
+import styles from './App.module.css'
 // import Party from './assets/1f389.png'
 
 export default function App() {
@@ -102,17 +100,11 @@ export default function App() {
   }, [membersSelected, confirmMembers]);
 
   return (
-    <div>
-
+    <div className={styles.container}>
 
       <PlanoDeFundo
-        images={BackgroudImage}
-      />
-
-      <Header />
-
-      <ButtonConfirm
-        setState={setConfirmarPresenca}
+        image={BackgroudImage}
+        setConfirmarPresenca={setConfirmarPresenca}
       />
 
       <Carrossel

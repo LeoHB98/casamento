@@ -34,7 +34,7 @@ func (s *Service) Listener(port int, auth string) {
 
 		// Serve arquivos estáticos do diretório "dist"
 		fs := http.FileServer(http.Dir("../../frontend/dist"))
-		router.Handle("/casamento/*", http.StripPrefix("/casamento", fs))
+		r.Handle("/casamento/*", http.StripPrefix("/casamento", fs))
 
 	})
 	log.Printf("Listening at port: %v", port)

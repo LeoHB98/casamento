@@ -31,3 +31,23 @@ func main() {
 	sv.Listener(8082, "")
 
 }
+
+// func main() {
+// 	target := "http://teste.com" // URL de destino para o proxy
+// 	proxyURL, err := url.Parse(target)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+
+// 	proxy := httputil.NewSingleHostReverseProxy(proxyURL)
+
+// 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+// 		r.Host = proxyURL.Host
+// 		proxy.ServeHTTP(w, r)
+// 	})
+
+// 	log.Println("Starting proxy server on :8080")
+// 	if err := http.ListenAndServe(":8080", nil); err != nil {
+// 		log.Fatal(err)
+// 	}
+// }
