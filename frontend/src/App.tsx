@@ -5,9 +5,10 @@ import { ResponseGetMembers } from './models/modal.interface'
 import { Confirmacao } from './components/confirmacao'
 import { Membros } from './components/membro';
 import { PlanoDeFundo } from './components/background';
-import { Images } from './assets/imgs';
+// import { Images } from './assets/imgs';
 import { BackgroudImage } from './assets/backgroud'
-import { Carrossel } from './components/carrossel'
+// import { Carrossel } from './components/carrossel'
+
 
 import Modal from './components/modal'
 import { Error } from './components/erro';
@@ -15,7 +16,7 @@ import MembrosEnviados from './components/envio_membros';
 
 
 // import EmojiPicker from 'emoji-picker-react';
-import styles from './App.module.css'
+import ButtonConfirm from './components/button';
 // import Party from './assets/1f389.png'
 
 export default function App() {
@@ -100,16 +101,21 @@ export default function App() {
   }, [membersSelected, confirmMembers]);
 
   return (
-    <div className={styles.container}>
+
+
+    <div>
 
       <PlanoDeFundo
         image={BackgroudImage}
-        setConfirmarPresenca={setConfirmarPresenca}
       />
 
-      <Carrossel
-        images={Images}
+      <ButtonConfirm
+        setState={setConfirmarPresenca}
       />
+
+      {/* <Carrossel
+        images={Images}
+      /> */}
 
       <Modal
         currentState={confirmarPresenca}
@@ -197,6 +203,9 @@ export default function App() {
 
 
     </div>
+
+
+
   )
 }
 

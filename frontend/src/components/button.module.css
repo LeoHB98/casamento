@@ -1,18 +1,9 @@
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-
-
-    position: absolute;
-    top: 0rem;
-    bottom: 0rem;
-    left: 0rem;
-    right: 0rem;
-    z-index: 2;
-
-    transform: translate(0%, 50%);
+    margin-bottom: 5rem;
 
 }
 
@@ -23,9 +14,26 @@
     background-color: var(--violet-300);
 }
 
+@media (max-width: 1280px) {
+
+    .container button {
+        width: 400px;
+    }
+}
+
 @media (max-width:768px) {
 
     .container button {
-        width: 90%;
+        width: 400px;
+        height: 5rem;
+        font-size: 1rem;
     }
+}
+
+@media (max-width:414px) {
+
+    .container button {
+        width: 300px;
+    }
+
 }
