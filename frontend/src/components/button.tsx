@@ -12,15 +12,18 @@ export default function ButtonConfirm(props: ButtonProps) {
     }
 
     return (
-        <div
-            className={styles.container}
-        >
-            <button
-                onClick={SetState}
+        <div className={styles.box}>
+            <div
+                className={styles.container}
             >
-                Confirme aqui a sua presença
-            </button>
+                <button
+                    onClick={SetState}
+                >
+                    Confirme aqui a sua presença
+                </button>
+            </div>
         </div>
+
     )
 
 }

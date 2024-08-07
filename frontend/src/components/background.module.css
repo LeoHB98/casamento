@@ -3,7 +3,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5rem;
+    margin-top: 2rem;
+    position: relative;
+
 }
 
 .container_imagem {
@@ -30,6 +32,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    position: absolute;
+    top: 0;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+
 }
 
 
@@ -44,10 +53,6 @@
 
 @media (max-width: 1280px) {
 
-    .container {
-        margin-bottom: 1rem;
-    }
-
     .container_imagem {
         width: 700px;
     }
@@ -60,9 +65,6 @@
 
 @media (max-width: 768px) {
 
-    .container {
-        margin-bottom: 1rem;
-    }
 
     .container_imagem {
         width: 400px;
