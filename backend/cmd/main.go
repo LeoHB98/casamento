@@ -32,7 +32,7 @@ func main() {
 
 }
 
-// func main() {
+// func main2() {
 // 	target := "http://teste.com" // URL de destino para o proxy
 // 	proxyURL, err := url.Parse(target)
 // 	if err != nil {

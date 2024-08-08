@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* padding: 300px; */
+
     width: 600px;
     height: 300px;
     background-color: white;
@@ -22,4 +22,18 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+}
+
+@media (max-width: 1280px) {}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 500px;
+    }
+}
+
+@media (max-width: 430px) {
+    .modal {
+        width: 340px;
+    }
 }

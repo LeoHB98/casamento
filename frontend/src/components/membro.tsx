@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { ResponseGetMembers } from '../models/modal.interface'
 import styles from './membro.module.css'
+import { CloseButton } from './closeButton'
 
 
 // import { CheckCircle, Circle } from 'phosphor-react'
 
 interface MembrosProps {
     family: ResponseGetMembers
-    setFamily: (value: ResponseGetMembers) => void
-    setOpenFamily: (value: boolean) => void
+    setMembers: (value: ResponseGetMembers) => void
+    setOpenMembersModal: (value: boolean) => void
     setMembersSelected: (value: string[]) => void
 }
 
@@ -23,19 +24,27 @@ export function Membros(props: MembrosProps) {
     const [members, setMembers] = useState<string[]>([])
 
     function handleMessageMembers() {
-        props.setOpenFamily(false)
-        props.setFamily({})
+        props.setOpenMembersModal(false)
+        props.setMembers({})
         props.setMembersSelected(members)
     }
 
 
+
+
     return (
         <div className={styles.container}>
-            <p>
-                <h3>
-                    Selecione os membros da família:
-                </h3>
-            </p>
+
+            <CloseButton
+
+                setBoolean={props.setOpenMembersModal}
+                setObjetct={props.setMembers}
+                setStringArray={props.setMembersSelected}
+            />
+
+            <h3>
+                Selecione os membros da família:
+            </h3>
 
             <div className={styles.membersContainer}>
                 {
@@ -58,6 +67,8 @@ export function Membros(props: MembrosProps) {
                 >
                     Enviar
                 </button>
+
+
             </div>
 
         </div>

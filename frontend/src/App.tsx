@@ -173,8 +173,8 @@ export default function App() {
           currentState={pMembrosFamilia}>
           <Membros
             family={family}
-            setFamily={setFamily}
-            setOpenFamily={setPMembrosFamilia}
+            setMembers={setFamily}
+            setOpenMembersModal={setPMembrosFamilia}
             setMembersSelected={setMembersSelected}
           />
         </Modal>

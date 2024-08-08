@@ -1,7 +1,7 @@
 
 import styles from './confirmacao.module.css'
-import { X } from 'phosphor-react'
 import { ChangeEvent, FormEvent, } from 'react';
+import { CloseButton } from './closeButton';
 
 interface ConfirmacaoProps {
     setState: (value: boolean) => void
@@ -32,9 +32,17 @@ export function Confirmacao(props: ConfirmacaoProps) {
 
 
     return (
-        <>
 
-            <div className={styles.closeButton}>
+
+        <div
+            className={styles.content}
+        >
+
+            <CloseButton
+                setBoolean={props.setState}
+            />
+
+            {/* <div className={styles.closeButton}>
                 <button
                     onClick={() => props.setState(false)}
                 >
@@ -43,38 +51,35 @@ export function Confirmacao(props: ConfirmacaoProps) {
                         color='white'
                     />
                 </button>
-            </div>
+            </div> */}
 
-            <div
-                className={styles.content}
+            <p>
+                Codigo disponibilizado pelo(a) noivo(a)
+            </p>
+
+            <form
+                onSubmit={handleSetSendCode}
+                className={styles.inputSpace}
             >
-                <p>
-                    Codigo disponibilizado pelo(a) noivo(a)
-                </p>
+                <input
+                    name='comment'
+                    className={styles.input}
+                    onChange={handleSetNewCode}
+                    placeholder='Escreva o codigo aqui...'
+                    value={props.currentCode}
+                />
 
-                <form
-                    onSubmit={handleSetSendCode}
-                    className={styles.inputSpace}
+                <button
+                    type='submit'
+                    className={styles.sendButton}
+                    title='Enviar codigo'
                 >
-                    <input
-                        name='comment'
-                        className={styles.input}
-                        onChange={handleSetNewCode}
-                        placeholder='Escreva o codigo aqui...'
-                        value={props.currentCode}
-                    />
+                    Enviar
+                </button>
+            </form>
+        </div>
 
-                    <button
-                        type='submit'
-                        className={styles.sendButton}
-                        title='Enviar codigo'
-                    >
-                        Enviar
-                    </button>
-                </form>
-            </div>
 
-        </>
     )
 
 }
