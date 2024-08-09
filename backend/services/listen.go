@@ -15,18 +15,38 @@ var authorization string
 func (s *Service) Listener(port int, auth string) {
 	router := chi.NewRouter()
 
-	// Configurar CORS
+	// CORS settings
 	router.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"*"},
+		AllowedOrigins:   []string{"*"}, // Altere para o domínio que precisa de acesso
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		AllowedHeaders:   []string{"*"},
 		ExposedHeaders:   []string{"Link"},
 		AllowCredentials: false,
-		MaxAge:           300,
+		MaxAge:           300, // Preflight request cache duration in seconds
 	}))
 
 	router.Route("/", func(r chi.Router) {
+
+		log.Println("Recebida uma requisição")
+
+		// CORS settings
+		r.Use(cors.Handler(cors.Options{
+			AllowedOrigins:   []string{"*"}, // Altere para o domínio que precisa de acesso
+			AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+			AllowedHeaders:   []string{"*"},
+			ExposedHeaders:   []string{"Link"},
+			AllowCredentials: false,
+			MaxAge:           300, // Preflight request cache duration in seconds
+		}))
+
+		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte(`{"status":"ok"}`))
+		})
+
 		// r.Use(Middleware)
+		r.Options("/familia/{id}", s.GetFamilyLastName)
 		r.Get("/familia/{id}", s.GetFamilyLastName)
 		r.Post("/membros", s.UpdateConfirmationMember)
 
@@ -39,6 +59,7 @@ func (s *Service) Listener(port int, auth string) {
 	})
 	log.Printf("Listening at port: %v", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), router))
+
 }
 
 func Middleware(next http.Handler) http.Handler {

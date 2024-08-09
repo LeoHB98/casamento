@@ -5,26 +5,16 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/alpha_main/models"
 	"github.com/go-chi/chi"
 )
 
 func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 
-	type MembroFamilia struct {
-		Id   int    `db:"id" json:"id"`
-		Nome string `db:"nome_membro" json:"nome"`
-	}
-
-	type Familia struct {
-		Id          int             `db:"id_familia" json:"id"`
-		NomeFamilia string          `db:"nome_familia" json:"nome_familia"`
-		NomeMembros []MembroFamilia `db:"nome_membro" json:"membros"`
-	}
-
 	log.Println(r.URL.Path)
 	code := chi.URLParam(r, "id")
 
-	data := Familia{}
+	data := models.Familia{}
 	sqlOp := `
 	select 
       f.id id_familia,
@@ -46,7 +36,7 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	err = s.DBs[0].Select(&data.NomeMembros, sqlOp2, data.Id)
+	err = s.DBs[0].Select(&data.NomeMembro, sqlOp2, data.Id)
 	if err != nil {
 		panic(err)
 	}

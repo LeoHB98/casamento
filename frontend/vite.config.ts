@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: '/casamento/',
   build: {
-    outDir: 'dist',
+    outDir: 'build',
   },
 })

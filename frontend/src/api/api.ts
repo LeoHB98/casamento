@@ -6,16 +6,27 @@ const instance = axios.create({
     baseURL: 'https://tight-lark-equal.ngrok-free.app/',
     // baseURL: 'http://localhost:8082/',
     timeout: 15000,
+    headers: {
+        'ngrok-skip-browser-warning': 'true'
+    }
 
 });
 
 const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
-    get: (url: string) => instance.get(url).then(responseBody),
-    post: (url: string, body: object) => instance.post(url, body).then(responseBody),
-    put: (url: string, body: object) => instance.put(url, body).then(responseBody),
-    delete: (url: string) => instance.delete(url).then(responseBody),
+
+    get: (url: string) =>
+        instance.get(url).then(responseBody),
+
+    post: (url: string, body: object) =>
+        instance.post(url, body).then(responseBody),
+
+    put: (url: string, body: object) =>
+        instance.put(url, body).then(responseBody),
+
+    delete: (url: string) =>
+        instance.delete(url).then(responseBody),
 };
 
 export const Api = {

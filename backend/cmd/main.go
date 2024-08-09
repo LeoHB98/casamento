@@ -32,22 +32,35 @@ func main() {
 
 }
 
-// func main2() {
-// 	target := "http://teste.com" // URL de destino para o proxy
-// 	proxyURL, err := url.Parse(target)
+// func main() {
+
+// 	if err := run(context.Background()); err != nil {
+// 		log.Fatal(err)
+// 	}
+// }
+
+// func run(ctx context.Context) error {
+
+// 	listener, err := ngrok.Listen(ctx,
+// 		config.HTTPEndpoint(
+// 			config.WithDomain("tight-lark-equal.ngrok-free.app"),
+// 			config.WithOAuth("google",
+// 				config.WithAllowOAuthEmail("leohenrique095@gmail.com"),
+// 			),
+// 		),
+// 		ngrok.WithAuthtokenFromEnv(),
+// 	)
 // 	if err != nil {
-// 		log.Fatal(err)
+// 		return err
 // 	}
 
-// 	proxy := httputil.NewSingleHostReverseProxy(proxyURL)
+// 	log.Println("teste")
 
-// 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-// 		r.Host = proxyURL.Host
-// 		proxy.ServeHTTP(w, r)
-// 	})
+// 	log.Println("Ingress established at:", listener.URL())
 
-// 	log.Println("Starting proxy server on :8080")
-// 	if err := http.ListenAndServe(":8080", nil); err != nil {
-// 		log.Fatal(err)
-// 	}
+// 	return http.Serve(listener, http.HandlerFunc(handler))
+// }
+
+// func handler(w http.ResponseWriter, r *http.Request) {
+// 	fmt.Fprintln(w, "Hello from ngrok-go!")
 // }
