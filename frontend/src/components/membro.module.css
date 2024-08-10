@@ -49,7 +49,7 @@
 
 .toCheck {
     border: 1px solid var(--violet-200);
-    background-color: aliceblue;
+    background-color: white;
 }
 
 .checkedButton {

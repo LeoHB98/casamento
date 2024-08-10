@@ -30,7 +30,7 @@ export function CloseButton(props: CloseButtonProps) {
             <button onClick={close}>
                 <X
                     size={20}
-                    color='white'
+                    color='black'
                 />
             </button>
         </div>
