@@ -1,0 +1,11 @@
+.container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    margin-top: 20rem;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
