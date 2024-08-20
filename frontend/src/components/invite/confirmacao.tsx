@@ -68,13 +68,15 @@ export function Confirmacao(props: ConfirmacaoProps) {
                     value={props.currentCode}
                 />
 
-                <button
-                    type='submit'
-                    className={styles.sendButton}
-                    title='Enviar codigo'
-                >
-                    Enviar
-                </button>
+                <div className={styles.sendButton}>
+                    <button
+                        type='submit'
+                        title='Enviar codigo'
+                    >
+                        Enviar
+                    </button>
+                </div>
+
             </form>
         </div>
 

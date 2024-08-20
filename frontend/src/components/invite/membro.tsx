@@ -62,15 +62,7 @@ export function Membros(props: MembrosProps) {
 
             </div>
 
-            <div className={styles.send}>
-                <button
-                    onClick={handleMessageMembers}
-                >
-                    Enviar
-                </button>
-            </div>
-
-            <p style={{ marginTop: '5px' }}>Você selecionou:</p>
+            <p>Você selecionou:</p>
 
             <div className={styles.membersSelected}>
                 {
@@ -82,6 +74,16 @@ export function Membros(props: MembrosProps) {
                         ))
                 }
             </div>
+
+            <div className={styles.send}>
+                <button
+                    onClick={handleMessageMembers}
+                >
+                    Enviar
+                </button>
+            </div>
+
+
         </div>
     )
 
