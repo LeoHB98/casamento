@@ -2,23 +2,23 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Api } from './../api/api';
 import { ResponseGetMembers } from './../models/modal.interface'
-import { Confirmacao } from './../components/confirmacao'
-import { Membros } from './../components/membro';
-import { PlanoDeFundo } from './../components/background';
+import { Confirmacao } from '../components/invite/confirmacao'
+import { Membros } from '../components/invite/membro';
+import { PlanoDeFundo } from '../components/invite/background';
 // import { Images } from './../assets/imgs';
 import { BackgroudImage } from './../assets/backgroud'
 // import { Carrossel } from './../components/carrossel'
 
 
-import Modal from './../components/modal'
-import { Error } from './../components/erro';
-import MembrosEnviados from './../components/envio_membros';
+import Modal from '../components/invite/modal'
+import { Error } from '../components/invite/erro';
+import MembrosEnviados from '../components/invite/envio_membros';
 
 
 // import EmojiPicker from 'emoji-picker-react';
-import ButtonConfirm from './../components/confirmation_button';
-import Header from './../components/header';
-import Location from '../components/location';
+import ButtonConfirm from '../components/invite/confirmation_button';
+import Header from '../components/invite/header';
+import Location from '../components/invite/location';
 
 // import Party from './../assets/1f389.png'
 

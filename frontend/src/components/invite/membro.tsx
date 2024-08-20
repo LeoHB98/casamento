@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ResponseGetMembers } from '../models/modal.interface'
+import { ResponseGetMembers } from '../../models/modal.interface'
 import styles from './membro.module.css'
 import { CloseButton } from './closeButton'
 
@@ -19,18 +19,19 @@ interface MembroProps {
     setMembersSelected: (value: string[]) => void
 }
 
+interface MProps {
+    membro: string
+}
+
 export function Membros(props: MembrosProps) {
 
     const [members, setMembers] = useState<string[]>([])
 
     function handleMessageMembers() {
         props.setOpenMembersModal(false)
-        props.setMembers({})
         props.setMembersSelected(members)
+        props.setMembers({})
     }
-
-
-
 
     return (
         <div className={styles.container}>
@@ -67,15 +68,33 @@ export function Membros(props: MembrosProps) {
                 >
                     Enviar
                 </button>
-
-
             </div>
 
+            <p style={{ marginTop: '5px' }}>Você selecionou:</p>
+
+            <div className={styles.membersSelected}>
+                {
+                    members?.map(
+                        (member) => (
+                            <MemberSeleted
+                                membro={member}
+                            />
+                        ))
+                }
+            </div>
         </div>
     )
 
 }
 
+function MemberSeleted({ membro }: MProps) {
+    return (
+        <div >
+            {` ${membro} |`}
+        </div>
+
+    )
+}
 
 function Membro(props: MembroProps) {
 

@@ -3,6 +3,7 @@ package services
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/alpha_main/config"
 	"github.com/alpha_main/models"
@@ -72,9 +73,11 @@ func TestGetMembers(t *testing.T) {
 		radomKey, err := tools.GenerateRandomKey(3)
 		tools.CheckError(err)
 
-		query := "insert into familia(id,codigo,nome_familia) values($1,$2,$3)"
+		query := "insert into familia(id,codigo,nome_familia, data_criacao) values($1,$2,$3,$4)"
 
-		_, err = tx.Exec(tx.Rebind(query), members.Id, radomKey, tools.CleanString(*members.NomeFamilia))
+		timeNow := time.Now().Format("2006-01-02 15:04:05")
+
+		_, err = tx.Exec(tx.Rebind(query), members.Id, radomKey, tools.CleanString(*members.NomeFamilia), timeNow)
 		tools.CheckError(err)
 
 		for _, nome := range members.NomeMembro {

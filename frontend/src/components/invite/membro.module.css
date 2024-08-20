@@ -49,18 +49,26 @@
     background-color: white;
 }
 
+
 .checkedButton {
-    border: 3px solid var(--violet-200);
+    border: 5px solid var(--violet-200);
     background-color: var(--violet-100);
+    outline: none;
+    box-shadow: none;
 }
 
 .send {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin: 20px;
     width: 100%;
 }
 
-.send button {
-    width: 100%;
+.membersSelected {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
 }

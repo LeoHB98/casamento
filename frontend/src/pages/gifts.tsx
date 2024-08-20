@@ -1,5 +1,5 @@
 
-export default function Test() {
+export default function Gifts() {
     return (
         <>
             <h1>

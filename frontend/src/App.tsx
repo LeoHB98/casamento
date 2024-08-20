@@ -1,7 +1,9 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Invite from './pages/invite';
-import Test from './pages/test';
+
+import Gifts from './pages/gifts';
+import BGArea from './pages/BGArea';
 
 export default function App() {
 
@@ -9,7 +11,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Invite />} />
-        <Route path='/teste' element={<Test />} />
+        <Route path='/noivos' element={<BGArea />} />
+        <Route path='/gifts' element={<Gifts />} />
       </Routes>
     </BrowserRouter>
   )
