@@ -67,7 +67,8 @@
 
 
     .container_imagem {
-        width: 400px;
+        width: 450px;
+        height: 500px;
     }
 
     .container_header p {
@@ -76,10 +77,10 @@
 
 }
 
-@media (max-width: 414px) {
+@media (max-width: 460px) {
 
     .container_imagem {
-        width: 300px;
+        width: 350px;
     }
 
     .container_header p {

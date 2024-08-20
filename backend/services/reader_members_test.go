@@ -24,14 +24,19 @@ func TestGetMembers(t *testing.T) {
 
 			for c, cell := range row.Cells {
 
+				if cell.Value == "" {
+					continue
+				}
+
 				if c == 0 {
-					members.NomeFamilia = fmt.Sprintf("Familia %v", cell.Value)
+					nomeFamilia := fmt.Sprintf("Familia %v", cell.Value)
+					members.NomeFamilia = &nomeFamilia
 
 				}
 
 				members.NomeMembro = append(members.NomeMembro,
 					models.MembroFamilia{
-						Nome: cell.Value,
+						Nome: tools.ToPrt(cell.Value),
 					})
 			}
 
@@ -53,34 +58,48 @@ func TestGetMembers(t *testing.T) {
 
 	for _, members := range membersStorage {
 
+		if members.NomeFamilia == nil {
+			continue
+		}
+
 		err := tx.Get(&members.Id, "select max(id)+1 id from familia f")
 		tools.CheckError(err)
 
-		radomKey, err := tools.GenerateRandomKey(6)
+		if members.Id == nil {
+			members.Id = tools.ToPrt(1)
+		}
+
+		radomKey, err := tools.GenerateRandomKey(3)
 		tools.CheckError(err)
 
 		query := "insert into familia(id,codigo,nome_familia) values($1,$2,$3)"
 
-		_, err = tx.Exec(tx.Rebind(query), members.Id, radomKey, members.NomeFamilia)
+		_, err = tx.Exec(tx.Rebind(query), members.Id, radomKey, tools.CleanString(*members.NomeFamilia))
 		tools.CheckError(err)
 
 		for _, nome := range members.NomeMembro {
 
-			nome.Nome = tools.CleanString(nome.Nome)
+			nome.Nome = tools.ToPrt(tools.CleanString(*nome.Nome))
 
-			if nome.Nome == "" {
+			if nome.Nome == nil {
 				continue
 			}
 
 			err := tx.Get(&nome.Id, "select max(id)+1 id from familia_membros fm")
 			tools.CheckError(err)
 
+			if nome.Id == nil {
+				nome.Id = tools.ToPrt(1)
+			}
+
+			if members.Id != nil {
+				nome.FkIdFamilia = tools.ToPrt(*members.Id)
+			}
+
 			query = "insert into familia_membros(id,familia_id, nome_membro) values($1,$2,$3)"
-
-			nome.FkIdFamilia = members.Id
-
 			_, err = tx.Exec(tx.Rebind(query), nome.Id, nome.FkIdFamilia, nome.Nome)
 			tools.CheckError(err)
+
 		}
 
 	}
@@ -94,10 +113,7 @@ func LeitorXlsx(filePath string) *xlsx.File {
 
 	// Abrir o arquivo xlsx
 	xlsxFile, err := xlsx.OpenFile(filePath)
-	if err != nil {
-		panic(err)
-	}
-
+	tools.CheckErr(err)
 	return xlsxFile
 
 }

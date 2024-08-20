@@ -20,7 +20,6 @@ export function Confirmacao(props: ConfirmacaoProps) {
 
     function handleSetNewCode(event: ChangeEvent<HTMLInputElement>) {
 
-
         if (event.target.value.length === 0) {
             event.target.setCustomValidity('Valor nao pode ser vazio')
         } else {

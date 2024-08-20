@@ -6,6 +6,9 @@ interface ErroProps {
     setConfirmarPresenca: (value: boolean) => void;
     setPMembrosFamilia: (value: boolean) => void;
     setPresencaMembrosConfirmada: (value: boolean) => void;
+
+    setMessageError: (value: string) => void;
+    message?: string;
 }
 
 export function Error(props: ErroProps) {
@@ -15,13 +18,15 @@ export function Error(props: ErroProps) {
         props.setConfirmarPresenca(false)
         props.setPMembrosFamilia(false)
         props.setPresencaMembrosConfirmada(false)
+        props.setMessageError('')
+
     }
 
     return (
         <div className={styles.container}>
+
             <p>
-                Algo aconteceu de errado
-                😕
+                {`${props.message} 😕`}
             </p>
 
             <button onClick={handleSetError}>

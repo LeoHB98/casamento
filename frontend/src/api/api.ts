@@ -3,8 +3,8 @@ import { ResponseGetMembers, ResponseUpdateConfirmationMembers } from '../models
 
 
 const instance = axios.create({
-    baseURL: 'https://tight-lark-equal.ngrok-free.app/',
-    // baseURL: 'http://localhost:8082/',
+    baseURL: 'https://tight-lark-equal.ngrok-free.app/api/',
+    // baseURL: 'http://localhost:8082/api/',
     timeout: 15000,
     headers: {
         'ngrok-skip-browser-warning': 'true'
@@ -39,6 +39,8 @@ export const Api = {
         requests.post(`membros`, membros),
 
     confirmacao: (): Promise<ResponseUpdateConfirmationMembers> => requests.get(`membros`),
+
+    membersConfirmed: (): Promise<Response> => requests.get(`todos`)
 
     // deletePost: (id: number): Promise<void> => requests.delete(`posts/${id}`),
 };

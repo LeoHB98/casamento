@@ -20,43 +20,36 @@ func (s *Service) Listener(port int, auth string) {
 		AllowedOrigins:   []string{"*"}, // Altere para o domínio que precisa de acesso
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
-		ExposedHeaders:   []string{"Link"},
+		ExposedHeaders:   []string{"*"},
 		AllowCredentials: false,
 		MaxAge:           300, // Preflight request cache duration in seconds
 	}))
 
-	router.Route("/", func(r chi.Router) {
+	//Disponibiliza a rota
+	router.Get("/invite", s.Server)
 
-		log.Println("Recebida uma requisição")
+	// //Disponibiliza o arquivo para a rota
+	s.ServerFile(router)
 
-		// CORS settings
-		r.Use(cors.Handler(cors.Options{
-			AllowedOrigins:   []string{"*"}, // Altere para o domínio que precisa de acesso
-			AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-			AllowedHeaders:   []string{"*"},
-			ExposedHeaders:   []string{"Link"},
-			AllowCredentials: false,
-			MaxAge:           300, // Preflight request cache duration in seconds
-		}))
+	router.Route("/api", func(r chi.Router) {
+
+		// r.Use(Middleware)
 
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Type", "application/json; charset=utf-8")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte(`{"status":"ok"}`))
+			w.Write([]byte(`{"status":"api ok"}`))
 		})
 
-		// r.Use(Middleware)
-		r.Options("/familia/{id}", s.GetFamilyLastName)
 		r.Get("/familia/{id}", s.GetFamilyLastName)
-		r.Post("/membros", s.UpdateConfirmationMember)
-
-		r.Get("/casamento", s.Server)
-
-		// Serve arquivos estáticos do diretório "dist"
-		fs := http.FileServer(http.Dir("../../frontend/dist"))
-		r.Handle("/casamento/*", http.StripPrefix("/casamento", fs))
+		r.Route("/membros/", func(r chi.Router) {
+			r.Post("/", s.UpdateConfirmationMember)
+			r.Get("/cadastrados", s.GetAllMembers)
+			r.Get("/confirmados", s.GetMembersConfirmed)
+		})
 
 	})
+
 	log.Printf("Listening at port: %v", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), router))
 

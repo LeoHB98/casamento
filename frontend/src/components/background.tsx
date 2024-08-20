@@ -14,7 +14,7 @@ export function PlanoDeFundo({ image }: PlanoDeFundoProps) {
 
             <div className={styles.container_header}>
                 <p>
-                    Voce esta convidado!
+                    Você está convidado!
                 </p>
                 <p>
                     Leonardo & Bruna
@@ -28,10 +28,6 @@ export function PlanoDeFundo({ image }: PlanoDeFundoProps) {
                     src={image}
                 />
             </div>
-
-
-
-
 
         </div>
 

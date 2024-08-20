@@ -1,4 +1,5 @@
 export interface ResponseGetMembers {
+    http_code?: number
     id?: number;
     nome_familia?: string;
     membros?: Membros[];

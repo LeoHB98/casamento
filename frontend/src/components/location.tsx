@@ -84,6 +84,7 @@ export default function Location() {
                         {open && <InfoWindow
                             position={positon}
                             onCloseClick={() => setOpen(false)}
+
                         >
                             <p className={styles.text}>
                                 <button>

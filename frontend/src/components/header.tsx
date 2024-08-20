@@ -1,19 +1,20 @@
 
 
+// import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css'
-import { useNavigate } from 'react-router-dom';
+
 import { scroller } from 'react-scroll'
 
 export default function Header() {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const goTo = () => {
-        navigate('/teste')
-    }
+    // const goTo = () => {
+    //     navigate('/teste')
+    // }
 
     // Função para rolar para uma seção específica
-    const scrollToSection = (section) => {
+    const scrollToSection = (section: string) => {
         scroller.scrollTo(section, {
             smooth: true,
             duration: 500,
@@ -26,29 +27,30 @@ export default function Header() {
             className={styles.container}
         >
 
-            {/* 
-            <nav>
+
+            {/* <nav>
                 <ul> */}
             <button onClick={
                 () => scrollToSection("location")
             }>
-                Localizacao
+                Localização
             </button>
 
             <button>
                 Presentes
             </button>
 
-            {/* <Link to='button_confirmation' smooth={true} duration={300}> */}
             <button onClick={
                 () => scrollToSection("button_confirmation")}>
-                Presenca
+                Confirmar Presença
             </button>
-            {/* </Link> */}
+            {/* 
+                    <button onClick={goTo}>
+                        Ir para Teste
+                    </button> */}
 
-            <button>
-                Historia
-            </button>
+
+            {/* <button>                 História            </button> */}
             {/* 
                 </ul>
 

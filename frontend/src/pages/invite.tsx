@@ -19,6 +19,7 @@ import MembrosEnviados from './../components/envio_membros';
 import ButtonConfirm from './../components/confirmation_button';
 import Header from './../components/header';
 import Location from '../components/location';
+
 // import Party from './../assets/1f389.png'
 
 export default function Invite() {
@@ -27,6 +28,7 @@ export default function Invite() {
     const [confirmarPresenca, setConfirmarPresenca] = useState(false)
     const [pMembrosFamilia, setPMembrosFamilia] = useState(false)
     const [modalError, setModalError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const [presencaMembrosConfirmada, setPresencaMembrosConfirmada] = useState(false)
 
@@ -47,22 +49,51 @@ export default function Invite() {
 
     const fetchFamilyData = useCallback(async () => {
 
-        try {
-            setLoading(true);
-            const data = await Api.getAFamily(code);
-            setFamily(data);
 
-        } catch (err) {
-            console.log(err);
-            setModalError(true);
+        const data = await Api.getAFamily(code)
 
-        } finally {
+            .catch(function (error) {
+                setModalError(true)
 
-            setLoading(false);
-            setCode('')
-            setSendCode(false)
-            setConfirmarPresenca(false)
+                if (error.http_code == 404) {
+                    alert(error)
+                    setErrorMessage("Código inválido. Verifique e envie novamente")
+                    setFamily({})
+                    console.log(error);
+                }
+
+                // if (error.response) {
+                //     // A requisição foi feita e o servidor respondeu com um código de status
+                //     // que sai do alcance de 2xx
+                //     console.error(error.response.data);
+                //     console.error(error.response.status);
+                //     console.error(error.response.headers);
+                // } else if (error.request) {
+                //     // A requisição foi feita mas nenhuma resposta foi recebida
+                //     // `error.request` é uma instância do XMLHttpRequest no navegador e uma instância de
+                //     // http.ClientRequest no node.js
+                //     console.error(error.request);
+                // } else {
+
+                //     // Alguma coisa acontenceu ao configurar a requisição que acionou este erro.
+                //     console.error('Error', error.message);
+                // }
+                // console.error(error.config);
+            })
+            .finally(function () {
+                setLoading(false);
+                setCode('')
+                setSendCode(false)
+                setConfirmarPresenca(false)
+
+            });
+
+        console.log(data)
+        if (data !== undefined) {
+            setFamily(data)
         }
+
+
     }, [code]);
 
     const confirmMembers = useCallback(async () => {
@@ -143,6 +174,8 @@ export default function Invite() {
                                 setConfirmarPresenca={setConfirmarPresenca}
                                 setPMembrosFamilia={setPMembrosFamilia}
                                 setPresencaMembrosConfirmada={setPresencaMembrosConfirmada}
+                                message={errorMessage}
+                                setMessageError={setErrorMessage}
                             />
                         </Modal>
                     </> : <></>

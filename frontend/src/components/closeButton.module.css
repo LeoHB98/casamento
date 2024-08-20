@@ -5,6 +5,7 @@
     justify-content: flex-end;
     min-height: 3rem;
     margin-bottom: 0.5rem;
+    max-height: 1rem;
 }
 
 .close button {
