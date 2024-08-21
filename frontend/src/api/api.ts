@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { ResponseGetMembers, ResponseUpdateConfirmationMembers } from '../models/modal.interface'
+import { RequestMembersSelected, ResponseGetMembers, ResponseUpdateConfirmationMembers } from '../models/modal.interface'
 
 
 const instance = axios.create({
@@ -35,7 +35,7 @@ export const Api = {
     getAFamily: (id: string): Promise<ResponseGetMembers> => requests.get(`familia/${id}`),
     // createPost: (post: Teste): Promise<Teste> =>
     //     requests.post('posts', post),
-    confirmationMembers: (membros: string[]): Promise<ResponseUpdateConfirmationMembers> =>
+    postConfirmationMembers: (membros: RequestMembersSelected): Promise<ResponseUpdateConfirmationMembers> =>
         requests.post(`membros`, membros),
 
     confirmacao: (): Promise<ResponseUpdateConfirmationMembers> => requests.get(`membros`),

@@ -13,3 +13,8 @@ interface Membros {
 export interface ResponseUpdateConfirmationMembers {
     response: string;
 }
+
+export interface RequestMembersSelected {
+    code: string;
+    members: string[]
+}

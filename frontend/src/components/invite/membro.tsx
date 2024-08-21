@@ -37,14 +37,13 @@ export function Membros(props: MembrosProps) {
         <div className={styles.container}>
 
             <CloseButton
-
                 setBoolean={props.setOpenMembersModal}
                 setObjetct={props.setMembers}
                 setStringArray={props.setMembersSelected}
             />
 
             <h3>
-                Selecione os membros da família:
+                Selecione todos aqueles que participarão evento:
             </h3>
 
             <div className={styles.membersContainer}>

@@ -1,7 +1,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { Api } from './../api/api';
-import { ResponseGetMembers } from './../models/modal.interface'
+import { RequestMembersSelected, ResponseGetMembers } from './../models/modal.interface'
 import { Confirmacao } from '../components/invite/confirmacao'
 import { Membros } from '../components/invite/membro';
 import { PlanoDeFundo } from '../components/invite/background';
@@ -19,6 +19,7 @@ import MembrosEnviados from '../components/invite/envio_membros';
 import ButtonConfirm from '../components/invite/confirmation_button';
 import Header from '../components/invite/header';
 import Location from '../components/invite/location';
+
 
 // import Party from './../assets/1f389.png'
 
@@ -52,37 +53,19 @@ export default function Invite() {
 
         const data = await Api.getAFamily(code)
 
-            .catch(function (error) {
+            .catch(function (err) {
                 setModalError(true)
 
-                if (error.http_code == 404) {
-                    alert(error)
+                if (err.response.status == 404) {
+                    // alert(err)
                     setErrorMessage("Código inválido. Verifique e envie novamente")
                     setFamily({})
-                    console.log(error);
+                    setCode('')
+                    console.log(err);
                 }
-
-                // if (error.response) {
-                //     // A requisição foi feita e o servidor respondeu com um código de status
-                //     // que sai do alcance de 2xx
-                //     console.error(error.response.data);
-                //     console.error(error.response.status);
-                //     console.error(error.response.headers);
-                // } else if (error.request) {
-                //     // A requisição foi feita mas nenhuma resposta foi recebida
-                //     // `error.request` é uma instância do XMLHttpRequest no navegador e uma instância de
-                //     // http.ClientRequest no node.js
-                //     console.error(error.request);
-                // } else {
-
-                //     // Alguma coisa acontenceu ao configurar a requisição que acionou este erro.
-                //     console.error('Error', error.message);
-                // }
-                // console.error(error.config);
             })
             .finally(function () {
                 setLoading(false);
-                setCode('')
                 setSendCode(false)
                 setConfirmarPresenca(false)
 
@@ -98,22 +81,42 @@ export default function Invite() {
 
     const confirmMembers = useCallback(async () => {
 
-        try {
+        if (membersSelected.length > 0) {
+
             setLoading(true)
-            if (membersSelected.length > 0) {
-                const data = await Api.confirmationMembers(membersSelected);
-                console.log(data);
+            const m: RequestMembersSelected = {
+                code: code,
+                members: membersSelected
             }
 
-        } catch (err) {
-            console.log(err);
-            setModalError(true);
+            console.log(m);
 
-        } finally {
-            setLoading(false)
-            setPresencaMembrosConfirmada(true)
+            const data = await Api.postConfirmationMembers(m)
+                .catch(function (err) {
+                    console.log(err)
+                    setErrorMessage("Algo deu errado")
+                    setModalError(true)
+
+                    // if (err.response.status == 400) {
+                    // }
+
+                    // if (err.code == AxiosError.ERR_BAD_REQUEST) {
+                    //     setErrorMessage("Something wrong")
+                    //     setModalError(true)
+                    // }
+
+                }).finally(function () {
+                    setCode('')
+                    setPresencaMembrosConfirmada(true)
+                    setLoading(false)
+                    setMembersSelected([])
+                })
+
+            console.log(data);
+
         }
-    }, [membersSelected])
+
+    }, [membersSelected, code])
 
 
 

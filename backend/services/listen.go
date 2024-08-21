@@ -42,7 +42,7 @@ func (s *Service) Listener(port int, auth string) {
 		})
 
 		r.Get("/familia/{id}", s.GetFamilyLastName)
-		r.Route("/membros/", func(r chi.Router) {
+		r.Route("/membros", func(r chi.Router) {
 			r.Post("/", s.UpdateConfirmationMember)
 			r.Get("/cadastrados", s.GetAllMembers)
 			r.Get("/confirmados", s.GetMembersConfirmed)

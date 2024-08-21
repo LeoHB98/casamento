@@ -53,7 +53,7 @@ func TestGetMembers(t *testing.T) {
 	})
 
 	tx, err := db.Beginx()
-	tools.CheckError(err)
+	tools.CheckErr(err)
 
 	defer db.Close()
 
@@ -64,21 +64,21 @@ func TestGetMembers(t *testing.T) {
 		}
 
 		err := tx.Get(&members.Id, "select max(id)+1 id from familia f")
-		tools.CheckError(err)
+		tools.CheckErr(err)
 
 		if members.Id == nil {
 			members.Id = tools.ToPrt(1)
 		}
 
 		radomKey, err := tools.GenerateRandomKey(3)
-		tools.CheckError(err)
+		tools.CheckErr(err)
 
 		query := "insert into familia(id,codigo,nome_familia, data_criacao) values($1,$2,$3,$4)"
 
 		timeNow := time.Now().Format("2006-01-02 15:04:05")
 
 		_, err = tx.Exec(tx.Rebind(query), members.Id, radomKey, tools.CleanString(*members.NomeFamilia), timeNow)
-		tools.CheckError(err)
+		tools.CheckErr(err)
 
 		for _, nome := range members.NomeMembro {
 
@@ -89,7 +89,7 @@ func TestGetMembers(t *testing.T) {
 			}
 
 			err := tx.Get(&nome.Id, "select max(id)+1 id from familia_membros fm")
-			tools.CheckError(err)
+			tools.CheckErr(err)
 
 			if nome.Id == nil {
 				nome.Id = tools.ToPrt(1)
@@ -99,16 +99,16 @@ func TestGetMembers(t *testing.T) {
 				nome.FkIdFamilia = tools.ToPrt(*members.Id)
 			}
 
-			query = "insert into familia_membros(id,familia_id, nome_membro) values($1,$2,$3)"
-			_, err = tx.Exec(tx.Rebind(query), nome.Id, nome.FkIdFamilia, nome.Nome)
-			tools.CheckError(err)
+			query = "insert into familia_membros(id,familia_id, nome_membro, confirmado) values($1,$2,$3,$4)"
+			_, err = tx.Exec(tx.Rebind(query), nome.Id, nome.FkIdFamilia, nome.Nome, "N")
+			tools.CheckErr(err)
 
 		}
 
 	}
 
 	err = tx.Commit()
-	tools.CheckError(err)
+	tools.CheckErr(err)
 
 }
 
