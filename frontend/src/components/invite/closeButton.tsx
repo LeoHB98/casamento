@@ -6,6 +6,7 @@ interface CloseButtonProps {
     setObjetct?: (value: object) => void
     setStringArray?: (value: string[]) => void
     setBoolean?: (value: boolean) => void
+    setNullString?: (value: string) => void
 }
 
 export function CloseButton(props: CloseButtonProps) {
@@ -23,6 +24,11 @@ export function CloseButton(props: CloseButtonProps) {
         if (props.setStringArray !== undefined) {
             props.setStringArray([])
         }
+
+        if (props.setNullString !== undefined) {
+            props.setNullString('')
+        }
+
     }
 
     return (

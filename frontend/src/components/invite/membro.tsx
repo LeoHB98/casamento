@@ -81,11 +81,8 @@ export function Membros(props: MembrosProps) {
                     Enviar
                 </button>
             </div>
-
-
         </div>
     )
-
 }
 
 function MemberSeleted({ membro }: MProps) {

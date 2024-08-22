@@ -25,7 +25,10 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 
 		if existsCode == 0 {
 			code = http.StatusNotFound
+		}
 
+		if data.DateConfirmed != nil {
+			code = http.StatusAccepted
 		}
 
 		data.HttpCode = code
@@ -44,7 +47,8 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 	sqlOp := `
 	select 
       f.id id_familia,
-      f.nome_familia
+      f.nome_familia,
+	  f.data_confirmacao
     from familia f
     where f.codigo = $1`
 

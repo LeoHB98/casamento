@@ -2,23 +2,23 @@ import styles from './erro.module.css'
 
 
 interface ErroProps {
-    setError: (value: boolean) => void;
-    setConfirmarPresenca: (value: boolean) => void;
-    setPMembrosFamilia: (value: boolean) => void;
-    setPresencaMembrosConfirmada: (value: boolean) => void;
+    SetError: (value: boolean) => void;
+    SetConfirmarPresenca: (value: boolean) => void;
+    SetPMembrosFamilia: (value: boolean) => void;
+    SetPresencaMembrosConfirmada: (value: boolean) => void;
 
-    setMessageError: (value: string) => void;
-    message?: string;
+    SetMessageError: (value: string) => void;
+    Message?: string;
 }
 
 export function Error(props: ErroProps) {
 
     function handleSetError() {
-        props.setError(false)
-        props.setConfirmarPresenca(false)
-        props.setPMembrosFamilia(false)
-        props.setPresencaMembrosConfirmada(false)
-        props.setMessageError('')
+        props.SetError(false)
+        props.SetConfirmarPresenca(false)
+        props.SetPMembrosFamilia(false)
+        props.SetPresencaMembrosConfirmada(false)
+        props.SetMessageError('')
 
     }
 
@@ -26,7 +26,7 @@ export function Error(props: ErroProps) {
         <div className={styles.container}>
 
             <p>
-                {`${props.message} 😕`}
+                {`${props.Message} 😕`}
             </p>
 
             <button onClick={handleSetError}>
