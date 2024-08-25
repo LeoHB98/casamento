@@ -9,8 +9,8 @@ export default function Header() {
 
     const navigate = useNavigate();
 
-    const goTo = () => {
-        navigate('/noivos')
+    const goTo = (value: string) => {
+        navigate(`/${value}`)
     }
 
     // Função para rolar para uma seção específica
@@ -35,7 +35,7 @@ export default function Header() {
                 Localização
             </button>
 
-            <button>
+            <button onClick={() => goTo('gifts')}>
                 Presentes
             </button>
 
@@ -44,7 +44,7 @@ export default function Header() {
                 Confirmar Presença
             </button>
 
-            <button onClick={goTo}>
+            <button onClick={() => goTo('noivos')}>
                 Noivos
             </button>
 

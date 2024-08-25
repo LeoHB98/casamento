@@ -1,0 +1,40 @@
+ .close {
+     width: 100%;
+     padding-right: 0.5rem;
+     padding-top: 1rem;
+ }
+
+ .container {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     height: 100%;
+     justify-content: flex-start;
+     align-items: flex-start;
+     padding: 0.5rem;
+     font-size: 20px;
+     font-weight: bold;
+
+
+     & input {
+         margin: 1rem 0rem;
+         width: 100%;
+         border-radius: 0.5rem;
+
+         border: 1px solid var(--violet-200);
+         font-size: 20px;
+         height: 40px;
+         text-align: center;
+
+     }
+
+
+     & .buttonSpace {
+
+         & button {
+             width: 100%;
+         }
+     }
+
+
+ }

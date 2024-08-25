@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
-import { RequestMembersSelected, ResponseGetMembers, ResponseUpdateConfirmationMembers } from '../models/modal.interface'
+import { RequestMembersSelected, ResponseGetMembers, ResponseUpdateConfirmationMembers } from '../models/invite/modal.interface'
+import { Present } from '../models/gifts/modal.interface';
 
 
 const instance = axios.create({
@@ -30,17 +31,15 @@ const requests = {
 };
 
 export const Api = {
-    // getPosts: (): Promise<Result[]> => requests.get('posts'),
-    // getPosts: (): Promise<Result[]> => requests.get('teste'),
+
     getAFamily: (id: string): Promise<ResponseGetMembers> => requests.get(`familia/${id}`),
-    // createPost: (post: Teste): Promise<Teste> =>
-    //     requests.post('posts', post),
+    getFamily: (): Promise<ResponseGetMembers[]> => requests.get(`membros/cadastrados`),
+    getConfirmation: (): Promise<ResponseUpdateConfirmationMembers> => requests.get(`membros`),
+
     postConfirmationMembers: (membros: RequestMembersSelected): Promise<ResponseUpdateConfirmationMembers> =>
         requests.post(`membros`, membros),
 
-    confirmacao: (): Promise<ResponseUpdateConfirmationMembers> => requests.get(`membros`),
-
-    membersConfirmed: (): Promise<Response> => requests.get(`todos`)
+    postPresents: (present: Present) => requests.post('', present)
 
     // deletePost: (id: number): Promise<void> => requests.delete(`posts/${id}`),
 };

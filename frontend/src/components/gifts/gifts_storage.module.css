@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    max-height: 800px;
+    justify-content: center;
+    align-items: center;
+
+    & p {
+        font-size: 20px;
+        margin-bottom: 2rem;
+    }
+
+    & .list {
+        width: 100%;
+        max-width: 500px;
+        overflow-y: scroll;
+        border: 1px solid black;
+
+        background-color: white;
+        border-radius: 0.5rem;
+
+        padding: 0.5rem;
+
+    }
+
+    & .item {
+        padding: 20px;
+        margin-bottom: 10px;
+        /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 1); */
+        box-shadow: 0px 0px 5px var(--violet-400);
+        border-radius: 5px;
+    }
+}
+
+
+/* Personaliza a largura da barra de rolagem */
+.list::-webkit-scrollbar {
+    width: 12px;
+    /* Largura da barra de rolagem vertical */
+    height: 12px;
+    /* Altura da barra de rolagem horizontal */
+}
+
+/* Personaliza o trilho da barra de rolagem (o fundo) */
+.list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Cor do trilho */
+    border-radius: 10px;
+    /* Bordas arredondadas do trilho */
+}
+
+/* Personaliza o polegar da barra de rolagem (a parte que se move) */
+.list::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Cor do polegar */
+    border-radius: 10px;
+    /* Bordas arredondadas do polegar */
+}
+
+/* Cor e efeito ao passar o mouse sobre o polegar */
+.list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Cor do polegar ao passar o mouse */
+}
+
+/* Chrome, Safari e Opera */
+/*
+.list::-webkit-scrollbar {
+    display: none;
+}
+*/
+
+@media (max-width: 768px) {
+
+    .container {
+        height: 700px;
+
+    }
+
+    .list {
+        padding: 0.5rem;
+        height: 100%;
+    }
+}

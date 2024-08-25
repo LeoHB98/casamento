@@ -5,7 +5,7 @@ export interface ResponseGetMembers {
     membros?: Membros[];
 }
 
-interface Membros {
+export interface Membros {
     id: number;
     nome: string;
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ResponseGetMembers } from '../../models/modal.interface'
+import { ResponseGetMembers } from '../../models/invite/modal.interface'
 import styles from './membro.module.css'
 import { CloseButton } from './closeButton'
 

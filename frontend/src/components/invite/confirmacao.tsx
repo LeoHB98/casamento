@@ -42,8 +42,6 @@ export function Confirmacao(props: ConfirmacaoProps) {
 
         }
 
-        console.log(localCode)
-
     }
 
 

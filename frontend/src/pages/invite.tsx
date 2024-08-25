@@ -1,7 +1,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { Api } from './../api/api';
-import { RequestMembersSelected, ResponseGetMembers } from './../models/modal.interface'
+import { RequestMembersSelected, ResponseGetMembers } from '../models/invite/modal.interface'
 import { Confirmacao } from '../components/invite/confirmacao'
 import { Membros } from '../components/invite/membro';
 import { PlanoDeFundo } from '../components/invite/background';
