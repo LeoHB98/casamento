@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ResponseGetMembers } from '../../models/invite/modal.interface'
+import { MembersData } from '../../models/invite/modal.interface'
 import styles from './membro.module.css'
 import { CloseButton } from './closeButton'
 
@@ -7,8 +7,8 @@ import { CloseButton } from './closeButton'
 // import { CheckCircle, Circle } from 'phosphor-react'
 
 interface MembrosProps {
-    family: ResponseGetMembers
-    setMembers: (value: ResponseGetMembers) => void
+    family: MembersData
+    setMembers: (value: MembersData) => void
     setOpenMembersModal: (value: boolean) => void
     setMembersSelected: (value: string[]) => void
 }
@@ -50,12 +50,17 @@ export function Membros(props: MembrosProps) {
                 {
                     props.family.membros?.map(
                         (member) => (
-                            <Membro
-                                key={member.id}
-                                membro={member.nome}
-                                membros={members}
-                                setMembersSelected={setMembers}
-                            />
+                            <>
+                                {member.nome !== undefined ?
+                                    <Membro
+                                        key={member.id}
+                                        membro={member.nome}
+                                        membros={members}
+                                        setMembersSelected={setMembers}
+                                    />
+
+                                    : <></>}
+                            </>
                         ))
                 }
 

@@ -1,0 +1,20 @@
+.box {
+    padding: 3rem;
+
+    & .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        padding: 1rem;
+
+    }
+}
+
+@media (max-width: 767px) {
+
+    .box {
+        padding: 1rem
+    }
+
+}

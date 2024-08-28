@@ -1,7 +1,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { Api } from './../api/api';
-import { RequestMembersSelected, ResponseGetMembers } from '../models/invite/modal.interface'
+import { RequestMembersSelected, MembersData } from '../models/invite/modal.interface'
 import { Confirmacao } from '../components/invite/confirmacao'
 import { Membros } from '../components/invite/membro';
 import { PlanoDeFundo } from '../components/invite/background';
@@ -38,7 +38,7 @@ export default function Invite() {
     const [showMembers, setShowMembers] = useState(false)
 
     //Abriga os convidados
-    const [guests, setGuests] = useState<Partial<ResponseGetMembers>>({});
+    const [guests, setGuests] = useState<Partial<MembersData>>({});
 
     //Abriga os convidados que foram selecionados pelo usuario
     const [membersSelected, setMembersSelected] = useState<string[]>([])

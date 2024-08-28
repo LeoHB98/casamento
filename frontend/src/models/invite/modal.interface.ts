@@ -1,13 +1,13 @@
-export interface ResponseGetMembers {
+export interface MembersData {
     http_code?: number
     id?: number;
     nome_familia?: string;
-    membros?: Membros[];
+    membros?: Members[];
 }
 
-export interface Membros {
-    id: number;
-    nome: string;
+export interface Members {
+    id?: number;
+    nome?: string;
 }
 
 export interface ResponseUpdateConfirmationMembers {

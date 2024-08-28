@@ -58,15 +58,15 @@ export default function AddGifts(props: AddGiftsProps) {
                 currentState={props.OpenAddGift}
             >
 
-
-                <div className={styles.close}>
-                    <CloseButton
-                        setBoolean={props.SetOpenAddGift}
-                    />
-                </div>
-
-
                 <div className={styles.container}>
+
+                    <div className={styles.close}>
+                        <CloseButton
+                            setBoolean={props.SetOpenAddGift}
+                        />
+                    </div>
+
+
 
                     <form
                         onSubmit={handleAddGift}
