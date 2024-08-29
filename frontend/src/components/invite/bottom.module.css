@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    width: 100%;
+    margin: 2rem 0rem;
+    margin-top: 15rem;
+    background-color: var(--violet-200);
+    height: 100px;
+
+    border-radius: 0.5rem;
+
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 100%;
+        height: 50px;
+        width: 200px;
+    }
+
+    /* button :focus {
+        box-shadow: none;
+    } */
+}
+
+@media (max-width:765px) {
+    .container {
+        margin-top: 20rem;
+    }
+}

@@ -2,16 +2,20 @@ package models
 
 import "time"
 
-type Familia struct {
-	HttpCode      int             `json:"http_code"`
-	Id            *int            `db:"id_familia" json:"id"`
-	NomeFamilia   *string         `db:"nome_familia" json:"nome_familia"`
-	DateConfirmed *time.Time      `db:"data_confirmacao" json:"data_confirmada"`
-	NomeMembro    []MembroFamilia `db:"nome_membro" json:"membros"`
+type CompiledMembers struct {
+	HttpCode        int             `json:"httpCode"`
+	Codigo          *string         `json:"codigo" db:"codigo"`
+	Id              *int            `json:"id" db:"id" `
+	NomeFamilia     *string         `json:"nomeFamilia" db:"nome_familia"`
+	DataConfirmacao *time.Time      `json:"dataConfirmacao" db:"data_confirmacao"`
+	DataCriacao     *time.Time      `json:"dataCriacao" db:"data_criacao"`
+	NomeMembros     []MembroFamilia `json:"membros" db:"nome_membro"`
 }
 
 type MembroFamilia struct {
-	Id          *int    `db:"id" json:"id"`
-	FkIdFamilia *int    `db:"familia_id"`
-	Nome        *string `db:"nome_membro" json:"nome"`
+	Id              *int       `db:"id" json:"id"`
+	FkIdFamilia     *int       `db:"familia_id"`
+	NomeMembro      *string    `json:"nomeMembro" db:"nome_membro"`
+	DataAtualizacao *time.Time `json:"dataAtualizacao" db:"data_atualizacao"`
+	Confirmado      *string    `json:"confirmado" db:"confirmado"`
 }

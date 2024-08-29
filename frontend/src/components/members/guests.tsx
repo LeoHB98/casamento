@@ -7,6 +7,7 @@ import styles from './guests.module.css'
 import { Api } from "../../api/api";
 import { MembersData } from "../../models/invite/modal.interface";
 import { AddGuests } from "./addGuests";
+import { AllGuests } from "./allGuests";
 
 
 
@@ -19,24 +20,20 @@ export function Guests() {
 
         async () => {
 
-            const g = await Api.getFamily()
+            const g = await Api.getGuests()
                 .catch(function (err) {
                     console.log(err)
                 })
 
-            if (g !== undefined) {
-
-                console.log(g)
-
+            if (g) {
                 setGuests(g)
-
             }
 
         }, []);
 
     useEffect(() => {
         fetchAllMembers()
-    })
+    }, [fetchAllMembers])
 
     return (
 
@@ -52,22 +49,18 @@ export function Guests() {
             >
                 <AddGuests
                     SetOpenWindow={setOpenWindow}
-                // SetGuests={setGuests}
                 />
             </Modal>
 
-
             {
-                guests?.map(
-                    (guest) => (
-                        <div>
-                            <p>
-                                {`${guest}`}
-                            </p>
-                        </div>
-                    )
-                )
+                guests !== undefined && guests.length > 0 ?
+                    <AllGuests
+                        guests={
+                            guests.filter(
+                                (guest): guest is MembersData => guest !== undefined)}
+                    /> : <></>
             }
+
         </div>
 
     )

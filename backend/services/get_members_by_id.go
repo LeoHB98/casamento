@@ -12,7 +12,7 @@ import (
 
 func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 
-	var data models.Familia
+	var data models.CompiledMembers
 	existsCode := 0
 
 	defer func() {
@@ -27,7 +27,7 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 			code = http.StatusNotFound
 		}
 
-		if data.DateConfirmed != nil {
+		if data.DataConfirmacao != nil {
 			code = http.StatusAccepted
 		}
 
@@ -46,7 +46,7 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 
 	sqlOp := `
 	select 
-      f.id id_familia,
+      f.id,
       f.nome_familia,
 	  f.data_confirmacao
     from familia f
@@ -74,7 +74,7 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	err = s.DBs[0].Select(&data.NomeMembro, sqlOp2, data.Id)
+	err = s.DBs[0].Select(&data.NomeMembros, sqlOp2, data.Id)
 	if err != nil {
 		panic(err)
 	}

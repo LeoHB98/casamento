@@ -3,8 +3,10 @@
 
 import { useState } from 'react';
 import styles from './location.module.css'
-import { AdvancedMarker, APIProvider, InfoWindow, Map } from "@vis.gl/react-google-maps";
+import { AdvancedMarker, APIProvider, InfoWindow, Map, /*Pin*/ } from "@vis.gl/react-google-maps";
 import { Element } from 'react-scroll';
+import Modal from './modal';
+import { CloseButton } from './closeButton';
 
 // const mapContainerStyle = {
 //     width: '800px',
@@ -52,53 +54,68 @@ import { Element } from 'react-scroll';
 
 "use_client";
 
-export default function Location() {
+interface LocationProps {
+    OpenWindow: boolean;
+    SetOpenMap: (value: boolean) => void;
+}
+
+export default function Location(props: LocationProps) {
     const positon = {
         lat: - 21.48637294488083, lng: -47.012823587981295
     }
-
-
     const [open, setOpen] = useState(false)
     return (
 
         <Element name='location'>
-            <APIProvider
-                apiKey='AIzaSyDcxKvhslqsyJK405ALQFLmhtH6gfiOI64'>
+
+            <Modal
+                currentState={props.OpenWindow}
+            >
                 <div className={styles.container}>
-                    <Map
-                        zoom={15}
-                        center={positon}
-                        mapId={'e6865a8da6bd778'}
-                    >
-                        <AdvancedMarker
-                            position={positon}
-                            onClick={() => setOpen(true)}
+                    <CloseButton
+                        setBoolean={props.SetOpenMap}
+                    />
+
+                    <APIProvider apiKey='AIzaSyDcxKvhslqsyJK405ALQFLmhtH6gfiOI64'>
+
+                        <Map
+                            zoom={16}
+                            center={positon}
+                            mapId={'e6865a8da6bd778'}
                         >
-                            {/* <Pin
-                            background={"grey"}
-                            borderColor={"yellow"}
-                            glyphColor={"purple"}
-                        ></Pin> */}
+                            <AdvancedMarker
+                                position={positon}
+                                onClick={() => setOpen(true)}
+                            >
+                                {/* <Pin
+                                    background={"grey"}
+                                    borderColor={"yellow"}
+                                    glyphColor={"purple"}
+                                ></Pin> */}
+                            </AdvancedMarker>
 
-                        </AdvancedMarker>
-                        {open && <InfoWindow
-                            position={positon}
-                            onCloseClick={() => setOpen(false)}
+                            {open && <InfoWindow
+                                position={positon}
+                                onCloseClick={() => setOpen(false)}
 
-                        >
-                            <p className={styles.text}>
-                                <button>
-                                    <a href='https://www.google.com.br/maps/place/Bela+Vista+-+Ch%C3%A1cara+Espa%C3%A7o+para+Festas+e+Eventos+em+Mococa/@-21.4863992,-47.0132393,19z/data=!3m1!4b1!4m6!3m5!1s0x94b7b86185518a27:0xcd1300923be74145!8m2!3d-21.4864004!4d-47.0125956!16s%2Fg%2F1tcyyjc_?entry=ttu' >
-                                        Clique aqui para ir ao local
-                                    </a>
-                                </button>
-                            </p>
+                            >
+                                <p className={styles.text}>
+                                    <button>
+                                        <a href='https://www.google.com.br/maps/place/Bela+Vista+-+Ch%C3%A1cara+Espa%C3%A7o+para+Festas+e+Eventos+em+Mococa/@-21.4863992,-47.0132393,19z/data=!3m1!4b1!4m6!3m5!1s0x94b7b86185518a27:0xcd1300923be74145!8m2!3d-21.4864004!4d-47.0125956!16s%2Fg%2F1tcyyjc_?entry=ttu' >
+                                            Clique aqui para ir ao local
+                                        </a>
+                                    </button>
+                                </p>
 
-                        </InfoWindow>}
-                    </Map>
+                            </InfoWindow>}
+                        </Map>
+                    </APIProvider>
                 </div>
-            </APIProvider>
+            </Modal>
+
         </Element>
+
+
 
     )
 

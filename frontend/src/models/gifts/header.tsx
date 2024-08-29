@@ -5,7 +5,7 @@ import styles from './header.module.css'
 interface HeaderProps {
     toPage: string;
     middle: string;
-    SetOpenWindow: (value: boolean) => void;
+    SetOpenWindow?: (value: boolean) => void;
 }
 
 export function Header(props: HeaderProps) {
@@ -17,7 +17,9 @@ export function Header(props: HeaderProps) {
     }
 
     function handleAddGifts() {
-        props.SetOpenWindow(true)
+        if (props.SetOpenWindow) {
+            props.SetOpenWindow(true)
+        }
     }
 
     return (

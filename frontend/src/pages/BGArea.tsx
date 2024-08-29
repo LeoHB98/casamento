@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "phosphor-react";
 
+import styles from './BGArea.module.css'
+import { Header } from "../models/gifts/header";
 export default function BGArea() {
 
     const navigate = useNavigate();
@@ -10,18 +11,24 @@ export default function BGArea() {
     }
 
     return (
-        <>
-            <button
-                onClick={() => goTo('')}
-            >
-                <ArrowLeft />
+        <div className={styles.container}>
+            <Header
+
+                middle="Area dos noivos"
+                toPage=""
+            />
+
+            <button onClick={() => goTo('gifts')}>
+                Presentes
             </button>
 
             <button
                 onClick={() => goTo('guests')}
             >
-                convidados
+                Convidados
             </button>
-        </>
+
+
+        </div>
     )
 }

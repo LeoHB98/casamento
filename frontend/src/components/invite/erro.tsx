@@ -26,7 +26,12 @@ export function Error(props: ErroProps) {
         <div className={styles.container}>
 
             <p>
-                {`${props.Message} 😕`}
+                {props.Message !== '' ?
+                    <p>{`${props.Message} 😕`}</p>
+                    : <>
+                        <p>Algo aconteceu de errado 😕</p>
+                    </>
+                }
             </p>
 
             <button onClick={handleSetError}>

@@ -4,6 +4,7 @@ import { CloseButton } from "../invite/closeButton"
 import styles from './addGuests.module.css'
 import { Members, MembersData } from "../../models/invite/modal.interface";
 import { Check, X } from "phosphor-react";
+import { Api } from "../../api/api";
 
 
 
@@ -21,6 +22,8 @@ export function AddGuests(props: AddGuestsProps) {
 
     const [nameChief, setNameChief] = useState('')
 
+
+    const [sendData, setSendData] = useState(false)
 
     function onChangeAddChef(event: ChangeEvent<HTMLInputElement>) {
 
@@ -60,7 +63,7 @@ export function AddGuests(props: AddGuestsProps) {
             }
 
             guests.forEach((guest) => {
-                const G: Members = { nome: guest }
+                const G: Members = { nomeMembro: guest }
                 Gs = [...Gs, G]
             })
 
@@ -72,12 +75,14 @@ export function AddGuests(props: AddGuestsProps) {
                     // ...prevGuest,
                     // membros: [...(prevGuest.membros || []), ...Gs],
                     membros: [...Gs],
-                    nome_familia: nameChief
+                    nomeFamilia: nameChief
                 }))
 
-            // if (compiledGuests !== undefined) {
-            //     props.SetOpenWindow(false)
-            // }
+            if (compiledGuests !== undefined) {
+
+                setSendData(true)
+
+            }
 
 
             // const Zero: MembersData = {}
@@ -101,7 +106,11 @@ export function AddGuests(props: AddGuestsProps) {
     useEffect(() => {
         console.log(guests);
         console.log(compiledGuests)
-    }, [guests, compiledGuests]);
+
+        if (sendData) {
+            Api.postGuests(compiledGuests)
+        }
+    }, [guests, compiledGuests, sendData]);
 
 
     return (
@@ -160,7 +169,10 @@ export function AddGuests(props: AddGuestsProps) {
 
                     {
 
-                        (guests !== undefined && guests.length > 0) ?
+                        (guests !== undefined
+                            && guests.length > 0
+                            && nameChief.trim() !== ''
+                        ) ?
 
                             <div className={styles.finalButton}>
                                 <button
@@ -201,9 +213,8 @@ function MemberAdded(props: MemberAddedProps) {
     }
 
     return (
-        <>
+        <div /*className={styles.box}*/>
             {props.guests.length > 0 ?
-
                 <div className={!shouldScroll ? styles.containerMA : styles.scroll_container}>
                     {
                         props.guests?.map(
@@ -229,6 +240,8 @@ function MemberAdded(props: MemberAddedProps) {
                 </div>
                 : <></>
             }
-        </>
+            {/* {shouldScroll ? <p>(Arraste para o lado)</p> : <></>} */}
+
+        </div>
     )
 }

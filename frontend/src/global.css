@@ -21,6 +21,7 @@ body {
   --violet-200: #c4aafd;
   --violet-300: #bea0fe;
   --violet-400: #aa83ff;
+  --violet-500: rgb(111, 0, 255);
   --backgroud-opacity: #00000092;
   --item-bg-color: rgb(214, 214, 214);
   --input-font-size: 20px;
@@ -41,9 +42,8 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+  box-shadow: 1px 2px 6px var(--violet-500);
   background-color: var(--violet-200);
-  box-shadow: 1px 2px 6px rgb(111, 0, 255);
 }
 
 :focus {

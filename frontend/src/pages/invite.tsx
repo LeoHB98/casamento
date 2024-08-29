@@ -12,8 +12,10 @@ import Modal from '../components/invite/modal'
 import MembrosEnviados from '../components/invite/envio_membros';
 import ButtonConfirm from '../components/invite/confirmation_button';
 import Header from '../components/invite/header';
-import Location from '../components/invite/location';
+// import Location from '../components/invite/location';
 import WarmingCode from '../components/invite/warming';
+import { Bottom } from '../components/invite/bottom';
+import Info from '../components/invite/info';
 
 // import EmojiPicker from 'emoji-picker-react';
 // import Party from './../assets/1f389.png'
@@ -84,7 +86,7 @@ export default function Invite() {
 
             setShowWarning('ok')
 
-            if (data.http_code == 202) {
+            if (data.httpCode == 202) {
                 setShowWarning('warning')
             }
 
@@ -160,6 +162,8 @@ export default function Invite() {
                 image={BackgroudImage}
             />
 
+            <Info />
+
             <ButtonConfirm
                 setState={setConfirmPresence}
             />
@@ -168,7 +172,9 @@ export default function Invite() {
                 images={Images}
             /> */}
 
-            <Location />
+            {/* <Location
+                openWindow={true}
+            /> */}
 
             <Modal
                 currentState={confirmPresence}
@@ -243,6 +249,8 @@ export default function Invite() {
                         />
                     </Modal>
                 </> : <></>}
+
+            <Bottom />
 
         </div>
     )

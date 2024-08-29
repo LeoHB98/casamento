@@ -33,11 +33,15 @@ const requests = {
 export const Api = {
 
     getAFamily: (id: string): Promise<MembersData> => requests.get(`familia/${id}`),
-    getFamily: (): Promise<MembersData[]> => requests.get(`membros/cadastrados`),
-    getConfirmation: (): Promise<ResponseUpdateConfirmationMembers> => requests.get(`membros`),
+    getGuests: (): Promise<MembersData[]> => requests.get(`membros/cadastrados`),
 
-    postConfirmationMembers: (membros: RequestMembersSelected): Promise<ResponseUpdateConfirmationMembers> =>
-        requests.post(`membros`, membros),
+    postConfirmationMembers:
+        (membros: RequestMembersSelected):
+            Promise<ResponseUpdateConfirmationMembers> =>
+            requests.post(`membros/confirmar`, membros),
+    postGuests:
+        (membros: MembersData): Promise<ResponseUpdateConfirmationMembers> =>
+            requests.post(`membros/cadastrar`, membros),
 
     postPresents: (present: Present) => requests.post('', present)
 

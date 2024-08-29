@@ -68,7 +68,7 @@
 
 .scroll_container {
     flex-direction: column;
-    max-height: 230px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -83,4 +83,9 @@
     button {
         width: 100%;
     }
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
 }

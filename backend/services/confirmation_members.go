@@ -68,12 +68,16 @@ func (s *Service) UpdateConfirmationMember(w http.ResponseWriter, r *http.Reques
 	membersSelected := make(map[string]string)
 
 	for _, member := range m.Members {
+		membersSelected[member] = "N"
 
-		for _, mb := range allMembers {
-			membersSelected[mb] = "N"
+	}
 
-			if member == mb {
-				membersSelected[member] = "S"
+	for _, mb := range allMembers {
+
+		for k, v := range membersSelected {
+			if mb == k {
+				v = "S"
+				membersSelected[k] = v
 			}
 		}
 

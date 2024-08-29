@@ -1,17 +1,10 @@
-
-
-import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css'
 
 import { scroller } from 'react-scroll'
+import Location from './location';
+import { useState } from 'react';
 
 export default function Header() {
-
-    const navigate = useNavigate();
-
-    const goTo = (value: string) => {
-        navigate(`/${value}`)
-    }
 
     // Função para rolar para uma seção específica
     const scrollToSection = (section: string) => {
@@ -20,6 +13,13 @@ export default function Header() {
             duration: 1000,
         });
     };
+    const [openMap, setOpenMap] = useState(false)
+
+    function ToMap() {
+
+        setOpenMap(true)
+
+    }
 
     return (
 
@@ -27,16 +27,14 @@ export default function Header() {
             className={styles.container}
         >
 
-            {/* <nav>
-                <ul> */}
-            <button onClick={
+            {/* <button onClick={
                 () => scrollToSection("location")
             }>
                 Localização
-            </button>
+            </button> */}
 
-            <button onClick={() => goTo('gifts')}>
-                Presentes
+            <button onClick={ToMap}>
+                Localização
             </button>
 
             <button onClick={
@@ -44,17 +42,12 @@ export default function Header() {
                 Confirmar Presença
             </button>
 
-            <button onClick={() => goTo('noivos')}>
-                Noivos
-            </button>
-
-
-            {/* <button>                 História            </button> */}
-            {/* 
-                </ul>
-
-            </nav> */}
+            <Location
+                OpenWindow={openMap}
+                SetOpenMap={setOpenMap}
+            />
 
         </div >
     )
 }
+

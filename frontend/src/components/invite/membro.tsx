@@ -51,10 +51,10 @@ export function Membros(props: MembrosProps) {
                     props.family.membros?.map(
                         (member) => (
                             <>
-                                {member.nome !== undefined ?
+                                {member.nomeMembro !== undefined ?
                                     <Membro
                                         key={member.id}
-                                        membro={member.nome}
+                                        membro={member.nomeMembro}
                                         membros={members}
                                         setMembersSelected={setMembers}
                                     />

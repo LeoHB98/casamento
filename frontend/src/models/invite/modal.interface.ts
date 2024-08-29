@@ -1,13 +1,16 @@
 export interface MembersData {
-    http_code?: number
+    httpCode?: number
     id?: number;
-    nome_familia?: string;
+    codigo?: string;
+    nomeFamilia?: string;
+    dataCriacao?: string;
     membros?: Members[];
 }
 
 export interface Members {
-    id?: number;
-    nome?: string;
+    id?: number
+    nomeMembro?: string;
+    confirmado?: string;
 }
 
 export interface ResponseUpdateConfirmationMembers {
