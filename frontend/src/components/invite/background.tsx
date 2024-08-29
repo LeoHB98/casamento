@@ -1,31 +1,27 @@
 
 import styles from './background.module.css'
 
+import BkgImage from '../../assets/we_3.jpg'
 
-// import backimg from "../assets/flores_fundo-removebg-preview.png"
-interface PlanoDeFundoProps {
-    image: string;
-}
-
-export function PlanoDeFundo({ image }: PlanoDeFundoProps) {
+export function PlanoDeFundo() {
 
     return (
         <div className={styles.container}>
 
             <div className={styles.container_header}>
-                <p>
+                {/* <p>
                     Você está convidado!
-                </p>
-                <p>
-                    Leonardo & Bruna
-                </p>
+                </p> */}
+                <h1>Leonardo</h1>
+                <h2>&</h2>
+                <h1>Bruna</h1>
             </div>
 
             <div
                 className={styles.container_imagem}
-                key={image}>
+                key={BkgImage}>
                 <img
-                    src={image}
+                    src={BkgImage}
                 />
             </div>
 

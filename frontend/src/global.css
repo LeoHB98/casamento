@@ -22,11 +22,13 @@ body {
   --violet-300: #bea0fe;
   --violet-400: #aa83ff;
   --violet-500: rgb(111, 0, 255);
-  --backgroud-opacity: #00000092;
+
+  --background-opacity-dark: #00000055;
+  --background-opacity-light: #ffffff92;
   --item-bg-color: rgb(214, 214, 214);
   --input-font-size: 20px;
   --input-height: 40px;
-
+  --text-invite: white;
 }
 
 h1 {

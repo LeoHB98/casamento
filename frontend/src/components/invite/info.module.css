@@ -7,90 +7,84 @@
     text-align: center;
     font-family: "Lavishly Yours";
     position: relative;
+    margin-top: 2rem;
+}
 
+.text,
+.hour {
+    position: absolute;
+    width: 100%;
+    color: var(--text-invite);
+    top: 0;
+    left: 0;
+}
 
-    .text {
-        color: var(--violet-500);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        /* transform: translate(-50%, -50%); */
+.text {
+    transform: translateY(-500%);
 
-        h1 {
-            font-size: 10rem;
-            font-weight: normal;
-        }
-
-        h3 {
-            font-size: 8rem;
-            font-weight: normal;
-        }
-
-        h4 {
-            font-size: 4rem;
-            font-weight: normal;
-        }
+    h1 {
+        font-size: 10rem;
+        font-weight: normal;
     }
 
+    h4 {
+        font-size: 4rem;
+        font-weight: normal;
+    }
+}
 
-    .imge {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+
+.hour {
+    transform: translateY(-150%);
+
+    h3 {
+        font-size: 8rem;
+        font-weight: normal;
+    }
+}
+
+
+
+.imge {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+
+    img {
         width: 100%;
         height: 100%;
-
-
-        img {
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
+        z-index: -2;
     }
 }
 
 
-@media(max-width:1280px) {
-    .container {
-
-        .text {
-
-            h1 {
-                font-size: 8rem;
-            }
-
-            h3 {
-                font-size: 6rem;
-            }
-
-            h4 {
-                font-size: 6rem;
-            }
-        }
-
+/* Responsividade para telas menores */
+@media (max-width: 1280px) {
+    .text h1 {
+        font-size: 8rem;
     }
 
+    .text h4 {
+        font-size: 6rem;
+    }
+
+    .hour h3 {
+        font-size: 6rem;
+    }
 }
 
-@media(max-width:768px) {
-    .container {
-
-        .text {
-
-            h1 {
-                font-size: 4rem;
-            }
-
-            h3 {
-                font-size: 3rem;
-            }
-
-            h4 {
-                font-size: 3rem;
-            }
-        }
-
+@media (max-width: 768px) {
+    .text {
+        transform: translateY(-250%);
     }
 
+    .text h1 {
+        font-size: 3rem;
+    }
+
+    .hour h3 {
+        font-size: 2rem;
+    }
 }

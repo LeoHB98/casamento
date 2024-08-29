@@ -5,7 +5,6 @@ import { RequestMembersSelected, MembersData } from '../models/invite/modal.inte
 import { Confirmacao } from '../components/invite/confirmacao'
 import { Membros } from '../components/invite/membro';
 import { PlanoDeFundo } from '../components/invite/background';
-import { BackgroudImage } from './../assets/backgroud'
 import { Error } from '../components/invite/erro';
 
 import Modal from '../components/invite/modal'
@@ -158,9 +157,7 @@ export default function Invite() {
 
             <Header />
 
-            <PlanoDeFundo
-                image={BackgroudImage}
-            />
+            <PlanoDeFundo />
 
             <Info />
 
