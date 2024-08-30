@@ -1,4 +1,4 @@
-package services
+package database
 
 import (
 	"encoding/json"
@@ -8,7 +8,7 @@ import (
 	"github.com/alpha_main/tools"
 )
 
-func (s *Service) GetAllMembers(w http.ResponseWriter, r *http.Request) {
+func (s *DAO) GetAllMembers(w http.ResponseWriter, r *http.Request) {
 
 	data := []models.CompiledMembers{}
 	var err error
@@ -79,4 +79,4 @@ func (s *Service) GetAllMembers(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (s *Service) GetMembersConfirmed(w http.ResponseWriter, r *http.Request) {}
+func (s *DAO) GetMembersConfirmed(w http.ResponseWriter, r *http.Request) {}

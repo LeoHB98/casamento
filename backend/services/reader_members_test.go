@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alpha_main/config"
+	"github.com/alpha_main/database"
 	"github.com/alpha_main/models"
 	"github.com/alpha_main/tools"
 	"github.com/tealeg/xlsx"
@@ -56,7 +57,7 @@ func TestGetMembers(t *testing.T) {
 
 	defer db.Close()
 
-	if err := InsertNewMembers(membersStorage, txx); err != nil {
+	if err := database.InsertNewMembers(membersStorage, txx); err != nil {
 		tools.CheckErr(err)
 	}
 }

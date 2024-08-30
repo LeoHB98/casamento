@@ -135,7 +135,7 @@ func (u *Util) DoResponse(w http.ResponseWriter, response []models.UserResponse,
 	}
 
 	if w != nil {
-		toByte := u.DecideTypeResponse(models.Response{Response: response}, typeResp)
+		toByte := u.DecideTypeResponse(models.ResponseUser{UserResponse: response}, typeResp)
 		log.Println(string(toByte))
 
 		w.Header().Set("Content-Type", fmt.Sprintf("application/%v;charset=utf-8", typeResp))

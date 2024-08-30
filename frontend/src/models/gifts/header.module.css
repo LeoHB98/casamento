@@ -3,6 +3,12 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
+    padding: 1rem;
+
+    .noadd {
+        display: flex;
+        width: 60px;
+    }
 
     p {
         font-size: 20px;

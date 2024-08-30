@@ -4,7 +4,7 @@ import Invite from './pages/invite';
 
 import Gifts from './pages/gifts';
 import BGArea from './pages/BGArea';
-import { Guests } from './components/guests/guests';
+import { Guests } from './pages/guests';
 import Login from './pages/login';
 
 export default function App() {

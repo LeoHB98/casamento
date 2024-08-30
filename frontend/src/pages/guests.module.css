@@ -1,5 +1,5 @@
 .box {
-    padding: 3rem;
+    padding: 0rem 1rem;
 
     & .container {
         display: flex;
@@ -11,13 +11,7 @@
     }
 }
 
-@media (max-width: 767px) {
 
-    .box {
-        padding: 1rem
-    }
-
-}
 
 
 @media (max-width: 430px) {

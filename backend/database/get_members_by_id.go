@@ -1,4 +1,4 @@
-package services
+package database
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 	"github.com/go-chi/chi"
 )
 
-func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
+func (s *DAO) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 
 	var data models.CompiledMembers
 	existsCode := 0
@@ -61,7 +61,7 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 	order by fm.id asc
 	`
 
-	err := s.DBs[0].Get(&existsCode, "select count(f.codigo) from familia f where f.codigo = $1", code)
+	err := s.DB[0].Get(&existsCode, "select count(f.codigo) from familia f where f.codigo = $1", code)
 	tools.CheckErr(err)
 
 	if existsCode == 0 {
@@ -69,12 +69,12 @@ func (s *Service) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = s.DBs[0].Get(&data, sqlOp, code)
+	err = s.DB[0].Get(&data, sqlOp, code)
 	if err != nil {
 		panic(err)
 	}
 
-	err = s.DBs[0].Select(&data.NomeMembros, sqlOp2, data.Id)
+	err = s.DB[0].Select(&data.NomeMembros, sqlOp2, data.Id)
 	if err != nil {
 		panic(err)
 	}

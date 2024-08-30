@@ -1,4 +1,4 @@
-package services
+package database
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func (s *Service) PostNewMember(w http.ResponseWriter, r *http.Request) {
+func (s *DAO) PostNewMember(w http.ResponseWriter, r *http.Request) {
 
 	membersStorage := models.CompiledMembers{}
 

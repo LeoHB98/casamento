@@ -13,11 +13,12 @@ export interface Members {
     confirmado?: string;
 }
 
-export interface ResponseUpdateConfirmationMembers {
-    response: string;
-}
-
 export interface RequestMembersSelected {
     code: string;
     members: string[]
+}
+
+export interface ResponseCode {
+    code: number;
+    message: string;
 }

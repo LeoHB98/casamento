@@ -25,11 +25,11 @@ func (s *Service) Listener(port int, auth string) {
 		MaxAge:           300, // Preflight request cache duration in seconds
 	}))
 
-	//Disponibiliza a rota
-	router.Get("/invite", s.Server)
+	// //Disponibiliza a rota
+	// router.Get("/invite", s.Server)
 
-	// //Disponibiliza o arquivo para a rota
-	s.ServerFile(router)
+	// // //Disponibiliza o arquivo para a rota
+	// s.ServerFile(router)
 
 	router.Route("/api", func(r chi.Router) {
 
@@ -40,6 +40,8 @@ func (s *Service) Listener(port int, auth string) {
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte(`{"status":"api ok"}`))
 		})
+
+		r.Get("/login", s.Login)
 
 		r.Get("/familia/{id}", s.GetFamilyLastName)
 

@@ -6,11 +6,15 @@ import (
 )
 
 type DAO struct {
-	DBs []sqlx.DB
+	DB []sqlx.DB
 }
 
 func New(dbs []sqlx.DB, u *util.Util) *DAO {
 	return &DAO{
-		DBs: dbs,
+		DB: dbs,
 	}
+}
+
+func (d *DAO) DBConx1() *sqlx.DB {
+	return &d.DB[0]
 }

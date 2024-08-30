@@ -11,20 +11,24 @@ export default function Gifts() {
     const [openAddGifts, setOpenAddGifts] = useState(false)
 
     return (
-
-        <div className={styles.box}>
+        <>
             <Header
-                toPage=""
+                toPage="noivos"
                 middle="Lista de Presentes"
                 SetOpenWindow={setOpenAddGifts}
+                hasAdd
             />
+            <div className={styles.box}>
 
-            <AddGifts
-                OpenAddGift={openAddGifts}
-                SetOpenAddGift={setOpenAddGifts}
-            />
-            <AllGifts />
-        </div>
+                <AddGifts
+                    OpenAddGift={openAddGifts}
+                    SetOpenAddGift={setOpenAddGifts}
+                />
+
+                <AllGifts />
+            </div>
+        </>
+
 
     );
 }

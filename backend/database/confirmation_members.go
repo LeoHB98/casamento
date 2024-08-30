@@ -1,18 +1,16 @@
-package services
+package database
 
 import (
 	"encoding/json"
 	"net/http"
 	"time"
 
+	"github.com/alpha_main/models"
 	"github.com/alpha_main/tools"
 )
 
-func (s *Service) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
+func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 
-	type Response struct {
-		Response string `json:"response"`
-	}
 	type members struct {
 		Code    string   `json:"code"`
 		Members []string `json:"members"`
@@ -38,8 +36,8 @@ func (s *Service) UpdateConfirmationMember(w http.ResponseWriter, r *http.Reques
 
 		w.WriteHeader(code)
 
-		err := json.NewEncoder(w).Encode(Response{
-			Response: mgm,
+		err := json.NewEncoder(w).Encode(models.GenericResponse{
+			Message: mgm,
 		})
 		tools.CheckErr(err)
 

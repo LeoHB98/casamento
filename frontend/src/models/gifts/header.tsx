@@ -36,7 +36,6 @@ export function Header(props: HeaderProps) {
             <p>{props.middle}</p>
 
 
-
             {props.hasAdd ?
 
                 <button
@@ -45,7 +44,9 @@ export function Header(props: HeaderProps) {
                     <Plus
                         size={30}
                     />
-                </button> : <></>}
+                </button>
+
+                : <div className={styles.noadd}></div>}
 
 
 

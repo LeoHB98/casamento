@@ -4,6 +4,8 @@ import styles from './login.module.css'
 import { Header } from '../models/gifts/header'
 import { Api } from '../api/api'
 import { GenericError } from '../components/tools/genericError'
+import { useNavigate } from 'react-router-dom'
+import { AxiosError } from 'axios'
 
 
 export default function Login() {
@@ -14,6 +16,9 @@ export default function Login() {
     const [send, setSend] = useState(false)
 
     const [hasError, setHasError] = useState(false)
+    const [mgmError, setMgmErro] = useState('')
+
+
 
     function onChangeUsername(event: ChangeEvent<HTMLInputElement>) {
 
@@ -24,40 +29,62 @@ export default function Login() {
     }
 
     function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
-
-        const p = event.target.value.trim()
-
-        if (p && p !== '') {
-            setPass(p)
-        }
-
+        const p = event.target.value
+        setPass(p)
     }
 
+
+    const navigate = useNavigate();
 
 
     const fecthGetLogin = useCallback(
 
         async () => {
-            if (send) {
-                const response = Api.login(username, pass)
-                    .catch((err) => {
-                        console.log(err)
-                        setHasError(true)
 
-                    })
-
-                console.log(response)
+            function goTo(route: string) {
+                navigate(`/${route}`)
             }
 
+            if (send) {
 
-            setSend(false)
-        }, [username, pass, send]);
+                try {
+                    const response = await Api.login(username, pass)
+                    if (response && response.code === 200) {
+                        goTo(`noivos`)
+                    }
 
+                } catch (err) {
+
+                    console.log(err)
+                    setHasError(true)
+
+
+                    if (err instanceof AxiosError) {
+
+                        const dataErr = err.response?.data;
+
+                        if (dataErr.code === 404) {
+                            setMgmErro(dataErr.message)
+                        }
+
+                    } else {
+                        // Caso o erro não seja do tipo esperado
+                        setMgmErro('Um erro inesperado ocorreu.');
+                    }
+
+                    setUsername('')
+                    setPass('')
+
+                } finally {
+                    setSend(false)
+                }
+
+            }
+
+        }, [username, pass, send, navigate]);
 
 
     useEffect(() => {
-        console.log(username)
-        console.log(pass)
         fecthGetLogin()
     }, [username, pass, fecthGetLogin])
 
@@ -68,16 +95,14 @@ export default function Login() {
     }
 
     return (
-
         <>
+            <Header
+                middle=''
+                toPage=''
+                hasAdd={false}
+            />
 
             <div className={styles.box}>
-
-                <Header
-                    middle=''
-                    toPage=''
-                    hasAdd={false}
-                />
 
                 <form action=""
                     className={styles.container}
@@ -117,7 +142,7 @@ export default function Login() {
                 </form>
                 {hasError ?
                     <GenericError
-                        ErrorMessage='Não foi possível efetuar o login'
+                        ErrorMessage={mgmError}
                         SetCloseWindow={setHasError}
                         closeWindow={hasError}
                     /> : <></>}

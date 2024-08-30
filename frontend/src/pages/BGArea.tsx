@@ -15,7 +15,7 @@ export default function BGArea() {
 
         <>
             <Header
-                middle="Area dos noivos"
+                middle="Àrea dos noivos"
                 toPage=""
                 hasAdd={false}
             />

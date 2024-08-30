@@ -1,7 +1,7 @@
 package models
 
-type Response struct {
-	Response []UserResponse `xml:"error,omitempty"`
+type ResponseUser struct {
+	UserResponse []UserResponse `xml:"error,omitempty"`
 }
 
 type UserResponse struct {
