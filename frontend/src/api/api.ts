@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { RequestMembersSelected, MembersData, ResponseUpdateConfirmationMembers } from '../models/invite/modal.interface'
+import { RequestMembersSelected, MembersData, ResponseUpdateConfirmationMembers as ResponseCode } from '../models/invite/modal.interface'
 import { Present } from '../models/gifts/modal.interface';
 
 
@@ -34,13 +34,14 @@ export const Api = {
 
     getAFamily: (id: string): Promise<MembersData> => requests.get(`familia/${id}`),
     getGuests: (): Promise<MembersData[]> => requests.get(`membros/cadastrados`),
+    login: (username: string, password: string): Promise<ResponseCode> => requests.get(`login&${username}&${password}`),
 
     postConfirmationMembers:
         (membros: RequestMembersSelected):
-            Promise<ResponseUpdateConfirmationMembers> =>
+            Promise<ResponseCode> =>
             requests.post(`membros/confirmar`, membros),
     postGuests:
-        (membros: MembersData): Promise<ResponseUpdateConfirmationMembers> =>
+        (membros: MembersData): Promise<ResponseCode> =>
             requests.post(`membros/cadastrar`, membros),
 
     postPresents: (present: Present) => requests.post('', present)

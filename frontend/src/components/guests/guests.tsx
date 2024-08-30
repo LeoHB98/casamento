@@ -42,6 +42,7 @@ export function Guests() {
                 toPage="noivos"
                 middle="Lista de convidados"
                 SetOpenWindow={setOpenWindow}
+                hasAdd={openWindow}
             />
 
             <Modal

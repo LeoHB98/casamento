@@ -12,7 +12,7 @@ export function Bottom() {
 
     return (
         <div className={styles.container}>
-            <button onClick={() => goTo('noivos')}>
+            <button onClick={() => goTo('login')}>
                 Àrea Noivos
             </button>
         </div>

@@ -1,9 +1,18 @@
-.container {
+.box {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 1rem;
 
+    justify-content: center;
+    align-items: center;
+
+    .container {
+
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
 
     button {
         margin: 1rem 0rem;

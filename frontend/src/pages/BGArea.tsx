@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import styles from './BGArea.module.css'
 import { Header } from "../models/gifts/header";
+
 export default function BGArea() {
 
     const navigate = useNavigate();
@@ -11,24 +12,30 @@ export default function BGArea() {
     }
 
     return (
-        <div className={styles.container}>
-            <Header
 
+        <>
+            <Header
                 middle="Area dos noivos"
                 toPage=""
+                hasAdd={false}
             />
 
-            <button onClick={() => goTo('gifts')}>
-                Presentes
-            </button>
+            <div className={styles.box}>
 
-            <button
-                onClick={() => goTo('guests')}
-            >
-                Convidados
-            </button>
+                <div className={styles.container}>
+                    <button onClick={() => goTo('gifts')}>
+                        Presentes
+                    </button>
 
+                    <button
+                        onClick={() => goTo('guests')}
+                    >
+                        Convidados
+                    </button>
+                </div>
 
-        </div>
+            </div>
+        </>
+
     )
 }

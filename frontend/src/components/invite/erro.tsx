@@ -1,4 +1,6 @@
+
 import styles from './erro.module.css'
+
 
 
 interface ErroProps {
@@ -41,4 +43,5 @@ export function Error(props: ErroProps) {
     )
 
 }
+
 

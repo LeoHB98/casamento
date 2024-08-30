@@ -4,7 +4,8 @@ import Invite from './pages/invite';
 
 import Gifts from './pages/gifts';
 import BGArea from './pages/BGArea';
-import { Guests } from './components/members/guests';
+import { Guests } from './components/guests/guests';
+import Login from './pages/login';
 
 export default function App() {
 
@@ -12,6 +13,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Invite />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/noivos' element={<BGArea />} />
         <Route path='/gifts' element={<Gifts />} />
         <Route path='/guests' element={<Guests />} />

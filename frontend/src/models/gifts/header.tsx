@@ -6,6 +6,7 @@ interface HeaderProps {
     toPage: string;
     middle: string;
     SetOpenWindow?: (value: boolean) => void;
+    hasAdd: boolean;
 }
 
 export function Header(props: HeaderProps) {
@@ -16,7 +17,7 @@ export function Header(props: HeaderProps) {
         navigate(`/${value}`)
     }
 
-    function handleAddGifts() {
+    function handleAdd() {
         if (props.SetOpenWindow) {
             props.SetOpenWindow(true)
         }
@@ -34,13 +35,18 @@ export function Header(props: HeaderProps) {
 
             <p>{props.middle}</p>
 
-            <button
-                onClick={handleAddGifts}
-            >
-                <Plus
-                    size={30}
-                />
-            </button>
+
+
+            {props.hasAdd ?
+
+                <button
+                    onClick={handleAdd}
+                >
+                    <Plus
+                        size={30}
+                    />
+                </button> : <></>}
+
 
 
         </div>
