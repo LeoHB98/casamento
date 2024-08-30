@@ -18,6 +18,22 @@
     border-radius: 0.5rem;
 }
 
+@media (max-width: 1024px) {
+
+    .container {
+        height: 100%;
+        flex-wrap: wrap;
+        height: 5rem;
+    }
+
+    .container button {
+        border-radius: 8px;
+        margin: 0.25rem;
+        height: 3rem;
+    }
+
+}
+
 @media (max-width: 768px) {
     .container {
         height: 100%;

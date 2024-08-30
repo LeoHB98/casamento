@@ -76,10 +76,11 @@ export default function Location(props: LocationProps) {
                         setBoolean={props.SetOpenMap}
                     />
 
-                    <APIProvider apiKey='AIzaSyDcxKvhslqsyJK405ALQFLmhtH6gfiOI64'>
+                    <APIProvider
+                        apiKey='AIzaSyDcxKvhslqsyJK405ALQFLmhtH6gfiOI64'>
 
                         <Map
-                            zoom={16}
+                            zoom={15}
                             center={positon}
                             mapId={'e6865a8da6bd778'}
                         >
@@ -99,20 +100,20 @@ export default function Location(props: LocationProps) {
                                 onCloseClick={() => setOpen(false)}
 
                             >
-                                <p className={styles.text}>
-                                    <button>
+                                <button>
+                                    <p className={styles.text}>
                                         <a href='https://www.google.com.br/maps/place/Bela+Vista+-+Ch%C3%A1cara+Espa%C3%A7o+para+Festas+e+Eventos+em+Mococa/@-21.4863992,-47.0132393,19z/data=!3m1!4b1!4m6!3m5!1s0x94b7b86185518a27:0xcd1300923be74145!8m2!3d-21.4864004!4d-47.0125956!16s%2Fg%2F1tcyyjc_?entry=ttu' >
                                             Clique aqui para ir ao local
                                         </a>
-                                    </button>
-                                </p>
+                                    </p>
+                                </button>
 
                             </InfoWindow>}
                         </Map>
                     </APIProvider>
                 </div>
-            </Modal>
 
+            </Modal>
         </Element>
 
 

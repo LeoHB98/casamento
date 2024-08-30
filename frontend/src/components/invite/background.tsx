@@ -8,17 +8,14 @@ export function PlanoDeFundo() {
     return (
         <div className={styles.container}>
 
-            <div className={styles.container_header}>
-                {/* <p>
-                    Você está convidado!
-                </p> */}
+            <header>
                 <h1>Leonardo</h1>
                 <h2>&</h2>
                 <h1>Bruna</h1>
-            </div>
+            </header>
 
             <div
-                className={styles.container_imagem}
+                className={styles.imge}
                 key={BkgImage}>
                 <img
                     src={BkgImage}
