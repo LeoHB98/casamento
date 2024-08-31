@@ -39,7 +39,7 @@ export function Guests() {
                 toPage="noivos"
                 middle="Lista de convidados"
                 SetOpenWindow={setOpenWindow}
-                hasAdd={openWindow}
+                hasAdd={true}
             />
             <div className={styles.box}>
 

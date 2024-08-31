@@ -71,10 +71,10 @@ export default function Location(props: LocationProps) {
             <Modal
                 currentState={props.OpenWindow}
             >
+                <CloseButton
+                    setBoolean={props.SetOpenMap}
+                />
                 <div className={styles.container}>
-                    <CloseButton
-                        setBoolean={props.SetOpenMap}
-                    />
 
                     <APIProvider
                         apiKey='AIzaSyDcxKvhslqsyJK405ALQFLmhtH6gfiOI64'>

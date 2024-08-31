@@ -104,13 +104,13 @@ export default function Login() {
 
             <div className={styles.box}>
 
-                <form action=""
+                <form
                     className={styles.container}
                     onSubmit={handleSendLogin}
                 >
 
                     <div>
-                        <label htmlFor="username">Usuário</label>
+                        <p >Usuário</p>
                         <input
                             type="text"
                             id="username"
@@ -123,7 +123,7 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <label htmlFor="password">Senha</label>
+                        <p>Senha</p>
 
                         <input type="password"
                             id='password'

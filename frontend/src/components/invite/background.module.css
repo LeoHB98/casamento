@@ -136,7 +136,8 @@
     .container {
 
         .imge {
-            width: 500px;
+            width: 414px;
+            height: 800px;
         }
 
         header {
@@ -154,7 +155,7 @@
 
 }
 
-@media (max-width: 430px) {
+@media (max-width: 450px) {
 
     .container {
 
