@@ -8,10 +8,13 @@ import Modal from "../components/invite/modal";
 import { AddGuests } from "../components/guests/addGuests";
 import { AllGuests } from "../components/guests/allGuests";
 
+
 export function Guests() {
 
-    const [openWindow, setOpenWindow] = useState(false)
+    const [openAddWindow, setOpenAddWindow] = useState(false)
     const [guests, setGuests] = useState<Partial<MembersData[]>>()
+
+    const [reload, setReload] = useState(false)
 
     const fetchAllMembers = useCallback(
 
@@ -26,11 +29,19 @@ export function Guests() {
                 setGuests(g)
             }
 
-        }, []);
+            setReload(false)
+        }
+
+        , []);
 
     useEffect(() => {
         fetchAllMembers()
-    }, [fetchAllMembers])
+
+        if (reload) {
+            fetchAllMembers()
+        }
+    }, [fetchAllMembers, reload])
+
 
     return (
 
@@ -38,16 +49,17 @@ export function Guests() {
             <Header
                 toPage="noivos"
                 middle="Lista de convidados"
-                SetOpenWindow={setOpenWindow}
+                SetOpenWindow={setOpenAddWindow}
                 hasAdd={true}
             />
             <div className={styles.box}>
 
                 <Modal
-                    currentState={openWindow}
+                    currentState={openAddWindow}
                 >
                     <AddGuests
-                        SetOpenWindow={setOpenWindow}
+                        SetOpenWindow={setOpenAddWindow}
+                        SetReload={setReload}
                     />
                 </Modal>
 

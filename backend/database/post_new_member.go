@@ -1,36 +1,12 @@
 package database
 
 import (
-	"encoding/json"
-	"net/http"
 	"time"
 
 	"github.com/alpha_main/models"
 	"github.com/alpha_main/tools"
 	"github.com/jmoiron/sqlx"
 )
-
-func (s *DAO) PostNewMember(w http.ResponseWriter, r *http.Request) {
-
-	membersStorage := models.CompiledMembers{}
-
-	err := json.NewDecoder(r.Body).Decode(&membersStorage)
-	tools.CheckErr(err)
-
-	// db := tools.ConnectPostgres(&config.DbConfigPostgres{
-	// 	DbName:   "mydatabase",
-	// 	Password: "leoPost1234",
-	// 	User:     "leonardo",
-	// })
-	// defer db.Close()
-
-	txx, err := s.DB[0].Beginx()
-	tools.CheckErr(err)
-
-	if err := InsertNewMembers([]models.CompiledMembers{membersStorage}, txx); err != nil {
-		tools.CheckErr(err)
-	}
-}
 
 func InsertNewMembers(membersStorage []models.CompiledMembers, txx *sqlx.Tx) error {
 

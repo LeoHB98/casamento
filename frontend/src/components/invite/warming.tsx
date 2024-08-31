@@ -1,10 +1,13 @@
+
+import { CloseButton } from './closeButton';
+import Modal from './modal';
 import styles from './warming.module.css'
 
 import { useCallback, useEffect, useState } from "react";
 
 interface WarmingProps {
-    setToFamilyMembers: (value: boolean) => void
-    setConfirmPresence: (value: boolean) => void
+    setToValueBool1: (value: boolean) => void
+    setToValueBool2: (value: boolean) => void
     setShowWarming: (value: string) => void
     warning: string
 
@@ -16,22 +19,24 @@ export default function WarmingCode(props: WarmingProps) {
 
     function close() {
 
-        props.setToFamilyMembers(false)
-        props.setConfirmPresence(false)
+        props.setToValueBool1(false)
+        props.setToValueBool2(false)
         props.setShowWarming('')
 
     }
 
-    const handleToFamilyMembers =
+    const handleToNextPart =
         useCallback(() => {
-            props.setToFamilyMembers(true);
-            props.setConfirmPresence(false);
+            props.setToValueBool1(true);
+            props.setToValueBool2(false);
         }, [props]);
 
 
+    const condition = props.warning === 'ok' || props.warning === 'cadastro'
+
     useEffect(() => {
 
-        if (props.warning === 'ok') {
+        if (condition) {
 
             const timer = setInterval(() => {
                 setCountdown((prevCountdown) => prevCountdown - 1);
@@ -46,10 +51,10 @@ export default function WarmingCode(props: WarmingProps) {
     useEffect(() => {
 
         if (countdown < 0) {
-            handleToFamilyMembers();
+            handleToNextPart();
         }
 
-    }, [countdown, handleToFamilyMembers]);
+    }, [countdown, handleToNextPart]);
 
 
 
@@ -86,7 +91,7 @@ export default function WarmingCode(props: WarmingProps) {
                             </button>
 
                             <button
-                                onClick={handleToFamilyMembers}
+                                onClick={handleToNextPart}
                             >
                                 Sim
                             </button>
@@ -94,7 +99,25 @@ export default function WarmingCode(props: WarmingProps) {
                         </div>
                     </>
 
-                ) : <></>
+                ) : props.warning === 'cadastro' ? (
+                    <>
+                        <div>
+                            <p>Cadastro confirmado ✅</p>
+                        </div>
+                    </>
+                )
+                    :
+                    <Modal
+                        currentState
+                    >
+                        <CloseButton
+                            setBoolean={props.setToValueBool1}
+                        />
+                        <div className={styles.lastOne}>
+                            <p>Algo aconteceu de errado</p>
+                        </div>
+
+                    </Modal>
             }
         </div>
     )

@@ -1,17 +1,15 @@
-import { ChangeEvent, FormEvent, KeyboardEvent, useEffect, useState } from "react"
+import { ChangeEvent, FormEvent, KeyboardEvent, useCallback, useEffect, useState } from "react"
 import { CloseButton } from "../invite/closeButton"
 
 import styles from './addGuests.module.css'
 import { Members, MembersData } from "../../models/invite/modal.interface";
 import { Check, X } from "phosphor-react";
 import { Api } from "../../api/api";
-
-
-
+import WarmingCode from "../invite/warming";
 
 interface AddGuestsProps {
     SetOpenWindow: (value: boolean) => void;
-    // SetGuests: (value: MembersData[]) => void;
+    SetReload: (value: boolean) => void;
 }
 
 export function AddGuests(props: AddGuestsProps) {
@@ -24,6 +22,8 @@ export function AddGuests(props: AddGuestsProps) {
 
 
     const [sendData, setSendData] = useState(false)
+    const [openWarmingCode, setWarmingCode] = useState(false)
+    const [warming, setWarming] = useState('')
 
     function onChangeAddChef(event: ChangeEvent<HTMLInputElement>) {
 
@@ -45,7 +45,6 @@ export function AddGuests(props: AddGuestsProps) {
             setGuests([...guests || [], gs])
         }
 
-
         setGs('')
 
     }
@@ -54,7 +53,6 @@ export function AddGuests(props: AddGuestsProps) {
         event.preventDefault()
 
         let Gs: Members[] = []
-        console.log('handleAddMembers acionado')
 
         if (nameChief !== '') {
 
@@ -79,19 +77,8 @@ export function AddGuests(props: AddGuestsProps) {
                 }))
 
             if (compiledGuests !== undefined) {
-
                 setSendData(true)
-
             }
-
-
-            // const Zero: MembersData = {}
-            // const ZerOMember = {}
-            // setCompiledGuests(Zero)
-            // setNameChief('')
-            // setGuests([])
-            // setCompiledGuests(ZerOMember)
-
         }
     }
 
@@ -103,14 +90,44 @@ export function AddGuests(props: AddGuestsProps) {
         }
     }
 
+    const fecthPostMembers = useCallback(
+        async () => {
+
+            try {
+                const resp = await Api.postGuests(compiledGuests)
+                console.log('to aqui')
+
+                console.log(resp)
+
+                if (resp) {
+                    setWarmingCode(true)
+                    setWarming('cadastro')
+                }
+
+            } catch (err) {
+                console.log(err)
+                setWarmingCode(true)
+                setWarming('error')
+
+            } finally {
+                const Zero: MembersData = {}
+                setCompiledGuests(Zero)
+
+                setNameChief('')
+                setGuests([])
+                setSendData(false)
+                props.SetReload(true)
+            }
+
+        }, [compiledGuests, props])
+
     useEffect(() => {
-        console.log(guests);
-        console.log(compiledGuests)
 
         if (sendData) {
-            Api.postGuests(compiledGuests)
+            fecthPostMembers()
         }
-    }, [guests, compiledGuests, sendData]);
+
+    }, [fecthPostMembers, sendData]);
 
 
     return (
@@ -155,9 +172,6 @@ export function AddGuests(props: AddGuestsProps) {
                                 size={20}
                             />
                         </button>
-
-
-
                     </div>
                     {
                         guests !== undefined ?
@@ -183,6 +197,18 @@ export function AddGuests(props: AddGuestsProps) {
                                 </button>
                             </div>
                             : <></>
+                    }
+
+
+                    {
+                        openWarmingCode ?
+                            <WarmingCode
+                                setToValueBool1={props.SetOpenWindow}
+                                setToValueBool2={setWarmingCode}
+
+                                setShowWarming={setWarming}
+                                warning={warming}
+                            /> : <></>
                     }
 
                 </form>

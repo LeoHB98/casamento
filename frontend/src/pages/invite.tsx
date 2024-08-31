@@ -189,9 +189,9 @@ export default function Invite() {
                     currentState={showWarning !== ''}
                 >
                     <WarmingCode
-                        setToFamilyMembers={setShowMembers}
+                        setToValueBool1={setShowMembers}
                         setShowWarming={setShowWarning}
-                        setConfirmPresence={setConfirmPresence}
+                        setToValueBool2={setConfirmPresence}
                         warning={showWarning}
                     />
                 </Modal>
