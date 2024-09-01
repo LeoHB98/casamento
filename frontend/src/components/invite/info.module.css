@@ -143,20 +143,28 @@
 
     .text {
 
-        transform: translateY(-260%);
+        transform: translateY(-450%);
 
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
         }
+
     }
 
     .hour {
+
         h3 {
             font-size: 3rem;
         }
     }
 
 }
+
+/* @media (max-width: 485px) {
+    .text {
+        transform: translateY(-250);
+    }
+} */
 
 @media (max-width: 450px) {
 
@@ -212,4 +220,26 @@
             font-size: 2rem;
         }
     }
+}
+
+@media (max-width: 240px) {
+
+    .text {
+
+        transform: translateY(-290%);
+
+        h1 {
+            font-size: 2rem;
+        }
+    }
+
+    .hour {
+        transform: translateY(-130%);
+
+        h3 {
+            font-size: 2rem;
+        }
+
+    }
+
 }
