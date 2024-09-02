@@ -42,8 +42,8 @@ func (s *DAO) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	log.Println(r.URL.Path)
-	code := chi.URLParam(r, "id")
 
+	code := chi.URLParam(r, "code")
 	sqlOp := `
 	select 
       f.id,

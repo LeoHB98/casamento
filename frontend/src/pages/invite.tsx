@@ -60,7 +60,7 @@ export default function Invite() {
     const fetchFamilyData = useCallback(async () => {
 
 
-        const data = await Api.getAFamily(code)
+        const data = await Api.getGuestsByCode(code)
 
             .catch(function (err) {
                 setModalError(true)

@@ -33,7 +33,7 @@ const requests = {
 export const Api = {
     login: (username: string, password: string): Promise<ResponseCode> => requests.get(`login?username=${username}&password=${password}`),
 
-    getAFamily: (id: string): Promise<MembersData> => requests.get(`familia/${id}`),
+    getGuestsByCode: (id: string): Promise<MembersData> => requests.get(`membros/${id}`),
     getGuests: (): Promise<MembersData[]> => requests.get(`membros/cadastrados`),
 
     postConfirmationMembers:
@@ -44,8 +44,8 @@ export const Api = {
         (membros: MembersData): Promise<ResponseCode> =>
             requests.post(`membros/cadastrar`, membros),
 
-    postPresents: (present: Present) => requests.post('', present)
+    postPresents: (present: Present) => requests.post('', present),
 
-    // deletePost: (id: number): Promise<void> => requests.delete(`posts/${id}`),
+    deleteGuests: (code: string): Promise<ResponseCode> => requests.delete(`membros/${code}`),
 };
 

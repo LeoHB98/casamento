@@ -1,12 +1,30 @@
 import { Pen, Trash } from "phosphor-react";
 import { Members, MembersData } from "../../models/invite/modal.interface";
 import styles from './allGuests.module.css'
+import { useCallback, useEffect, useState } from "react";
+import { Api } from "../../api/api";
+import Modal from "../invite/modal";
+import { CloseButton } from "../invite/closeButton";
 
 interface AllGuestsProps {
     guests: (MembersData[])
+    reloadGuests: (value: boolean) => void
 }
 
 export function AllGuests(props: AllGuestsProps) {
+
+    const [reload, setReaload] = useState(false)
+
+
+    useEffect(() => {
+
+        if (reload) {
+            props.reloadGuests(true)
+
+        }
+
+    }, [reload, props])
+
     return (
         <div className={styles.box}>
             {props.guests !== undefined && props.guests.length > 0 ?
@@ -15,10 +33,27 @@ export function AllGuests(props: AllGuestsProps) {
                     (guest) => (
 
                         <CompiledGuest
-                            guest={guest} />
+                            guest={guest}
+                            setReload={setReaload}
+                        />
                     )
                 )
                 : <></>
+            }
+            {
+                reload
+                    ? <Modal
+                        currentState={reload}
+                    >
+                        <>
+                            <CloseButton
+                                setBoolean={setReaload}
+                            />
+                            <p>Membro deletado com sucesso!</p>
+                        </>
+
+                    </Modal>
+                    : <></>
             }
         </div>
     )
@@ -26,9 +61,32 @@ export function AllGuests(props: AllGuestsProps) {
 
 interface GuestsProps {
     guest: (MembersData)
+    setReload: (value: boolean) => void
 }
 
 function CompiledGuest(props: GuestsProps) {
+
+    const handleRemove = useCallback(
+
+        async () => {
+            if (props.guest.codigo) {
+
+                try {
+                    const resp = await Api.deleteGuests(props.guest.codigo)
+                    if (resp.code === 200) {
+                        props.setReload(true);
+                    }
+
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+        }, [props]
+
+    )
+
+
+
 
     return (
         <div className={styles.card}>
@@ -47,8 +105,9 @@ function CompiledGuest(props: GuestsProps) {
                             color="white"
                         />
                     </button>
-                    <button>
-
+                    <button
+                        onClick={handleRemove}
+                    >
                         <Trash
                             size={25}
                             color="white"
@@ -75,8 +134,8 @@ function CompiledGuest(props: GuestsProps) {
         </div>
     )
 
-}
 
+}
 interface GuestProps {
     member: Members
 }

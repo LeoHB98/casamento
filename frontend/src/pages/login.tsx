@@ -1,7 +1,7 @@
 
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import styles from './login.module.css'
-import { Header } from '../models/gifts/header'
+import { Header } from '../models/header'
 import { Api } from '../api/api'
 import { GenericError } from '../components/tools/genericError'
 import { useNavigate } from 'react-router-dom'

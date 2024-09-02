@@ -95,7 +95,6 @@ export function AddGuests(props: AddGuestsProps) {
 
             try {
                 const resp = await Api.postGuests(compiledGuests)
-                console.log('to aqui')
 
                 console.log(resp)
 

@@ -64,7 +64,6 @@
         h1 {
             font-size: 6rem;
         }
-
     }
 
     .hour {
@@ -72,9 +71,7 @@
         h3 {
             font-size: 5rem;
         }
-
     }
-
 }
 
 
@@ -94,9 +91,7 @@
         h3 {
             font-size: 4rem;
         }
-
     }
-
 }
 
 @media (max-width: 853px) {
@@ -106,7 +101,6 @@
         h1 {
             font-size: 5rem;
         }
-
     }
 
     .hour {
@@ -114,9 +108,7 @@
         h3 {
             font-size: 4rem;
         }
-
     }
-
 }
 
 @media (max-width: 768px) {
@@ -136,7 +128,6 @@
             font-size: 3rem;
         }
     }
-
 }
 
 @media (max-width: 540px) {
@@ -148,7 +139,6 @@
         h1 {
             font-size: 3.5rem;
         }
-
     }
 
     .hour {
@@ -157,14 +147,7 @@
             font-size: 3rem;
         }
     }
-
 }
-
-/* @media (max-width: 485px) {
-    .text {
-        transform: translateY(-250);
-    }
-} */
 
 @media (max-width: 450px) {
 
@@ -239,7 +222,5 @@
         h3 {
             font-size: 2rem;
         }
-
     }
-
 }

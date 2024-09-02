@@ -17,6 +17,8 @@
 @media (max-width: 430px) {
 
     .box {
+        padding: 0rem;
         max-width: 414px;
+
     }
 }

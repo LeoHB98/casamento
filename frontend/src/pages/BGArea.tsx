@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import styles from './BGArea.module.css'
-import { Header } from "../models/gifts/header";
+import { Header } from "../models/header";
 
 export default function BGArea() {
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "../models/gifts/header";
+import { Header } from "../models/header";
 
 import AddGifts from "../components/gifts/addGifts";
 import AllGifts from "../components/gifts/gifts_storage";
