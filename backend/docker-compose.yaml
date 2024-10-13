@@ -1,8 +1,7 @@
-version: "3.1"
-
 services:
   db:
-    image: postgres:latest
+    image: postgres:16
+    container_name: casamento_app
     restart: always
     environment:
       POSTGRES_USER: leonardo
@@ -11,4 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /home/leonardo/backup/dbeaver:/var/lib/postgresql/data
+      - C:/Users/leohe/database:/var/lib/postgresql/data
+            #linux
+            # - /home/leonardo/backup/dbeaver:/var/lib/postgresql/data
+
