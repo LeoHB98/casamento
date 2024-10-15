@@ -59,6 +59,7 @@ func (s *DAO) GetAllMembers(w http.ResponseWriter, r *http.Request) {
 		  where fm.familia_id = $1`
 
 		err = db.Select(&data[i].NomeMembros, sqlOp, data[i].Id)
+		tools.CheckErr(err)
 
 		for j := 0; j < len(data[i].NomeMembros); j++ {
 
