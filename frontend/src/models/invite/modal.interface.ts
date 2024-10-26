@@ -22,3 +22,9 @@ export interface ResponseCode {
     code: number;
     message: string;
 }
+
+export interface TotalMembers{
+    response :ResponseCode;
+    quantidade: number;
+
+}

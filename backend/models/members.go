@@ -19,3 +19,7 @@ type MembroFamilia struct {
 	DataAtualizacao *time.Time `json:"dataAtualizacao" db:"data_atualizacao"`
 	Confirmado      *string    `json:"confirmado" db:"confirmado"`
 }
+
+type CountMembers struct {
+	Quantidade int `json:"quantidade"`
+}

@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
-import { RequestMembersSelected, MembersData, ResponseCode } from '../models/invite/modal.interface'
+import { RequestMembersSelected, MembersData, ResponseCode, TotalMembers } from '../models/invite/modal.interface'
 import { Present } from '../models/gifts/modal.interface';
 
 
 const instance = axios.create({
-     baseURL: 'https://tight-lark-equal.ngrok-free.app/api/casamento/',
-    // baseURL: 'http://localhost:8070/api/casamento/',
+    baseURL: 'https://tight-lark-equal.ngrok-free.app/api/casamento/',
+    //  baseURL: 'http://localhost:8070/api/casamento/',
+    // baseURL :'http://localhost:8082/',
     timeout: 15000,
     headers: {
         'ngrok-skip-browser-warning': 'true'
@@ -35,6 +36,9 @@ export const Api = {
 
     getGuestsByCode: (id: string): Promise<MembersData> => requests.get(`membros/${id}`),
     getGuests: (): Promise<MembersData[]> => requests.get(`membros/cadastrados`),
+    getCountMembers: ():
+        Promise<TotalMembers> =>
+        requests.get(`membros/count`),
 
     postConfirmationMembers:
         (membros: RequestMembersSelected):

@@ -11,216 +11,181 @@
 }
 
 .text,
-.hour {
+.hour,
+.header {
     position: absolute;
     width: 100%;
     color: var(--text-invite);
     top: 0;
     left: 0;
+    text-align: center;
 }
 
-.text {
-    transform: translateY(-500%);
+.header {
+    transform: translateY(-250%);
 
     h1 {
         font-size: 10rem;
         font-weight: normal;
     }
-
-    h4 {
-        font-size: 4rem;
-        font-weight: normal;
-    }
 }
 
+.text {
+    transform: translateY(-300%);
 
-.hour {
-    transform: translateY(-150%);
-
-    h3 {
+    h1 {
         font-size: 8rem;
         font-weight: normal;
     }
-}
 
-.imge {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
-
-    img {
-        width: 100%;
-        height: 100%;
-        z-index: -2;
+    h4 {
+        font-size: 3.5rem;
+        font-weight: normal;
     }
 }
 
+.hour {
+    transform: translateY(-100%);
+
+    h3 {
+        font-size: 6rem;
+        font-weight: normal;
+    }
+}
+
+/* Responsividade */
+
+/* Entre 1720px e 1280px */
+@media (max-width: 1720px) {
+    .header h1 {
+        font-size: 8rem;
+    }
+
+    .text h1 {
+        font-size: 7rem;
+    }
+
+    .hour h3 {
+        font-size: 5rem;
+    }
+}
+
+/* Entre 1280px e 1080px */
 @media (max-width: 1280px) {
-
-    .text {
-
-        h1 {
-            font-size: 6rem;
-        }
+    .header h1 {
+        font-size: 7rem;
     }
 
-    .hour {
+    .text h1 {
+        font-size: 6rem;
+    }
 
-        h3 {
-            font-size: 5rem;
-        }
+    .hour h3 {
+        font-size: 4rem;
     }
 }
 
-
-/* Responsividade para telas menores */
-@media (max-width: 1024px) {
-
-    .text {
-
-        h1 {
-            font-size: 4rem;
-        }
-
+/* Entre 1080px e 920px */
+@media (max-width: 1080px) {
+    .header h1 {
+        font-size: 6rem;
     }
 
-    .hour {
+    .text h1 {
+        font-size: 5rem;
+    }
 
-        h3 {
-            font-size: 4rem;
-        }
+    .hour h3 {
+        font-size: 3.5rem;
     }
 }
 
-@media (max-width: 853px) {
-
-    .text {
-
-        h1 {
-            font-size: 5rem;
-        }
+/* Entre 920px e 768px */
+@media (max-width: 920px) {
+    .header h1 {
+        font-size: 5rem;
     }
 
-    .hour {
+    .text h1 {
+        font-size: 4rem;
+    }
 
-        h3 {
-            font-size: 4rem;
-        }
+    .hour h3 {
+        font-size: 3rem;
     }
 }
 
+/* Entre 768px e 540px */
 @media (max-width: 768px) {
-
-    .text {
-
-        transform: translateY(-400%);
-
-        h1 {
-            font-size: 4rem;
-        }
-
+    .header h1 {
+        font-size: 4.5rem;
     }
 
-    .hour {
-        h3 {
-            font-size: 3rem;
-        }
+    .text h1 {
+        font-size: 3.5rem;
+    }
+
+    .hour h3 {
+        font-size: 2.8rem;
     }
 }
 
+/* Entre 540px e 414px */
 @media (max-width: 540px) {
-
-    .text {
-
-        transform: translateY(-450%);
-
-        h1 {
-            font-size: 3.5rem;
-        }
+    .header h1 {
+        font-size: 4rem;
     }
 
-    .hour {
+    .text h1 {
+        font-size: 3rem;
+    }
 
-        h3 {
-            font-size: 3rem;
-        }
+    .hour h3 {
+        font-size: 2.5rem;
     }
 }
 
-@media (max-width: 450px) {
-
-    .text {
-
-        transform: translateY(-260%);
-
-        h1 {
-            font-size: 4rem;
-        }
-
-    }
-
-    .hour {
-        h3 {
-            font-size: 3rem;
-        }
-    }
-
-}
-
+/* Entre 414px e 344px */
 @media (max-width: 414px) {
-
-    .text {
-
-        transform: translateY(-500%);
-
-        h1 {
-            font-size: 2.5rem;
-        }
+    .header h1 {
+        font-size: 3.5rem;
     }
 
-    .hour {
-        h3 {
-            font-size: 2rem;
-        }
+    .text h1 {
+        font-size: 2.5rem;
     }
 
+    .hour h3 {
+        font-size: 2rem;
+    }
 }
 
+/* Menor que 344px */
 @media (max-width: 344px) {
-    .text {
-
-        transform: translateY(-270%);
-
-        h1 {
-            font-size: 2.5rem;
-        }
+    .header h1 {
+        font-size: 3rem;
     }
 
-    .hour {
-        h3 {
-            font-size: 2rem;
-        }
+    .text h1 {
+        font-size: 2rem;
+    }
+
+    .hour h3 {
+        font-size: 1.8rem;
     }
 }
 
+/* Menor que 240px */
 @media (max-width: 240px) {
-
-    .text {
-
-        transform: translateY(-290%);
-
-        h1 {
-            font-size: 2rem;
-        }
+    .header h1 {
+        font-size: 2.5rem;
     }
 
-    .hour {
-        transform: translateY(-130%);
+    .text h1 {
+        font-size: 1.8rem;
+    }
 
-        h3 {
-            font-size: 2rem;
-        }
+    .hour h3 {
+        font-size: 1.5rem;
     }
 }

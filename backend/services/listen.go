@@ -54,6 +54,8 @@ func (s *Service) Listener(port int, auth string) {
 			rrr.Post("/cadastrar", s.PostNewMember)
 
 			rrr.Delete("/{code}", s.DeleteMember)
+
+			rrr.Get("/count", s.GetCountMembers)
 		})
 
 	})

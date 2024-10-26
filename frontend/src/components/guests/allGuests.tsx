@@ -78,7 +78,7 @@ function CompiledGuest(props: GuestsProps) {
       <div className={styles.header}>
         <p>{props.guest.nomeFamilia}</p>
 
-        <div className={styles.button}>
+        <div className={styles.buttonSpace}>
           <button>
             <Pen size={25} color="white" />
           </button>

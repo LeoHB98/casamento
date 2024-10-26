@@ -8,37 +8,13 @@
     z-index: -3;
     font-family: "Lavishly Yours";
 
-    header {
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        position: absolute;
-        top: 0;
-
-        h1,
-        h2 {
-            font-weight: normal;
-            color: var(--text-invite);
-        }
-
-        h1 {
-            font-size: 12rem;
-        }
-
-        h2 {
-            font-size: 5rem;
-        }
-    }
-
     .imge {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 100%;
+        height: 1680px;
+        /* Altura padrão para telas grandes */
         border-radius: 0.75rem;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, var(--violet-100) 100%);
         background-size: cover;
@@ -53,200 +29,60 @@
     }
 }
 
-
-
 /* Responsividade */
+
+/* Entre 1280px e 1024px */
+@media (max-width: 1280px) {
+    .container .imge {
+        height: 900px;
+    }
+}
+
+/* Entre 1024px e 768px */
 @media (max-width: 1024px) {
-
-    .container {
-
-        .imge {
-            width: 900px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 9rem;
-            }
-
-            h2 {
-                font-size: 4rem;
-            }
-
-        }
-
+    .container .imge {
+        height: 850px;
     }
-
 }
 
-@media (max-width: 900px) {
-
-    .container {
-
-        .imge {
-            width: 768px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 7rem;
-            }
-
-            h2 {
-                font-size: 4rem;
-            }
-        }
-
-    }
-
-}
-
+/* Entre 768px e 540px */
 @media (max-width: 768px) {
-
-    .container {
-
-        .imge {
-            width: 540px;
-            height: 900px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 6rem;
-            }
-
-            h2 {
-                font-size: 3rem;
-            }
-
-        }
-
+    .container .imge {
+        height: 700px;
     }
-
-
 }
 
-
-
+/* Entre 540px e 450px */
 @media (max-width: 540px) {
-
-    .container {
-
-        .imge {
-            width: 450px;
-            height: 700px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 4rem;
-            }
-
-            h2 {
-                font-size: 4rem;
-            }
-        }
-
+    .container .imge {
+        height: 600px;
     }
-
 }
 
+/* Entre 450px e 414px */
 @media (max-width: 450px) {
-
-    .container {
-
-        .imge {
-            width: 414px;
-            height: 700px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 4rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
+    .container .imge {
+        height: 550px;
     }
-
 }
 
+/* Entre 414px e 350px */
 @media (max-width: 414px) {
-
-    .container {
-
-        .imge {
-            width: 350px;
-            height: 600px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 4rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
+    .container .imge {
+        height: 500px;
     }
-
 }
 
+/* Entre 350px e 240px */
 @media (max-width: 350px) {
-
-    .container {
-
-        .imge {
-            width: 340px;
-            height: 600px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 4rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
+    .container .imge {
+        height: 400px;
     }
-
 }
 
+/* Menor que 240px */
 @media (max-width: 240px) {
-
-    .container {
-
-        .imge {
-            width: 240px;
-            height: 400px;
-        }
-
-        header {
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
+    .container .imge {
+        height: 350px;
     }
-
 }

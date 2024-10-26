@@ -81,3 +81,17 @@ func (s *DAO) GetAllMembers(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *DAO) GetMembersConfirmed(w http.ResponseWriter, r *http.Request) {}
+
+func (d *DAO) GetCountMem() (int, error) {
+
+	sqlOp := "select count(id) from familia_membros"
+
+	count := 0
+
+	err := d.DB[0].Get(&count, sqlOp)
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
