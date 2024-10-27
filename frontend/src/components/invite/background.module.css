@@ -41,42 +41,42 @@
 /* Entre 1024px e 768px */
 @media (max-width: 1024px) {
     .container .imge {
-        height: 850px;
+        height: 800px;
     }
 }
 
 /* Entre 768px e 540px */
 @media (max-width: 768px) {
     .container .imge {
-        height: 700px;
+        height: 600px;
     }
 }
 
 /* Entre 540px e 450px */
 @media (max-width: 540px) {
     .container .imge {
-        height: 600px;
+        height: 550px;
     }
 }
 
 /* Entre 450px e 414px */
 @media (max-width: 450px) {
     .container .imge {
-        height: 550px;
+        height: 500px;
     }
 }
 
 /* Entre 414px e 350px */
 @media (max-width: 414px) {
     .container .imge {
-        height: 500px;
+        height: 400px;
     }
 }
 
 /* Entre 350px e 240px */
 @media (max-width: 350px) {
     .container .imge {
-        height: 400px;
+        height: 350px;
     }
 }
 
