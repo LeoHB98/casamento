@@ -31,7 +31,7 @@
 }
 
 .text {
-    transform: translateY(-300%);
+    transform: translateY(-350%);
 
     h1 {
         font-size: 8rem;
@@ -45,7 +45,7 @@
 }
 
 .hour {
-    transform: translateY(-100%);
+    transform: translateY(-120%);
 
     h3 {
         font-size: 6rem;
