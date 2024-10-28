@@ -1,191 +1,200 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: "Lavishly Yours";
-    position: relative;
-    margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Lavishly Yours";
+  position: relative;
+  margin-top: 2rem;
 }
 
 .text,
 .hour,
 .header {
-    position: absolute;
-    width: 100%;
-    color: var(--text-invite);
-    top: 0;
-    left: 0;
-    text-align: center;
+  position: absolute;
+  width: 100%;
+  color: var(--text-invite);
+  top: 0;
+  left: 0;
+
+  text-align: center;
+  text-shadow: -1px -1px 0 white;
 }
 
 .header {
-    transform: translateY(-250%);
+  transform: translateY(-250%);
 
-    h1 {
-        font-size: 10rem;
-        font-weight: normal;
-    }
+  h1 {
+    font-size: 10rem;
+    font-weight: normal;
+  }
 }
 
 .text {
-    transform: translateY(-350%);
+  transform: translateY(-350%);
 
-    h1 {
-        font-size: 8rem;
-        font-weight: normal;
-    }
+  h1 {
+    font-size: 8rem;
+    font-weight: normal;
+  }
 
-    h4 {
-        font-size: 3.5rem;
-        font-weight: normal;
-    }
+  h4 {
+    font-size: 3.5rem;
+    font-weight: normal;
+  }
 }
 
 .hour {
-    transform: translateY(-120%);
+  transform: translateY(-120%);
 
-    h3 {
-        font-size: 6rem;
-        font-weight: normal;
-    }
+  h3 {
+    font-size: 6rem;
+    font-weight: normal;
+  }
 }
 
 /* Responsividade */
 
 /* Entre 1720px e 1280px */
 @media (max-width: 1720px) {
-    .header h1 {
-        font-size: 8rem;
-    }
+  .header h1 {
+    font-size: 10rem;
+  }
 
-    .text h1 {
-        font-size: 7rem;
-    }
+  .text h1 {
+    font-size: 8rem;
+  }
 
-    .hour h3 {
-        font-size: 5rem;
-    }
+  .hour h3 {
+    font-size: 5rem;
+  }
 }
 
 /* Entre 1280px e 1080px */
 @media (max-width: 1280px) {
-    .header h1 {
-        font-size: 7rem;
-    }
+  .header h1 {
+    font-size: 8rem;
+  }
 
-    .text h1 {
-        font-size: 6rem;
-    }
+  .text h1 {
+    font-size: 6rem;
+  }
 
-    .hour h3 {
-        font-size: 4rem;
-    }
+  .hour h3 {
+    font-size: 4rem;
+  }
 }
 
 /* Entre 1080px e 920px */
 @media (max-width: 1080px) {
-    .header h1 {
-        font-size: 6rem;
-    }
+  .header h1 {
+    font-size: 7rem;
+  }
 
-    .text h1 {
-        font-size: 5rem;
-    }
+  .text h1 {
+    font-size: 5rem;
+  }
 
-    .hour h3 {
-        font-size: 3.5rem;
-    }
+  .hour h3 {
+    font-size: 4rem;
+  }
 }
 
 /* Entre 920px e 768px */
 @media (max-width: 920px) {
-    .header h1 {
-        font-size: 5rem;
-    }
+  .header h1 {
+    font-size: 6rem;
+  }
 
-    .text h1 {
-        font-size: 4rem;
-    }
+  .text h1 {
+    font-size: 4rem;
+  }
 
-    .hour h3 {
-        font-size: 3rem;
-    }
+  .hour h3 {
+    font-size: 3rem;
+  }
 }
 
 /* Entre 768px e 540px */
 @media (max-width: 768px) {
-    .header h1 {
-        font-size: 4.5rem;
-    }
+  .header h1 {
+    font-size: 6.5rem;
+  }
 
-    .text h1 {
-        font-size: 3.5rem;
-    }
+  .text h1 {
+    font-size: 4rem;
+  }
 
-    .hour h3 {
-        font-size: 2.8rem;
-    }
+  .hour h3 {
+    font-size: 3rem;
+  }
 }
 
 /* Entre 540px e 414px */
 @media (max-width: 540px) {
-    .header h1 {
-        font-size: 4rem;
-    }
+  .header h1 {
+    font-size: 5rem;
+  }
 
-    .text h1 {
-        font-size: 3rem;
-    }
+  .text h1 {
+    transform: translateY(-150%);
+    font-size: 3rem;
+  }
 
-    .hour h3 {
-        font-size: 2.5rem;
-    }
+  .hour h3 {
+    font-size: 3rem;
+  }
 }
 
 /* Entre 414px e 344px */
 @media (max-width: 414px) {
-    .header h1 {
-        font-size: 3.5rem;
-    }
+  .header h1 {
+    font-size: 5rem;
+  }
 
-    .text h1 {
-        font-size: 2.5rem;
+  .text {
+    h1 {
+      font-size: 2.5rem;
     }
+  }
 
-    .hour h3 {
-        font-size: 2rem;
-    }
+  .hour h3 {
+    font-size: 3rem;
+  }
 }
 
 /* Menor que 344px */
 @media (max-width: 344px) {
-    .header h1 {
-        font-size: 3rem;
+  .header {
+    h1 {
+      font-size: 5rem;
     }
+  }
 
-    .text h1 {
-        font-size: 2rem;
+  .text {
+    h1 {
+      font-size: 2.2rem;
     }
+  }
 
-    .hour h3 {
-        font-size: 1.8rem;
-    }
+  .hour h3 {
+    font-size: 3rem;
+  }
 }
 
 /* Menor que 240px */
 @media (max-width: 240px) {
-    .header h1 {
-        font-size: 2.5rem;
-    }
+  .header h1 {
+    font-size: 2.5rem;
+  }
 
-    .text h1 {
-        font-size: 1.8rem;
-    }
+  .text h1 {
+    font-size: 1.8rem;
+  }
 
-    .hour h3 {
-        font-size: 1.5rem;
-    }
+  .hour h3 {
+    font-size: 1.5rem;
+  }
 }

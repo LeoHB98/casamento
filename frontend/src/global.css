@@ -3,10 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   padding: 0.1rem;
-
-
 }
-
 
 body {
   display: flex;
@@ -16,13 +13,11 @@ body {
   background-color: var(--violet-100);
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
 
-
   font-family: "SUSE", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
 }
-
 
 :root {
   --violet-100: #e4ceff;
@@ -36,7 +31,7 @@ body {
   --item-bg-color: rgb(214, 214, 214);
   --input-font-size: 20px;
   --input-height: 40px;
-  --text-invite: white;
+  --text-invite: rgb(94, 87, 97);
 }
 
 h1 {
