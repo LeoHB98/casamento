@@ -1,41 +1,36 @@
 .box {
-    padding: 0rem 1rem;
+  padding: 0rem 1rem;
 
-
-    & .container {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 100%;
-        padding: 1rem;
-
-    }
+  & .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+  }
 }
 
 .round {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-between;
-    align-items: center;
-    font-size: large;
-    margin: 0.1rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+  margin: 0.1rem;
 
-    .circle{
-        padding: 1rem;
-        background-color: var(--violet-200);
-        border-radius: 100%;
-    }  
+  .circle {
+    padding: 1rem;
+    background-color: var(--text-invite);
+    border-radius: 100%;
+    color: white;
+    font-weight: bold;
+  }
 }
 
-
-
-
 @media (max-width: 430px) {
-
-    .box {
-        padding: 0rem;
-        max-width: 414px;
-
-    }
+  .box {
+    padding: 0rem;
+    max-width: 414px;
+  }
 }

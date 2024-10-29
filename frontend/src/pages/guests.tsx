@@ -11,9 +11,7 @@ export function Guests() {
   const [openAddWindow, setOpenAddWindow] = useState(false);
   const [guests, setGuests] = useState<Partial<MembersData[]>>();
 
-  const [reload, setReload] = useState(false);
-
-  const [firstReload, setFirstReload] = useState(true);
+  const [reload, setReload] = useState(true);
 
   const [totalMembers, setTotalMembers] = useState(Number);
 
@@ -46,18 +44,13 @@ export function Guests() {
     }
 
     setReload(false);
-    setFirstReload(false);
   }, [fecthCountMembers]);
 
   useEffect(() => {
-    if (firstReload) {
-      fetchAllMembers();
-    }
-
     if (reload) {
       fetchAllMembers();
     }
-  }, [fetchAllMembers, firstReload, reload]);
+  }, [fetchAllMembers, reload]);
 
   return (
     <>

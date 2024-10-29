@@ -1,50 +1,42 @@
-import { X } from 'phosphor-react'
-import styles from './closeButton.module.css'
-
+import { X } from "phosphor-react";
+import styles from "./closeButton.module.css";
 
 interface CloseButtonProps {
-    setObjetct?: (value: object) => void
-    setStringArray?: (value: string[]) => void
-    setBoolean?: (value: boolean) => void
-    setBoolean2?: (value: boolean) => void
-    setNullString?: (value: string) => void
+  setObjetct?: (value: object) => void;
+  setStringArray?: (value: string[]) => void;
+  setBoolean?: (value: boolean) => void;
+  setBoolean2?: (value: boolean) => void;
+  setNullString?: (value: string) => void;
 }
 
 export function CloseButton(props: CloseButtonProps) {
-
-    function close() {
-
-        if (props.setBoolean !== undefined) {
-            props.setBoolean(false)
-        }
-
-        //        if (props.setBoolean2 !== undefined) {
-        //     props.setBoolean2(false)
-        // }
-
-        if (props.setObjetct !== undefined) {
-            props.setObjetct({})
-        }
-
-        if (props.setStringArray !== undefined) {
-            props.setStringArray([])
-        }
-
-        if (props.setNullString !== undefined) {
-            props.setNullString('')
-        }
-
+  function close() {
+    if (props.setBoolean !== undefined) {
+      props.setBoolean(false);
     }
 
-    return (
-        <div className={styles.close}>
-            <button onClick={close}>
-                <X
-                    size={20}
-                    color='black'
-                />
-            </button>
-        </div>
-    )
+    //        if (props.setBoolean2 !== undefined) {
+    //     props.setBoolean2(false)
+    // }
 
+    if (props.setObjetct !== undefined) {
+      props.setObjetct({});
+    }
+
+    if (props.setStringArray !== undefined) {
+      props.setStringArray([]);
+    }
+
+    if (props.setNullString !== undefined) {
+      props.setNullString("");
+    }
+  }
+
+  return (
+    <div className={styles.close}>
+      <button onClick={close}>
+        <X size={20} />
+      </button>
+    </div>
+  );
 }
