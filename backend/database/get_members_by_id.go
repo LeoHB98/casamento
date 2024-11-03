@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/alpha_main/models"
 	"github.com/alpha_main/tools"
@@ -43,7 +44,7 @@ func (s *DAO) GetFamilyLastName(w http.ResponseWriter, r *http.Request) {
 
 	log.Println(r.URL.Path)
 
-	code := chi.URLParam(r, "code")
+	code := strings.ToUpper(chi.URLParam(r, "code"))
 	sqlOp := `
 	select 
       f.id,

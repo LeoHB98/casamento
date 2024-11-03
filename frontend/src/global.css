@@ -26,12 +26,16 @@ body {
   --violet-400: #aa83ff;
   --violet-500: rgb(111, 0, 255);
 
+  --grey-300: rgb(165, 164, 164);
+  --grey-400: rgb(95, 95, 95);
+  --gray-500: rgb(59, 59, 59);
+
   --background-opacity-dark: #00000055;
   --background-opacity-light: #ffffff92;
   --item-bg-color: rgb(214, 214, 214);
   --input-font-size: 20px;
   --input-height: 40px;
-  --text-invite: rgb(95, 95, 95);
+  --text-invite: var(--grey-400);
   --button-hover: rgb(119, 119, 119);
 }
 
@@ -41,24 +45,26 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 1rem;
+
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+
+  border: 1px solid transparent;
   box-shadow: 1px 2px 6px black;
-  background-color: var(--text-invite);
+  background-color: var(--grey-400);
   color: white;
 }
 
 :focus {
   outline: transparent;
-  box-shadow: 0 0 0 2px var(--text-invite);
+  box-shadow: 0 0 0 2px var(--gray-500);
 }
 
 button:hover {
   transition: 0.1s;
-  background-color: var(--button-hover);
+  background-color: var(--gray-500);
 }

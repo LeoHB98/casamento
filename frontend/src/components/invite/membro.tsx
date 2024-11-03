@@ -1,151 +1,110 @@
-import { useState } from 'react'
-import { MembersData } from '../../models/invite/modal.interface'
-import styles from './membro.module.css'
-import { CloseButton } from './closeButton'
-
+import { useState } from "react";
+import { MembersData } from "../../models/invite/modal.interface";
+import styles from "./membro.module.css";
+import { CloseButton } from "./closeButton";
 
 // import { CheckCircle, Circle } from 'phosphor-react'
 
 interface MembrosProps {
-    family: MembersData
-    setMembers: (value: MembersData) => void
-    setOpenMembersModal: (value: boolean) => void
-    setMembersSelected: (value: string[]) => void
+  family: MembersData;
+  setMembers: (value: MembersData) => void;
+  setOpenMembersModal: (value: boolean) => void;
+  setMembersSelected: (value: string[]) => void;
 }
 
 interface MembroProps {
-    membro: string
-    membros: string[]
-    setMembersSelected: (value: string[]) => void
+  membro: string;
+  membros: string[];
+  setMembersSelected: (value: string[]) => void;
 }
 
 interface MProps {
-    membro: string
+  membro: string;
 }
 
 export function Membros(props: MembrosProps) {
+  const [members, setMembers] = useState<string[]>([]);
 
-    const [members, setMembers] = useState<string[]>([])
+  function handleMessageMembers() {
+    props.setOpenMembersModal(false);
+    props.setMembersSelected(members);
+    props.setMembers({});
+  }
 
-    function handleMessageMembers() {
-        props.setOpenMembersModal(false)
-        props.setMembersSelected(members)
-        props.setMembers({})
-    }
+  return (
+    <div className={styles.container}>
+      <CloseButton
+        setBoolean={props.setOpenMembersModal}
+        setObjetct={props.setMembers}
+        setStringArray={props.setMembersSelected}
+      />
 
-    return (
-        <div className={styles.container}>
+      <h3>Selecione todos aqueles que participarão evento:</h3>
 
-            <CloseButton
-                setBoolean={props.setOpenMembersModal}
-                setObjetct={props.setMembers}
-                setStringArray={props.setMembersSelected}
-            />
+      <div className={styles.membersContainer}>
+        {props.family.membros?.map((member) => (
+          <>
+            {member.nomeMembro !== undefined ? (
+              <Membro
+                key={member.id}
+                membro={member.nomeMembro}
+                membros={members}
+                setMembersSelected={setMembers}
+              />
+            ) : (
+              <></>
+            )}
+          </>
+        ))}
+      </div>
 
-            <h3>
-                Selecione todos aqueles que participarão evento:
-            </h3>
+      <p>Você selecionou:</p>
 
-            <div className={styles.membersContainer}>
-                {
-                    props.family.membros?.map(
-                        (member) => (
-                            <>
-                                {member.nomeMembro !== undefined ?
-                                    <Membro
-                                        key={member.id}
-                                        membro={member.nomeMembro}
-                                        membros={members}
-                                        setMembersSelected={setMembers}
-                                    />
+      <div className={styles.membersSelected}>
+        {members?.map((member) => (
+          <MemberSeleted membro={member} />
+        ))}
+      </div>
 
-                                    : <></>}
-                            </>
-                        ))
-                }
-
-            </div>
-
-            <p>Você selecionou:</p>
-
-            <div className={styles.membersSelected}>
-                {
-                    members?.map(
-                        (member) => (
-                            <MemberSeleted
-                                membro={member}
-                            />
-                        ))
-                }
-            </div>
-
-            <div className={styles.send}>
-                <button
-                    onClick={handleMessageMembers}
-                >
-                    Enviar
-                </button>
-            </div>
-        </div>
-    )
+      <div className={styles.send}>
+        <button onClick={handleMessageMembers}>Enviar</button>
+      </div>
+    </div>
+  );
 }
 
 function MemberSeleted({ membro }: MProps) {
-    return (
-        <div >
-            {` ${membro} |`}
-        </div>
-
-    )
+  return <div>{` ${membro} |`}</div>;
 }
 
 function Membro(props: MembroProps) {
+  const [memberSelected, setMemberSelected] = useState(false);
 
-    const [memberSelected, setMemberSelected] = useState(false)
+  function SetMember() {
+    setMemberSelected(!memberSelected);
 
-    function SetMember() {
+    let updateMemberSelected: string[] = [...props.membros];
 
-        setMemberSelected(!memberSelected)
-
-        let updateMemberSelected: string[] = [...props.membros]
-
-
-        if (!memberSelected) {
-            updateMemberSelected = [...updateMemberSelected, props.membro];
-
-        } else {
-
-            updateMemberSelected =
-                updateMemberSelected.filter((member) => member !== props.membro);
-        }
-
-        props.setMembersSelected(updateMemberSelected)
-
+    if (!memberSelected) {
+      updateMemberSelected = [...updateMemberSelected, props.membro];
+    } else {
+      updateMemberSelected = updateMemberSelected.filter(
+        (member) => member !== props.membro
+      );
     }
 
-    return (
-        <div className={styles.memberContainer}>
+    props.setMembersSelected(updateMemberSelected);
+  }
 
-            <button
-                className={`${memberSelected ? styles.checkedButton : styles.toCheck}`}
-                onClick={SetMember}
-
-            >
-                {/* {!memberSelected ?
-                    <Circle
-                        size={20}
-                    />
-                    :
-                    <CheckCircle
-                        size={20}
-                    />} */}
-
-                <p>
-                    {props.membro}
-                </p>
-
-            </button>
-        </div>
-    )
-
+  return (
+    <div className={styles.memberContainer}>
+      <div
+        className={`${memberSelected ? styles.checkedButton : styles.toCheck}`}
+      >
+        <button onClick={SetMember}>
+          <p>{props.membro}</p>
+        </button>
+      </div>
+    </div>
+  );
 }

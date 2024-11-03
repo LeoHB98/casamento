@@ -1,82 +1,95 @@
 .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .close {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: flex-end;
-
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
 }
 
 .close button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
 .membersContainer {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .memberContainer {
-    display: flex;
-    color: black;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    border-radius: 8px;
-    margin: 0.1rem;
-
+  display: flex;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-radius: 8px;
+  margin: 0.1rem;
 }
 
 .toCheck {
-    border: 1px solid var(--violet-200);
+  /* border: 1px solid var(--grey-400); */
+  border: none;
+  button {
     background-color: white;
+    color: black;
+  }
 }
 
-
 .checkedButton {
-    border: 5px solid var(--violet-200);
-    background-color: var(--violet-100);
-    outline: none;
+  /* border: 5px solid black;  */
+  border-radius: 1rem;
+  color: var(--grey-500);
+  box-shadow: none;
+
+  /* outline: none;
+  box-shadow: none;
+  */
+
+  /* button:hover {
+    border: none;
+    transition: 0.1s;
+    
+  } */
+
+  button:focus {
     box-shadow: none;
+  }
 }
 
 .send {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 20px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+  width: 100%;
 }
 
 .membersSelected {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 3rem;
-    margin-bottom: 0.1rem;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  margin-bottom: 0.1rem;
 }
 
 @media (max-width: 767px) {
-    .membersSelected {
-        flex-wrap: wrap;
-    }
+  .membersSelected {
+    flex-wrap: wrap;
+  }
 }
