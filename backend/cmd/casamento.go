@@ -24,7 +24,7 @@ func main() {
 	}
 
 	log.Println("Connection with database was successful!")
-	log.Printf("Web-service alpha_manut_api - " + version)
+	log.Printf("Web-service casamento - " + version)
 
 	data := database.New(s.DbsConx, s.Util)
 	sv := services.New(s, data)

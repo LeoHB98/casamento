@@ -63,6 +63,8 @@ func ConnectPostgres(dbCxn *config.DbConfigPostgres) *sqlx.DB {
 
 	connStr := fmt.Sprintf("postgres://%v:%v@localhost:5432/%v?sslmode=disable", dbCxn.User, dbCxn.Password, dbCxn.DbName)
 
+	log.Println(connStr)
+
 	db, err := sqlx.Connect("pgx", connStr)
 	if err != nil {
 		log.Fatal(err)
