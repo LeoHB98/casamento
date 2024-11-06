@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/alpha_main/config"
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/jmoiron/sqlx/reflectx"
 	"github.com/pkg/errors"
@@ -61,9 +61,9 @@ func ConnectDBOracle(dbCxn *config.DBConfigOracle) (*sqlx.DB, error) {
 
 func ConnectPostgres(dbCxn *config.DbConfigPostgres) *sqlx.DB {
 
-	connStr := fmt.Sprintf("postgres://%v:%v@localhost:5432/%v?sslmode=disable", dbCxn.User, dbCxn.Password, dbCxn.DbName)
+	connStr := fmt.Sprintf("postgres://%v:%v@%v:5432/%v?sslmode=disable", dbCxn.User, dbCxn.Password, dbCxn.Host, dbCxn.DbName)
 
-	log.Println(connStr)
+	// log.Println(connStr)
 
 	db, err := sqlx.Connect("pgx", connStr)
 	if err != nil {

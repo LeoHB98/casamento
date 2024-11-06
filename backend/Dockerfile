@@ -20,7 +20,7 @@ COPY . .
 WORKDIR /app/cmd
 
 # Compilar a aplicação Go com o novo nome de binário
-RUN go build -o casamento .
+RUN go build -o myapp .
 
 # Etapa 2: Criar a imagem final mínima usando Alpine
 FROM alpine:latest
@@ -29,10 +29,10 @@ FROM alpine:latest
 WORKDIR /root/app/cmd/
 
 # Copiar o binário gerado da etapa de build
-COPY --from=builder /app/cmd/casamento .
+COPY --from=builder /app/cmd/myapp .
 
 # Expor a porta que sua aplicação Go vai utilizar
 EXPOSE 8082
 
 # Comando para rodar a aplicação
-CMD ["./casamento"]
+CMD ["./myapp"]

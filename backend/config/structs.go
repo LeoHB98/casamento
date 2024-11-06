@@ -26,6 +26,7 @@ type DbConfigPostgres struct {
 	Password string
 	DbName   string
 	User     string
+	Host     string
 }
 
 type Config struct {

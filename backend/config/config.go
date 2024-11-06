@@ -8,6 +8,7 @@ import (
 )
 
 func New(devMode bool) (*Config, error) {
+
 	if !devMode {
 		flag.BoolVar(&devMode, "devmode", false, "Adicionar esta flag para modo de desenvolvimento.")
 		flag.Parse()
@@ -17,10 +18,17 @@ func New(devMode bool) (*Config, error) {
 		fmt.Println("#### Ambiente de desenvolvimento ####")
 	}
 
+	// err := godotenv.Load("../env/app.env")
+	// if err != nil {
+	// 	log.Fatalf("Erro ao carregar o arquivo .env: %v", err)
+	// }
+
+	// viper.AutomaticEnv()
+	// viper.SetEnvPrefix("")
+
 	viper.SetConfigName("app.env")
 	viper.SetConfigType("env")
 	viper.AddConfigPath("../env")
-
 	err := viper.ReadInConfig()
 	if err != nil {
 		return nil, fmt.Errorf("erro ao ler config: %w", err)
@@ -43,6 +51,7 @@ func New(devMode bool) (*Config, error) {
 				DbName:   viper.GetString("DB_NAME_P"),
 				User:     viper.GetString("DB_USER_P"),
 				Password: viper.GetString("DB_PASS_P"),
+				Host:     viper.GetString("DB_HOST_P"),
 			}},
 
 		Email: &Email{

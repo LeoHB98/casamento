@@ -11,9 +11,9 @@ services:
       - "5432:5432"
     volumes:
       # Windows
-      - C:/Users/leohe/database:/var/lib/postgresql/data
+      # - C:/Users/leohe/database:/var/lib/postgresql/data
       # Linux
-      # - /home/leonardo/backup/dbeaver:/var/lib/postgresql/data
+      - /home/leonardo/backup/dbeaver:/var/lib/postgresql/data
 
   app:
     build:
@@ -22,8 +22,14 @@ services:
     image: casamento:v1.0.0
     container_name: casamento_app
     volumes:
-      - C:/Users/leohe/projetos/casamento/backend/env:/root/app/env
-      - C:/Users/leohe/projetos/casamento/backend/files:/root/app/files
+      #Linux
+      - /home/leonardo/projetos/casamento/backend/env:/root/app/env
+      - /home/leonardo/projetos/casamento/backend/files:/root/app/files
+
+      #Windows
+      #   - C:/Users/leohe/projetos/casamento/backend/env:/root/app/env
+      #   - C:/Users/leohe/projetos/casamento/backend/files:/root/app/files
+
     ports:
       - "8082:8082"
     restart: always
