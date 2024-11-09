@@ -12,7 +12,7 @@ CONTAINER_NAME="casamento_app"
 
 # Derruba o container usando o docker-compose
 echo "Derrubando o container com o docker-compose..."
-docker compose down 
+docker compose down $CONTAINER_NAME
 #|| { echo "Erro ao iniciar o docker-compose"; exit 1; }
 
 
@@ -32,3 +32,4 @@ docker build -t $IMAGE_NAME .
 echo "Iniciando o container com o docker-compose..."
 docker compose up -d || { echo "Erro ao iniciar o docker-compose"; exit 1; }
 echo "Deploy finalizado. O container $CONTAINER_NAME está em execução."
+

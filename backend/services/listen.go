@@ -37,14 +37,14 @@ func (s *Service) Listener(port int, auth string) {
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Type", "application/json; charset=utf-8")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte(`{"status":"api ok"}`))
+			w.Write([]byte(`{"status":"aplicação ok"}`))
 		})
 
 		r.Get("/login", s.Login)
 
 		r.Route("/membros", func(rrr chi.Router) {
 
-			rrr.Use(Middleware)
+			// rrr.Use(Middleware)
 
 			rrr.Get("/{code}", s.GetFamilyLastName)
 			rrr.Get("/cadastrados", s.GetAllMembers)
