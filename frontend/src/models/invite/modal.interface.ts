@@ -4,7 +4,7 @@ export interface MembersData {
     codigo?: string;
     nomeFamilia?: string;
     dataCriacao?: string;
-    membros?: Members[];
+    membros: Members[];
 }
 
 export interface Members {
