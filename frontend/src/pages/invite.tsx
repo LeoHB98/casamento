@@ -15,7 +15,6 @@ import ButtonConfirm from "../components/invite/confirmation_button";
 import Header from "../components/invite/header";
 // import Location from '../components/invite/location';
 import WarmingCode from "../components/invite/warming";
-import { Bottom } from "../components/invite/bottom";
 import Info from "../components/invite/info";
 
 // import EmojiPicker from 'emoji-picker-react';
@@ -178,7 +177,7 @@ export default function Invite() {
       {showMembers ? (
         <Modal currentState={showMembers}>
           <Membros
-            family={guests}
+            family={guests as MembersData}
             setMembers={setGuests}
             setOpenMembersModal={setShowMembers}
             setMembersSelected={setMembersSelected}
