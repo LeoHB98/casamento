@@ -26,14 +26,14 @@ export default function Login() {
     setUsername(u);
   }
 
-  const navigate = useNavigate();
-  function goTo(route: string) {
-    navigate(`/${route}`);
-  }
-
   function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
     const p = event.target.value;
     setPass(p);
+  }
+
+  const navigate = useNavigate();
+  function goTo(route: string) {
+    navigate(`/${route}`);
   }
 
   const fecthGetLogin = useCallback(async () => {
@@ -69,10 +69,26 @@ export default function Login() {
   useEffect(() => {
     fecthGetLogin();
 
+    // const handleVisibilityChange = () => {
+    //   if (document.visibilityState === "hidden") {
+    //     console.log("Usuário está saindo ou recarregando a página");
+    //     goTo(`noivos`);
+    //     // goTo(`/`);
+
+    //     // Adicione lógica aqui
+    //   }
+    // };
+
+    // document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // return () => {
+    //   document.removeEventListener("visibilitychange", handleVisibilityChange);
+    // };
+
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       event.preventDefault();
       event.returnValue = ""; // Requerido para que a mensagem padrão apareça
-      goTo("*");
+      goTo("login");
     };
 
     // Adiciona o listener ao montar o componente
@@ -82,7 +98,7 @@ export default function Login() {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [username, pass, fecthGetLogin]);
+  }, [username, pass, fecthGetLogin, goTo]);
 
   function handleSendLogin(event: FormEvent) {
     event.preventDefault();

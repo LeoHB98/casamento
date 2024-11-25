@@ -9,7 +9,7 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<Invite />} />
+        <Route path="/" element={<Invite />} />
         <Route path="/login" element={<Login />} />
         <Route path="/noivos" element={<BGArea />} />
         <Route path="/gifts" element={<Gifts />} />
