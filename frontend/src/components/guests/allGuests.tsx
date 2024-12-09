@@ -5,6 +5,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Api } from "../../api/api";
 import Modal from "../invite/modal";
 import { CloseButton } from "../invite/closeButton";
+import { CopiableArea } from "../tools/copyMessager";
+import { WhatsAppShareButton } from "../tools/whatsMessager";
 
 interface AllGuestsProps {
   guests: MembersData[];
@@ -73,12 +75,23 @@ function CompiledGuest(props: GuestsProps) {
     }
   }, [props]);
 
+  const message = `
+  Para confirmar sua presença no casamento de _Bruna & Leonardo_ clique aqui:
+  \n https://casamento.tecnosoftapps.com/ \n\n Use o código: \t *${props.guest.codigo}*\n
+  Cole o código na parte de confirmação dentro do site.
+  Essa confirmação pode ser feita até o dia *08/01/25*.
+  Para mais detalhes entre em contato com os noivos. Contamos com a sua presença! 😉
+  `;
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
         <p>{props.guest.nomeFamilia}</p>
 
         <div className={styles.buttonSpace}>
+          <WhatsAppShareButton message={message} />
+          <CopiableArea message={message} />
+
           <button>
             <Pen size={25} color="white" />
           </button>
