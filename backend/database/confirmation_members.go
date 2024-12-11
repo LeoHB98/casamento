@@ -51,16 +51,28 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 	_, err = txx.Exec("update familia set data_confirmacao = $1 where codigo = $2", timeNow, m.Code)
 	tools.CheckErr(err)
 
+	getIdFamilyId := `select id from familia f where f.codigo = $1`
+
+	familyId := 0
+
+	err = s.DB[0].Get(familyId, getIdFamilyId)
+	tools.CheckErr(err)
+
+	if familyId == 0 {
+		m.Code = ""
+		return
+	}
+
 	sqlOp := `
 	select
- 	  fm.nome_membro 
+ 	  fm.id 
 	from familia_membros fm
 	  inner join familia f on fm.familia_id = f.id 
-	where f.codigo = $1
+	where f.id = $1
 	order by fm.nome_membro asc`
 
 	allMembers := []string{}
-	err = txx.Select(&allMembers, sqlOp, m.Code)
+	err = txx.Select(&allMembers, sqlOp, familyId)
 	tools.CheckErr(err)
 
 	membersSelected := make(map[string]string)
@@ -89,7 +101,7 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 			set
 			 data_atualizacao = $1,
 			 confirmado = $2
-			 where nome_membro = $3`, timeNow, value, member)
+			 where id = $3`, timeNow, value, member)
 		tools.CheckErr(err)
 	}
 
