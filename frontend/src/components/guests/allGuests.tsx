@@ -80,7 +80,8 @@ function CompiledGuest(props: GuestsProps) {
   \n https://casamento.tecnosoftapps.com/ \n\n Use o código: \t *${props.guest.codigo}*\n
   Cole o código na parte de confirmação dentro do site.
   Essa confirmação pode ser feita até o dia *08/01/25*.
-  Para mais detalhes entre em contato com os noivos. Contamos com a sua presença! 😉
+  Para mais detalhes entre em contato com os noivos. Contamos com a sua presença! 😉 \n\n
+  Caso queira presentear os noivos, confira a lista no site 🎁
   `;
 
   return (

@@ -1,29 +1,25 @@
-import styles from './envio_membro.module.css'
+import styles from "./envio_membro.module.css";
 
 interface membrosEnviadosProps {
-    setMembrosEnviados: (value: boolean) => void;
-    setMembersSelected: (value: string[]) => void;
+  setMembrosEnviados: (value: boolean) => void;
+  setMembersSelected: (value: string[]) => void;
+  setOpenGifts: (value: boolean) => void;
 }
 
 export default function MembrosEnviados(props: membrosEnviadosProps) {
+  function handleSetMembrosEnviados() {
+    props.setMembrosEnviados(false);
+    props.setMembersSelected([]);
+    props.setOpenGifts(true);
+  }
 
-    function handleSetMembrosEnviados() {
-        props.setMembrosEnviados(false)
-        props.setMembersSelected([])
-    }
+  return (
+    <div className={styles.container}>
+      <h3>
+        <p>Enviado com sucesso ✅</p>
+      </h3>
 
-    return (
-        <div className={styles.container}>
-            <h3>
-                <p>
-                    Enviado com sucesso ✅
-                </p>
-            </h3>
-
-            <button onClick={handleSetMembrosEnviados}>
-                OK
-            </button>
-        </div>
-    )
-
+      <button onClick={handleSetMembrosEnviados}>OK</button>
+    </div>
+  );
 }

@@ -17,6 +17,8 @@ import Header from "../components/invite/header";
 import WarmingCode from "../components/invite/warming";
 import Info from "../components/invite/info";
 
+import { Gifts } from "../components/gifts/giftsModal";
+
 // import EmojiPicker from 'emoji-picker-react';
 // import Party from './../assets/1f389.png'
 
@@ -136,6 +138,8 @@ export default function Invite() {
     }
   }, [membersSelected, confirmMembers]);
 
+  const [openModalGifts, setOpenModalGifts] = useState(false);
+
   return (
     <div>
       <PlanoDeFundo />
@@ -143,6 +147,23 @@ export default function Invite() {
       <Info />
 
       <ButtonConfirm setState={setConfirmPresence} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          alignItems: "center",
+          alignContent: "center",
+          justifyContent: "center",
+        }}
+      >
+        <button
+          style={{ width: "30%" }}
+          onClick={() => setOpenModalGifts(true)}
+        >
+          Presentes
+        </button>
+      </div>
 
       {/* <Carrossel
                 images={Images}
@@ -200,10 +221,15 @@ export default function Invite() {
           <MembrosEnviados
             setMembrosEnviados={setPresencaMembrosConfirmada}
             setMembersSelected={setMembersSelected}
+            setOpenGifts={setOpenModalGifts}
           />
         </Modal>
       ) : (
         <></>
+      )}
+
+      {openModalGifts && (
+        <Gifts openModal={openModalGifts} setOpenModal={setOpenModalGifts} />
       )}
 
       {modalError ? (
