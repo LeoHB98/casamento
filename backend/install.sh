@@ -1,16 +1,35 @@
 #!/bin/bash
 
-# Atualiza o repositório
+# Exibe mensagem de início
+echo "Iniciando o processo de build e deploy..."
 
-# Muda para o diretório do projeto e executa o servidor Go em segundo plano
-cd ../../tecnosoft_api/cmd &&  git pull && go run main.go &
-git pull 
-cd ./cmd/ && go run casamento.go &
-# Muda para o diretório onde o ngrok está localizado
-cd ../../../ngrok-v3-stable-windows-amd64 || { echo "Falha ao mudar de diretório"; exit 1; }
+# Define o nome da imagem e o nome do container
+VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+echo "Instalando versão: $VERSION"
 
-# Executa o ngrok em segundo plano
-./ngrok.exe http --url=tight-lark-equal.ngrok-free.app 8070 &
+IMAGE_NAME="casamento:$VERSION"
+CONTAINER_NAME="casamento_app"
 
-# echo "ngrok foi iniciado em segundo plano."
-    
+# Derruba o container usando o docker-compose
+echo "Derrubando o container com o docker-compose..."
+docker compose down $CONTAINER_NAME
+#|| { echo "Erro ao iniciar o docker-compose"; exit 1; }
+
+
+if docker images --format "{{.Repository}}:{{.Tag}}" | grep -q "$IMAGE_NAME"; then
+  echo "Eliminando docker image $IMAGE_NAME..."
+  docker rmi $IMAGE_NAME
+  echo "Docker image $IMAGE_NAME removida com sucesso."
+else
+  echo "A imagem $IMAGE_NAME não foi encontrada, porntanto será construída."
+fi
+
+# Build da imagem Docker
+echo "Construindo a imagem Docker..."
+docker build -t $IMAGE_NAME .
+
+# Sobe o container usando o docker-compose
+echo "Iniciando o container com o docker-compose..."
+docker compose up -d || { echo "Erro ao iniciar o docker-compose"; exit 1; }
+echo "Deploy finalizado. O container $CONTAINER_NAME está em execução."
+

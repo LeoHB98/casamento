@@ -55,7 +55,7 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 
 	familyId := 0
 
-	err = s.DB[0].Get(familyId, getIdFamilyId)
+	err = s.DB[0].Get(&familyId, getIdFamilyId, m.Code)
 	tools.CheckErr(err)
 
 	if familyId == 0 {

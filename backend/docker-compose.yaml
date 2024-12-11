@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile # Certifique-se de que o Dockerfile esteja na raiz ou ajuste o caminho
-    image: casamento:v1.0.0
+    image: casamento:v1.0.2
     container_name: casamento_app
     volumes:
       #Linux
@@ -35,11 +35,11 @@ services:
     restart: always
     depends_on:
       - db
-       
+
     networks:
       - app-network
 
 networks:
   app-network:
-   external: true
-   driver: bridge
+    external: true
+    driver: bridge
