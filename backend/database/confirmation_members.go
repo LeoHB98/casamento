@@ -55,7 +55,7 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 
 	familyId := 0
 
-	err = s.DB[0].Get(familyId, getIdFamilyId)
+	err = s.DB[0].Get(&familyId, getIdFamilyId, m.Code)
 	tools.CheckErr(err)
 
 	if familyId == 0 {
@@ -65,13 +65,17 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 
 	sqlOp := `
 	select
- 	  fm.id 
+ 		fm.id,  
+		fm.nome_membro
 	from familia_membros fm
-	  inner join familia f on fm.familia_id = f.id 
+	  	inner join familia f on fm.familia_id = f.id 
 	where f.id = $1
 	order by fm.nome_membro asc`
 
-	allMembers := []string{}
+	allMembers := []struct {
+		Id   int    `db:"id"`
+		Name string `db:"nome_membro"`
+	}{}
 	err = txx.Select(&allMembers, sqlOp, familyId)
 	tools.CheckErr(err)
 
@@ -79,15 +83,14 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 
 	for _, member := range m.Members {
 		membersSelected[member] = "N"
-
 	}
 
 	for _, mb := range allMembers {
 
-		for k, v := range membersSelected {
-			if mb == k {
-				v = "S"
-				membersSelected[k] = v
+		for name, value := range membersSelected {
+			if mb.Name == name {
+				value = "S"
+				membersSelected[name] = value
 			}
 		}
 
@@ -101,7 +104,7 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 			set
 			 data_atualizacao = $1,
 			 confirmado = $2
-			 where id = $3`, timeNow, value, member)
+			 where nome_membro = $3 and familia_id = $4`, timeNow, value, member, familyId)
 		tools.CheckErr(err)
 	}
 
