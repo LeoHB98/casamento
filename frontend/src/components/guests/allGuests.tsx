@@ -15,41 +15,52 @@ interface AllGuestsProps {
 
 export function AllGuests(props: AllGuestsProps) {
   const [reload, setReaload] = useState(false);
-  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     if (reload) {
       props.reloadGuests(true);
-
-      if (deleted) {
-        setReaload(false);
-      }
+      setReaload(false);
     }
-  }, [reload, deleted, props]);
+  }, [reload, props]);
 
   return (
     <div className={styles.box}>
-      {props.guests !== undefined && props.guests.length > 0 ? (
+      {props.guests !== undefined &&
+        props.guests.length > 0 &&
         props.guests?.map((guest) => (
-          <CompiledGuest
-            guest={guest}
-            setReload={setReaload}
-            setDeleted={setDeleted}
-          />
-        ))
-      ) : (
-        <></>
-      )}
-      {deleted ? (
-        <Modal currentState={deleted}>
-          <>
-            <CloseButton setBoolean={setDeleted} />
-            <p>Membro deletado com sucesso!</p>
-          </>
-        </Modal>
-      ) : (
-        <></>
-      )}
+          <CompiledGuest key={guest.id} guest={guest} setReload={setReaload} />
+        ))}
+    </div>
+  );
+}
+
+interface ConfirmationDeleteProps {
+  setToDelete: (value: boolean) => void;
+  openConfirmationToDelete: boolean;
+  setOpenConfirmationToDelete: (value: boolean) => void;
+}
+
+function ConfirmationDelete(props: ConfirmationDeleteProps) {
+  function handleConfirm() {
+    console.log(`passo 2`);
+    props.setToDelete(true);
+    props.setOpenConfirmationToDelete(false);
+  }
+
+  function handleRejected() {
+    props.setToDelete(false);
+    props.setOpenConfirmationToDelete(false);
+  }
+
+  return (
+    <div>
+      <Modal currentState={props.openConfirmationToDelete}>
+        <div>
+          <p>Tem certeza disso?</p>
+          <button onClick={handleRejected}>Não</button>
+          <button onClick={handleConfirm}>Sim</button>
+        </div>
+      </Modal>
     </div>
   );
 }
@@ -57,23 +68,47 @@ export function AllGuests(props: AllGuestsProps) {
 interface GuestsProps {
   guest: MembersData;
   setReload: (value: boolean) => void;
-  setDeleted: (value: boolean) => void;
 }
 
 function CompiledGuest(props: GuestsProps) {
+  const [openConfirmationToDelete, setOpenConfirmationToDelete] =
+    useState(false);
+
+  const [toDelete, setToDelete] = useState(false);
+
+  const [deleted, setDeleted] = useState(false);
+
+  function handleConfirmationToDelete() {
+    console.log(`passo 1`);
+    setOpenConfirmationToDelete(true);
+  }
+
+  function handleReload() {
+    props.setReload(true);
+    setToDelete(false);
+  }
+
   const handleRemove = useCallback(async () => {
     if (props.guest.codigo) {
       try {
         const resp = await Api.deleteGuests(props.guest.codigo);
         if (resp.code === 200) {
-          props.setReload(true);
-          props.setDeleted(true);
+          console.log("membro deletado");
         }
       } catch (err) {
         console.log(err);
+      } finally {
+        setDeleted(true);
+        setToDelete(false);
       }
     }
   }, [props]);
+
+  useEffect(() => {
+    if (toDelete) {
+      handleRemove();
+    }
+  }, [toDelete, handleRemove]);
 
   const message = `
   Para confirmar sua presença no casamento de _Bruna & Leonardo_ clique aqui:
@@ -96,7 +131,7 @@ function CompiledGuest(props: GuestsProps) {
           <button>
             <Pen size={25} color="white" />
           </button>
-          <button onClick={handleRemove}>
+          <button onClick={handleConfirmationToDelete}>
             <Trash size={25} color="white" />
           </button>
         </div>
@@ -112,6 +147,19 @@ function CompiledGuest(props: GuestsProps) {
           <Guest member={mem} />
         ))}
       </div>
+
+      <ConfirmationDelete
+        openConfirmationToDelete={openConfirmationToDelete}
+        setOpenConfirmationToDelete={setOpenConfirmationToDelete}
+        setToDelete={setToDelete}
+      />
+
+      <Modal currentState={deleted}>
+        <>
+          <CloseButton setBoolean={handleReload} />
+          <p>Membro deletado com sucesso!</p>
+        </>
+      </Modal>
     </div>
   );
 }

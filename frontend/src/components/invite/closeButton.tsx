@@ -5,7 +5,7 @@ interface CloseButtonProps {
   setObjetct?: (value: object) => void;
   setStringArray?: (value: string[]) => void;
   setBoolean?: (value: boolean) => void;
-  setBoolean2?: (value: boolean) => void;
+  invertBool?: (value: boolean) => void;
   setNullString?: (value: string) => void;
 }
 
@@ -15,8 +15,8 @@ export function CloseButton(props: CloseButtonProps) {
       props.setBoolean(false);
     }
 
-    //        if (props.setBoolean2 !== undefined) {
-    //     props.setBoolean2(false)
+    // if (props.invertBool !== undefined) {
+    //   props.invertBool((prev: boolean) => !prev);
     // }
 
     if (props.setObjetct !== undefined) {

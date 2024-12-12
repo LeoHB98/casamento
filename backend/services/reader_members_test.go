@@ -50,6 +50,7 @@ func TestGetMembers(t *testing.T) {
 		DbName:   "mydatabase",
 		Password: "leoPost1234",
 		User:     "leonardo",
+		Host:     "localhost",
 	})
 
 	txx, err := db.Beginx()
