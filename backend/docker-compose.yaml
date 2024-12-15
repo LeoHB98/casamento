@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile # Certifique-se de que o Dockerfile esteja na raiz ou ajuste o caminho
-    image: casamento:v1.0.2
+    image: casamento:v1.1.1
     container_name: casamento_app
     volumes:
       #Linux
