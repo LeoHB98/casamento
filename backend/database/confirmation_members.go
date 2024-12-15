@@ -2,6 +2,7 @@ package database
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
@@ -82,18 +83,14 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 	membersSelected := make(map[string]string)
 
 	for _, member := range m.Members {
-		membersSelected[member] = "N"
-	}
 
-	for _, mb := range allMembers {
-
-		for name, value := range membersSelected {
-			if mb.Name == name {
+		for _, mb := range allMembers {
+			value := "N"
+			if mb.Name == member {
 				value = "S"
-				membersSelected[name] = value
 			}
+			membersSelected[mb.Name] = value
 		}
-
 	}
 
 	for member, value := range membersSelected {
@@ -109,5 +106,6 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tools.CheckErr(txx.Commit())
+	log.Println("Confirmacao efetuada com sucesso")
 
 }

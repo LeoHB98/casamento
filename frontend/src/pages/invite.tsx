@@ -38,7 +38,7 @@ export default function Invite() {
   const [showWarning, setShowWarning] = useState("");
 
   //Modal que mostra os membros segundo o codigo enviado
-  const [showMembers, setShowMembers] = useState(false);
+  const [showMembersToSelect, setShowMembers] = useState(false);
 
   //Abriga os convidados
   const [guests, setGuests] = useState<Partial<MembersData>>({});
@@ -195,8 +195,8 @@ export default function Invite() {
         <></>
       )}
 
-      {showMembers ? (
-        <Modal currentState={showMembers}>
+      {showMembersToSelect ? (
+        <Modal currentState={showMembersToSelect}>
           <Membros
             family={guests as MembersData}
             setMembers={setGuests}

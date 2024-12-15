@@ -31,11 +31,16 @@ export function Membros(props: MembrosProps) {
     props.setMembers({});
   }
 
+  function handleCleanMembers() {
+    setMembers([]);
+    props.setMembers({});
+  }
+
   return (
     <div className={styles.container}>
       <CloseButton
         setBoolean={props.setOpenMembersModal}
-        setObjetct={props.setMembers}
+        setObjetct={handleCleanMembers}
         setStringArray={props.setMembersSelected}
       />
 
@@ -58,7 +63,11 @@ export function Membros(props: MembrosProps) {
         ))}
       </div>
 
-      <p>Você selecionou:</p>
+      {members.length > 0 ? (
+        <p>Você selecionou:</p>
+      ) : (
+        <p>Você não selecionou ninguém ainda 😔</p>
+      )}
 
       <div className={styles.membersSelected}>
         {members?.map((member) => (
@@ -66,15 +75,26 @@ export function Membros(props: MembrosProps) {
         ))}
       </div>
 
-      <div className={styles.send}>
-        <button onClick={handleMessageMembers}>Enviar</button>
-      </div>
+      {members.length > 0 && (
+        <div className={styles.send}>
+          <button onClick={handleMessageMembers}>Enviar</button>
+        </div>
+      )}
     </div>
   );
 }
 
 function MemberSeleted({ membro }: MProps) {
-  return <div>{` ${membro} |`}</div>;
+  return (
+    <div
+      style={{
+        border: "1px solid",
+        borderRadius: "1rem",
+        padding: "0.8rem",
+        margin: "0.5rem 0.1rem",
+      }}
+    >{` ${membro} `}</div>
+  );
 }
 
 function Membro(props: MembroProps) {
