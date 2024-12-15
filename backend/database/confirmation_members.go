@@ -83,13 +83,12 @@ func (s *DAO) UpdateConfirmationMember(w http.ResponseWriter, r *http.Request) {
 	membersSelected := make(map[string]string)
 
 	for _, member := range m.Members {
-
 		for _, mb := range allMembers {
-			value := "N"
 			if mb.Name == member {
-				value = "S"
+				membersSelected[mb.Name] = "S"
+			} else if membersSelected[mb.Name] != "S" {
+				membersSelected[mb.Name] = "N"
 			}
-			membersSelected[mb.Name] = value
 		}
 	}
 
