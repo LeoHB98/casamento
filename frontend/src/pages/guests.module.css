@@ -22,9 +22,10 @@
   .circle {
     padding: 1rem;
     background-color: var(--text-invite);
-    border-radius: 100%;
+    border-radius: 2rem;
     color: white;
     font-weight: bold;
+    margin-left: 1rem;
   }
 }
 

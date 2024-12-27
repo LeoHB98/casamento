@@ -10,52 +10,83 @@ import { Search } from "../components/guests/search";
 
 export function Guests() {
   const [openAddWindow, setOpenAddWindow] = useState(false);
-  const [guests, setGuests] = useState<Partial<MembersData[]>>();
+  const [guests, setGuests] = useState<MembersData[]>([]);
   const [originalGuests, setOriginalGuests] =
     useState<Partial<MembersData[]>>();
 
   const [reload, setReload] = useState(true);
 
+  const [countTotalGuests, setCountTotalGuests] = useState(false);
   const [totalMembers, setTotalMembers] = useState(Number);
+  const [totalMembersConfirmed, setTotalMembersConfirmed] = useState(Number);
 
   const fecthCountMembers = useCallback(async () => {
-    const c = await Api.getCountMembers().catch(function (err) {
-      console.log(err);
-      return;
+    // const c = await Api.getCountMembers().catch(function (err) {
+    //   console.log(err);
+    //   return;
+    // });
+
+    // if (!c) {
+    //   return;
+    // }
+
+    // console.log(c);
+
+    // if (c.response?.code && c.response?.code != 200) {
+    //   return;
+    // }
+
+    // setTotalMembers(c.quantidade);
+
+    const mCounts: string[] = []; // Inicialize como um array vazio com tipo correto
+    const mCountsConfirmed: string[] = [];
+
+    guests.forEach((v) => {
+      // console.log(v);
+      v.membros.forEach((m) => {
+        // console.log(m);
+        if (m.nomeMembro) {
+          mCounts.push(m.nomeMembro); // Adiciona o nome ao array
+
+          if (m.confirmado === "Sim") {
+            mCountsConfirmed.push(m.nomeMembro);
+          }
+        }
+      });
     });
 
-    if (c) {
-      console.log(c);
-
-      if (c.response?.code && c.response?.code != 200) {
-        return;
-      }
-
-      setTotalMembers(c.quantidade);
-    }
-  }, []);
+    setCountTotalGuests(false);
+    setTotalMembers(mCounts.length);
+    setTotalMembersConfirmed(mCountsConfirmed.length);
+  }, [guests]);
 
   const fetchAllMembers = useCallback(async () => {
-    const g = await Api.getGuests().catch(function (err) {
+    const allM = await Api.getGuests().catch(function (err) {
       console.log(err);
     });
 
-    fecthCountMembers();
-    console.log(g);
+    console.log(allM);
 
-    if (g) {
-      setGuests(g);
-      setOriginalGuests(g);
+    if (allM) {
+      setGuests(allM);
+      setOriginalGuests(allM);
+      setCountTotalGuests(true);
     }
 
     setReload(false);
-  }, [fecthCountMembers]);
+  }, []);
 
   useEffect(() => {
     if (reload) {
       fetchAllMembers();
     }
   }, [fetchAllMembers, reload]);
+
+  useEffect(() => {
+    if (countTotalGuests) {
+      fecthCountMembers();
+    }
+  });
 
   return (
     <>
@@ -70,23 +101,37 @@ export function Guests() {
           <AddGuests SetOpenWindow={setOpenAddWindow} SetReload={setReload} />
         </Modal>
 
-        {guests && guests?.length > 0 ? (
+        {guests && guests?.length > 0 && (
           <div className={styles.round}>
-            Total familias:
+            Total familias/convites:
             <div className={styles.circle}>{guests?.length}</div>
           </div>
-        ) : null}
+        )}
 
-        {totalMembers > 0 ? (
+        {totalMembersConfirmed > 0 && (
+          <div className={styles.round}>
+            Total de participantes confirmados:
+            <div className={styles.circle}>{totalMembersConfirmed}</div>
+          </div>
+        )}
+
+        {totalMembersConfirmed > 0 && (
+          <div className={styles.round}>
+            Total de participantes nao confirmados:
+            <div className={styles.circle}>
+              {totalMembers - totalMembersConfirmed}
+            </div>
+          </div>
+        )}
+
+        {totalMembers > 0 && (
           <div className={styles.round}>
             Total de participantes cadastrados:
             <div className={styles.circle}>{totalMembers}</div>
           </div>
-        ) : (
-          ""
         )}
 
-        {guests && originalGuests ? (
+        {guests && originalGuests && (
           <Search
             members={guests.filter(
               (guest): guest is MembersData => guest !== undefined
@@ -97,19 +142,15 @@ export function Guests() {
             )}
             setMembers={setGuests}
           />
-        ) : (
-          <></>
         )}
 
-        {guests !== undefined && guests.length > 0 ? (
+        {guests !== undefined && guests.length > 0 && (
           <AllGuests
             reloadGuests={setReload}
             guests={guests.filter(
               (guest): guest is MembersData => guest !== undefined
             )}
           />
-        ) : (
-          <></>
         )}
       </div>
     </>

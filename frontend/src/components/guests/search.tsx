@@ -10,11 +10,7 @@ interface SearchInfProps {
   setMembers: (inf: MembersData[]) => void;
 }
 
-export function Search({
-  members,
-  originaisMembers,
-  setMembers,
-}: SearchInfProps) {
+export function Search({ originaisMembers, setMembers }: SearchInfProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -26,17 +22,17 @@ export function Search({
       return originaisMembers; // Se o campo de busca estiver vazio, retorna todos os membros
     }
 
-    return members.filter((mem) => {
+    return originaisMembers.filter((mem) => {
       return mem?.membros.some((m) =>
         m.nomeMembro?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
-  }, [searchTerm, members, originaisMembers]);
+  }, [searchTerm, originaisMembers]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setMembers(filteredMembers); // Atualiza o estado com membros filtrados
-    }, 500);
+    }, 100);
     return () => clearTimeout(timer);
   }, [filteredMembers, setMembers]);
 

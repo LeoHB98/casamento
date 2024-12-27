@@ -42,7 +42,6 @@ interface ConfirmationDeleteProps {
 
 function ConfirmationDelete(props: ConfirmationDeleteProps) {
   function handleConfirm() {
-    console.log(`passo 2`);
     props.setToDelete(true);
     props.setOpenConfirmationToDelete(false);
   }
@@ -55,10 +54,12 @@ function ConfirmationDelete(props: ConfirmationDeleteProps) {
   return (
     <div>
       <Modal currentState={props.openConfirmationToDelete}>
-        <div>
-          <p>Tem certeza disso?</p>
-          <button onClick={handleRejected}>Não</button>
-          <button onClick={handleConfirm}>Sim</button>
+        <div className={styles.ask_delete}>
+          <h4>Tem certeza que deseja deletar esse grupo da familia?</h4>
+          <div className={styles.buttons}>
+            <button onClick={handleRejected}>Não</button>
+            <button onClick={handleConfirm}>Sim</button>
+          </div>
         </div>
       </Modal>
     </div>
@@ -79,7 +80,6 @@ function CompiledGuest(props: GuestsProps) {
   const [deleted, setDeleted] = useState(false);
 
   function handleConfirmationToDelete() {
-    console.log(`passo 1`);
     setOpenConfirmationToDelete(true);
   }
 
@@ -155,10 +155,10 @@ function CompiledGuest(props: GuestsProps) {
       />
 
       <Modal currentState={deleted}>
-        <>
-          <CloseButton setBoolean={handleReload} />
+        <CloseButton setBoolean={handleReload} />
+        <div className={styles.ask_delete}>
           <p>Membro deletado com sucesso!</p>
-        </>
+        </div>
       </Modal>
     </div>
   );
@@ -171,7 +171,7 @@ function Guest(props: GuestProps) {
   return (
     <div className={styles.containerGuest}>
       <p>{`${props.member.nomeMembro} - `}</p>
-      <p>{`Confirmado? ${props.member.confirmado}`}</p>
+      <p>{`Confirmado ? ${props.member.confirmado}`}</p>
     </div>
   );
 }

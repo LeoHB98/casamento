@@ -28,12 +28,12 @@ export function Membros(props: MembrosProps) {
   function handleMessageMembers() {
     props.setOpenMembersModal(false);
     props.setMembersSelected(members);
-    props.setMembers({});
+    props.setMembers({} as MembersData);
   }
 
   function handleCleanMembers() {
     setMembers([]);
-    props.setMembers({});
+    props.setMembers({} as MembersData);
   }
 
   return (
@@ -49,15 +49,13 @@ export function Membros(props: MembrosProps) {
       <div className={styles.membersContainer}>
         {props.family.membros?.map((member) => (
           <>
-            {member.nomeMembro !== undefined ? (
+            {member.nomeMembro !== undefined && (
               <Membro
                 key={member.id}
                 membro={member.nomeMembro}
                 membros={members}
                 setMembersSelected={setMembers}
               />
-            ) : (
-              <></>
             )}
           </>
         ))}
@@ -71,7 +69,7 @@ export function Membros(props: MembrosProps) {
 
       <div className={styles.membersSelected}>
         {members?.map((member) => (
-          <MemberSeleted membro={member} />
+          <MemberSelected membro={member} />
         ))}
       </div>
 
@@ -84,16 +82,17 @@ export function Membros(props: MembrosProps) {
   );
 }
 
-function MemberSeleted({ membro }: MProps) {
+function MemberSelected({ membro }: MProps) {
   return (
     <div
-      style={{
-        border: "1px solid",
-        borderRadius: "1rem",
-        padding: "0.8rem",
-        margin: "0.5rem 0.1rem",
-      }}
-    >{` ${membro} `}</div>
+      // style={{
+      //   border: "1px solid",
+      //   borderRadius: "1rem",
+      //   padding: "0.8rem",
+      //   margin: "0.5rem 0.1rem",
+      // }}
+      className={styles.mem}
+    >{` ${membro}`}</div>
   );
 }
 

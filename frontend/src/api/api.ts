@@ -4,9 +4,9 @@ import { Present } from '../models/gifts/modal.interface';
 
 
 const instance = axios.create({
-    // baseURL: 'https://tight-lark-equal.ngrok-free.app/api/casamento/',
+    baseURL: 'https://tight-lark-equal.ngrok-free.app/api/casamento/',
     //  baseURL: 'http://localhost:8070/api/casamento/',
-    baseURL :'http://localhost:8082/',
+    // baseURL :'http://localhost:8082/',
     timeout: 15000,
     headers: {
         'ngrok-skip-browser-warning': 'true'

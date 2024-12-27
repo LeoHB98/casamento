@@ -22,7 +22,9 @@ interface AddGuestsProps {
 export function AddGuests(props: AddGuestsProps) {
   const [gs, setGs] = useState("");
   const [guests, setGuests] = useState<string[]>();
-  const [compiledGuests, setCompiledGuests] = useState<MembersData>();
+  const [compiledGuests, setCompiledGuests] = useState<MembersData>(
+    {} as MembersData
+  );
 
   const [nameChief, setNameChief] = useState("");
 
@@ -55,26 +57,30 @@ export function AddGuests(props: AddGuestsProps) {
 
     let Gs: Members[] = [];
 
-    if (nameChief !== "") {
-      if (guests === undefined) {
-        return;
-      }
+    if (nameChief === "") {
+      alert("Por favor, preencha o nome do representante do grupo adicionado");
+      return;
+    }
 
-      guests.forEach((guest) => {
-        const G: Members = { nomeMembro: guest };
-        Gs = [...Gs, G];
-      });
+    if (guests === undefined || guests.length === 0) {
+      alert("Por favor, adicione pelo menos um membro do grupo");
+      return;
+    }
 
-      setCompiledGuests((/*prevGuest*/) => ({
-        // ...prevGuest,
-        // membros: [...(prevGuest.membros || []), ...Gs],
-        membros: [...Gs],
-        nomeFamilia: nameChief,
-      }));
+    guests.forEach((guest) => {
+      const G: Members = { nomeMembro: guest };
+      Gs = [...Gs, G];
+    });
 
-      if (compiledGuests !== undefined) {
-        setSendData(true);
-      }
+    setCompiledGuests(() => ({
+      membros: [...Gs],
+      nomeFamilia: nameChief,
+    }));
+
+    console.log(compiledGuests);
+
+    if (compiledGuests !== undefined) {
+      setSendData(true);
     }
   }
 
@@ -87,28 +93,25 @@ export function AddGuests(props: AddGuestsProps) {
 
   const fecthPostMembers = useCallback(async () => {
     try {
+      setSendData(false);
       const resp = await Api.postGuests(compiledGuests);
+      if (!resp) {
+        return;
+      }
 
       console.log(resp);
 
-      if (resp) {
-        setWarmingCode(true);
-        setWarming("cadastro");
-      }
+      setWarming("cadastro");
+      setWarmingCode(true);
     } catch (err) {
       console.log(err);
       setWarmingCode(true);
       setWarming("error");
     } finally {
-      const Zero: MembersData = {
-        membros: [],
-      };
-      setCompiledGuests(Zero);
-
       setNameChief("");
       setGuests([]);
-      setSendData(false);
       props.SetReload(true);
+      setCompiledGuests({} as MembersData);
     }
   }, [compiledGuests, props]);
 
