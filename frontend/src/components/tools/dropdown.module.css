@@ -1,0 +1,72 @@
+/* Contêiner do dropdown */
+.dropdown {
+  display: inline-flex;
+  position: relative;
+
+  margin-top: 1rem;
+  justify-content: flex-end;
+  /* width: 100%; */
+}
+
+/* Botão principal */
+.mainButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Estilo da flecha */
+.arrow {
+  transition: transform 0.5s;
+  font-size: 12px;
+  transform-origin: center;
+}
+
+/* Gira a flecha quando o dropdown está aberto */
+.arrowOpen {
+  transform: rotate(90deg); /* Gira a flecha para apontar para baixo */
+}
+
+/* Estilo do menu dropdown */
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0; /* Alinha na mesma altura do botão */
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 150px;
+  button {
+    background-color: var(--grey-400);
+    margin-bottom: 0.5rem;
+  }
+  padding: 0.5rem;
+  margin-right: 6rem;
+}
+
+/* Estilo dos itens do dropdown */
+.dropdownItem {
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+}
+
+.dropdownItem:hover {
+  background-color: #f1f1f1;
+}

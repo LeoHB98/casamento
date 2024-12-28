@@ -83,17 +83,7 @@ export function Membros(props: MembrosProps) {
 }
 
 function MemberSelected({ membro }: MProps) {
-  return (
-    <div
-      // style={{
-      //   border: "1px solid",
-      //   borderRadius: "1rem",
-      //   padding: "0.8rem",
-      //   margin: "0.5rem 0.1rem",
-      // }}
-      className={styles.mem}
-    >{` ${membro}`}</div>
-  );
+  return <div className={styles.mem}>{` ${membro}`}</div>;
 }
 
 function Membro(props: MembroProps) {

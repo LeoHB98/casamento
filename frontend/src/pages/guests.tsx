@@ -7,6 +7,8 @@ import Modal from "../components/invite/modal";
 import { AddGuests } from "../components/guests/addGuests";
 import { AllGuests } from "../components/guests/allGuests";
 import { Search } from "../components/guests/search";
+import DropdownButton from "../components/tools/dropdown";
+import { Status } from "../components/guests/status";
 
 export function Guests() {
   const [openAddWindow, setOpenAddWindow] = useState(false);
@@ -16,52 +18,36 @@ export function Guests() {
 
   const [reload, setReload] = useState(true);
 
-  const [countTotalGuests, setCountTotalGuests] = useState(false);
-  const [totalMembers, setTotalMembers] = useState(Number);
-  const [totalMembersConfirmed, setTotalMembersConfirmed] = useState(Number);
+  const [typeReload, setTypeReload] = useState("");
 
-  const fecthCountMembers = useCallback(async () => {
-    // const c = await Api.getCountMembers().catch(function (err) {
-    //   console.log(err);
-    //   return;
-    // });
+  function handleChangeTypeReload(option: string) {
+    setTypeReload(option);
+    setReload(true);
+  }
 
-    // if (!c) {
-    //   return;
-    // }
+  // const fecthCountMembers = useCallback(async () => {
+  //   // const c = await Api.getCountMembers().catch(function (err) {
+  //   //   console.log(err);
+  //   //   return;
+  //   // });
 
-    // console.log(c);
+  //   // if (!c) {
+  //   //   return;
+  //   // }
 
-    // if (c.response?.code && c.response?.code != 200) {
-    //   return;
-    // }
+  //   // console.log(c);
 
-    // setTotalMembers(c.quantidade);
+  //   // if (c.response?.code && c.response?.code != 200) {
+  //   //   return;
+  //   // }
 
-    const mCounts: string[] = []; // Inicialize como um array vazio com tipo correto
-    const mCountsConfirmed: string[] = [];
+  //   // setTotalMembers(c.quantidade);
 
-    guests.forEach((v) => {
-      // console.log(v);
-      v.membros.forEach((m) => {
-        // console.log(m);
-        if (m.nomeMembro) {
-          mCounts.push(m.nomeMembro); // Adiciona o nome ao array
-
-          if (m.confirmado === "Sim") {
-            mCountsConfirmed.push(m.nomeMembro);
-          }
-        }
-      });
-    });
-
-    setCountTotalGuests(false);
-    setTotalMembers(mCounts.length);
-    setTotalMembersConfirmed(mCountsConfirmed.length);
-  }, [guests]);
+  //   setLoadStatus(false);
+  // }, [guests]);
 
   const fetchAllMembers = useCallback(async () => {
-    const allM = await Api.getGuests().catch(function (err) {
+    const allM = await Api.getGuests(typeReload).catch(function (err) {
       console.log(err);
     });
 
@@ -70,23 +56,16 @@ export function Guests() {
     if (allM) {
       setGuests(allM);
       setOriginalGuests(allM);
-      setCountTotalGuests(true);
     }
 
     setReload(false);
-  }, []);
+  }, [typeReload]);
 
   useEffect(() => {
     if (reload) {
       fetchAllMembers();
     }
   }, [fetchAllMembers, reload]);
-
-  useEffect(() => {
-    if (countTotalGuests) {
-      fecthCountMembers();
-    }
-  });
 
   return (
     <>
@@ -101,35 +80,11 @@ export function Guests() {
           <AddGuests SetOpenWindow={setOpenAddWindow} SetReload={setReload} />
         </Modal>
 
-        {guests && guests?.length > 0 && (
-          <div className={styles.round}>
-            Total familias/convites:
-            <div className={styles.circle}>{guests?.length}</div>
-          </div>
-        )}
+        <div className={styles.options}>
+          <Status setReload={setReload} guests={guests} />
 
-        {totalMembersConfirmed > 0 && (
-          <div className={styles.round}>
-            Total de participantes confirmados:
-            <div className={styles.circle}>{totalMembersConfirmed}</div>
-          </div>
-        )}
-
-        {totalMembersConfirmed > 0 && (
-          <div className={styles.round}>
-            Total de participantes nao confirmados:
-            <div className={styles.circle}>
-              {totalMembers - totalMembersConfirmed}
-            </div>
-          </div>
-        )}
-
-        {totalMembers > 0 && (
-          <div className={styles.round}>
-            Total de participantes cadastrados:
-            <div className={styles.circle}>{totalMembers}</div>
-          </div>
-        )}
+          <DropdownButton setOption={handleChangeTypeReload} />
+        </div>
 
         {guests && originalGuests && (
           <Search

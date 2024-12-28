@@ -31,7 +31,35 @@ func (s *DAO) GetAllMembers(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	sqlOp := `
+	ord := r.Header.Get("ordenation")
+	sqlOp := ""
+	switch ord {
+	case "a-z":
+		sqlOp = `
+	select 
+	  f.id,
+	  f.codigo,
+	  f.nome_familia,
+	  f.data_confirmacao,
+	  f.data_criacao
+	from familia f  
+	order by f.nome_familia asc`
+
+	case "z-a":
+
+		sqlOp = `
+	select 
+	  f.id,
+	  f.codigo,
+	  f.nome_familia,
+	  f.data_confirmacao,
+	  f.data_criacao
+	from familia f  
+	order by f.nome_familia desc`
+
+	default:
+
+		sqlOp = `
 	select 
 	  f.id,
 	  f.codigo,
@@ -40,6 +68,8 @@ func (s *DAO) GetAllMembers(w http.ResponseWriter, r *http.Request) {
 	  f.data_criacao
 	from familia f  
 	order by f.data_criacao desc`
+
+	}
 
 	db := s.DB[0]
 	tools.CheckErr(err)

@@ -19,6 +19,7 @@ export function AllGuests(props: AllGuestsProps) {
   useEffect(() => {
     if (reload) {
       props.reloadGuests(true);
+
       setReaload(false);
     }
   }, [reload, props]);

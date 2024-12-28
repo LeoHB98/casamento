@@ -1,21 +1,16 @@
 .container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: red; */
+  width: 100%;
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-
-    margin-left: 0.5rem;
-
-
-    input {
-        background-color: white;
-        border-radius: 1rem;
-        color: black;
-        text-align: center;
-        font-size: large;
-        height: 3rem;
-    }
-
-
+  input {
+    height: 3rem;
+    background-color: white;
+    border-radius: 1rem;
+    color: black;
+    text-align: center;
+    font-size: large;
+  }
 }

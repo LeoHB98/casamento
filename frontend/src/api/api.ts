@@ -31,11 +31,21 @@ const requests = {
         instance.delete(url).then(responseBody),
 };
 
+
 export const Api = {
     login: (username: string, password: string): Promise<ResponseCode> => requests.get(`login?username=${username}&password=${password}`),
 
     getGuestsByCode: (id: string): Promise<MembersData> => requests.get(`membros/${id}`),
-    getGuests: (): Promise<MembersData[]> => requests.get(`membros/cadastrados`),
+   
+    getGuests: (ordenation:string): Promise<MembersData[]> => {
+        return instance.get(`membros/cadastrados`, {
+            headers: {
+                'ordenation':ordenation,
+        }    
+        }).then(responseBody)
+        // requests.get(`membros/cadastrados`,),
+    },
+
     getCountMembers: ():
         Promise<TotalMembers> =>
         requests.get(`membros/count`),
@@ -51,5 +61,8 @@ export const Api = {
     postPresents: (present: Present) => requests.post('', present),
 
     deleteGuests: (code: string): Promise<ResponseCode> => requests.delete(`membros/${code}`),
+
+
+
 };
 
