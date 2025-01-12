@@ -29,6 +29,7 @@ body {
   --grey-300: rgb(165, 164, 164);
   --grey-400: rgb(95, 95, 95);
   --gray-500: rgb(59, 59, 59);
+  --gray-600: rgb(37, 37, 37);
 
   --background-opacity-dark: #00000055;
   --background-opacity-light: #ffffff92;

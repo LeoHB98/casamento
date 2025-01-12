@@ -1,23 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
-import styles from "./guests.module.css";
 import { MembersData } from "../models/invite/modal.interface";
 import { Api } from "../api/api";
 import { Header } from "../models/header";
-import Modal from "../components/invite/modal";
 import { AddGuests } from "../components/guests/addGuests";
-import { AllGuests } from "../components/guests/allGuests";
 import { Search } from "../components/guests/search";
-import DropdownButton from "../components/tools/dropdown";
+import Ordenation from "../components/tools/dropdown";
 import { Status } from "../components/guests/status";
+import { Tabs } from "../components/guests/tabs";
+
+import Modal from "../components/invite/modal";
+import styles from "./guests.module.css";
 
 export function Guests() {
   const [openAddWindow, setOpenAddWindow] = useState(false);
+
+  const [originalGuests, setOriginalGuests] = useState<MembersData[]>([]);
   const [guests, setGuests] = useState<MembersData[]>([]);
-  const [originalGuests, setOriginalGuests] =
-    useState<Partial<MembersData[]>>();
 
   const [reload, setReload] = useState(true);
-
   const [typeReload, setTypeReload] = useState("");
 
   function handleChangeTypeReload(option: string) {
@@ -30,35 +30,30 @@ export function Guests() {
   //   //   console.log(err);
   //   //   return;
   //   // });
-
   //   // if (!c) {
   //   //   return;
   //   // }
-
   //   // console.log(c);
-
   //   // if (c.response?.code && c.response?.code != 200) {
   //   //   return;
   //   // }
-
   //   // setTotalMembers(c.quantidade);
-
   //   setLoadStatus(false);
   // }, [guests]);
 
   const fetchAllMembers = useCallback(async () => {
-    const allM = await Api.getGuests(typeReload).catch(function (err) {
+    try {
+      const allM = await Api.getGuests(typeReload);
+
+      if (allM) {
+        setGuests(allM);
+        setOriginalGuests(allM);
+      }
+    } catch (err) {
       console.log(err);
-    });
-
-    console.log(allM);
-
-    if (allM) {
-      setGuests(allM);
-      setOriginalGuests(allM);
+    } finally {
+      setReload(false);
     }
-
-    setReload(false);
   }, [typeReload]);
 
   useEffect(() => {
@@ -83,7 +78,7 @@ export function Guests() {
         <div className={styles.options}>
           <Status setReload={setReload} guests={guests} />
 
-          <DropdownButton setOption={handleChangeTypeReload} />
+          <Ordenation setOption={handleChangeTypeReload} />
         </div>
 
         {guests && originalGuests && (
@@ -99,14 +94,7 @@ export function Guests() {
           />
         )}
 
-        {guests !== undefined && guests.length > 0 && (
-          <AllGuests
-            reloadGuests={setReload}
-            guests={guests.filter(
-              (guest): guest is MembersData => guest !== undefined
-            )}
-          />
-        )}
+        <Tabs guests={guests} setReload={setReload} />
       </div>
     </>
   );

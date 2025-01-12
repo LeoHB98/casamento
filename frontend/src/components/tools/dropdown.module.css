@@ -3,9 +3,17 @@
   display: inline-flex;
   position: relative;
 
-  margin-top: 1rem;
   justify-content: flex-end;
-  /* width: 100%; */
+  height: 3rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown.active {
+  background-color: var(--gray-600);
+  border-bottom: solid black;
+  color: white;
 }
 
 /* Botão principal */
