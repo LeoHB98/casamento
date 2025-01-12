@@ -11,24 +11,24 @@ services:
       - "5432:5432"
     volumes:
       # Windows
-      # - C:/Users/leohe/20_12_24:/var/lib/postgresql/data
+      - C:/Users/leohe/database:/var/lib/postgresql/data
       # Linux
-      - /home/leonardo/backup/20_12_24:/var/lib/postgresql/data
+      # - /home/leonardo/backup/20_12_24:/var/lib/postgresql/data
 
   app:
     build:
       context: .
       dockerfile: Dockerfile # Certifique-se de que o Dockerfile esteja na raiz ou ajuste o caminho
-    image: casamento:v1.2.0
+    image: casamento:v1.3.1
     container_name: casamento_app
     volumes:
       #Linux
-      - /home/leonardo/projetos/casamento/backend/env:/root/app/env
-      - /home/leonardo/projetos/casamento/backend/files:/root/app/files
+      # - /home/leonardo/projetos/casamento/backend/env:/root/app/env
+      # - /home/leonardo/projetos/casamento/backend/files:/root/app/files
 
       #Windows
-      # - C:/Users/leohe/projetos/casamento/backend/env:/root/app/env
-      # - C:/Users/leohe/projetos/casamento/backend/files:/root/app/files
+      - C:/Users/leohe/projetos/casamento/backend/env:/root/app/env
+      - C:/Users/leohe/projetos/casamento/backend/files:/root/app/files
 
     ports:
       - "8082:8082"
