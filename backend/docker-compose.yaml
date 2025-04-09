@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:16
-    container_name: casamento_db_app
+    container_name: db_app
     restart: always
     environment:
       POSTGRES_USER: leonardo
